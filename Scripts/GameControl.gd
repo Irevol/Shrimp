@@ -16,12 +16,13 @@ func _ready():
 	
 	
 func start_enemy_turn():
+		
+	await get_tree().create_timer(0.3).timeout
+	
 	if total_enemies == 0: # there's no enemies to take a turn!
 		start_player_turn() 
 		return
 		
-	await get_tree().create_timer(0.3).timeout
-	
 	claimed_positions.clear()
 	enemy_turn.emit()
 	
