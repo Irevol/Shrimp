@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bd7ufpgavyv7b"]
+
+[ext_resource type="Shader" uid="uid://c7t5wmnnax346" path="res://Shaders/shake.gdshader" id="1_aprr6"]
+
+[resource]
+shader = ExtResource("1_aprr6")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0

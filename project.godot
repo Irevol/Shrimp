@@ -11,15 +11,27 @@ config_version=5
 [application]
 
 config/name="Shrimp"
+run/main_scene="uid://dkww1pexib2bu"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://images/icon.svg"
+config/icon="res://Images/icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[global_group]
+
+walkable="You can move onto this"
+enemy=""
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.17042518, 0.27428266, 0.5858323, 1)

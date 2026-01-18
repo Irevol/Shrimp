@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkww1pexib2bu"]
+
+[ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://scenes/GameControl.gd" id="1_sugp2"]
+[ext_resource type="Shader" uid="uid://ch7sbptgs7kp" path="res://shaders/flash.gdshader" id="2_85g3d"]
+[ext_resource type="Script" uid="uid://diosfi45hn20" path="res://scenes/Player.gd" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://bg41xuljf2e6d" path="res://scenes/DetectTiles.gd" id="4_jyhfs"]
+[ext_resource type="SpriteFrames" uid="uid://c36kfvdqaypyi" path="res://animations/shrimp.tres" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://mxvd6ch8ltlu" path="res://scenes/Enemy.gd" id="5_tefeu"]
+[ext_resource type="SpriteFrames" uid="uid://cvw46yjlrtmg8" path="res://animations/jelly.tres" id="6_o6xl0"]
+[ext_resource type="Script" uid="uid://2va1u8f12klg" path="res://scenes/Tiles.gd" id="7_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bv8dk71bn2mgh" path="res://scenes/tile.tscn" id="8_choun"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
+shader = ExtResource("2_85g3d")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/speed_scale = 1.0
+shader_parameter/intensity = 0.0
+shader_parameter/total_time = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(288, 288)
+
+[node name="GameControl" type="Node2D"]
+script = ExtResource("1_sugp2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.45, 0.45)
+
+[node name="Player" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_choun")
+script = ExtResource("2_tbgi4")
+
+[node name="DetectTile" type="Node2D" parent="Player"]
+script = ExtResource("4_jyhfs")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = ExtResource("4_tbgi4")
+animation = &"idle"
+frame_progress = 0.06550259
+
+[node name="Enemy" type="Node2D" parent="." groups=["enemy"]]
+position = Vector2(-288, 288)
+script = ExtResource("5_tefeu")
+
+[node name="DetectTile" type="Node2D" parent="Enemy"]
+script = ExtResource("4_jyhfs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+sprite_frames = ExtResource("6_o6xl0")
+animation = &"idle"
+frame = 2
+frame_progress = 0.007707566
+
+[node name="Area2D" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="Tiles" type="Node2D" parent="."]
+script = ExtResource("7_85g3d")
+tile = ExtResource("8_choun")

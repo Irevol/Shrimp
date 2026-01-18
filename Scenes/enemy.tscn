@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhd2jib6vcsvt"]
+
+[ext_resource type="Script" uid="uid://8ybeg4jdjvpa" path="res://Scripts/Enemies/Jelly.gd" id="1_287tu"]
+[ext_resource type="Script" uid="uid://bg41xuljf2e6d" path="res://Scripts/Utils/DetectTiles.gd" id="2_0830c"]
+[ext_resource type="SpriteFrames" uid="uid://cvw46yjlrtmg8" path="res://Animations/jelly.tres" id="3_ghaa6"]
+[ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="4_1dp5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(200, 193)
+
+[node name="Enemy" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_287tu")
+
+[node name="DetectTile" type="Node2D" parent="."]
+script = ExtResource("2_0830c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_ghaa6")
+animation = &"idle"
+frame = 2
+frame_progress = 0.007707566
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, -24.5)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="Move" type="Node2D" parent="."]
+script = ExtResource("4_1dp5w")
+metadata/_custom_type_script = "uid://bxw5tud1rq036"
