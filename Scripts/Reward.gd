@@ -38,7 +38,7 @@ func on_pickup_init():
 	game_control.current_rewards.append(self)
 	sprite.offset = Vector2.ZERO
 	sprite.scale = Vector2.ONE * 0.5
-	$Area2D.queue_free()
+	# $Area2D.queue_free(), needed for tooltip
 	shake_timer = shake_duration
 	game_control.exit_rewards()
 	on_pickup()

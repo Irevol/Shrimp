@@ -33,10 +33,10 @@ func take_damage():
 	
 	
 func die():
+	hide()
+	# await get_tree().create_timer(0.5).timeout
 	game_control.enemies_killed += 1
 	player.kill.emit(color)
-	await get_tree().create_timer(0.2).timeout
-	end_turn()
 	queue_free()
 
 

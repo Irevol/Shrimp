@@ -32,6 +32,7 @@ shape = SubResource("RectangleShape2D_jyhfs")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0.84663665, 0.7900067, 1)
 light_mask = 3
+z_index = 5
 y_sort_enabled = true
 sprite_frames = ExtResource("3_x3wgy")
 animation = &"idle"

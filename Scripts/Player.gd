@@ -11,6 +11,7 @@ var reward_pos: Vector2
 @export var shake_intensity: float = 25.0
 @export var shake_duration: float = 0.5
 var shake_timer: float = 0.0
+var bug_patch: bool = false
 
 signal move(dir: Vector2)
 signal kill(color: String)
@@ -50,6 +51,7 @@ func _physics_process(_delta):
 		elif Input.is_action_pressed("ui_down"):
 			input_dir = Vector2.DOWN
 		if input_dir != Vector2.ZERO:
+			print("registered")
 			can_press_key = false
 			move_in_dir(input_dir)
 			move.emit(input_dir)
@@ -78,6 +80,7 @@ func change_light_mask(num):
 	
 
 func move_in_dir(dir):
+	
 	var target_pos = position + (dir * game_control.tile_size)
 	var allow_move = false
 	var prevent_move = false
@@ -92,7 +95,7 @@ func move_in_dir(dir):
 		
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
-			if node is Enemy:
+			if not reward_walker and node is Enemy:
 				node.take_damage()
 				prevent_move = true
 			if not reward_walker and node.is_in_group("walkable"):
@@ -108,4 +111,5 @@ func move_in_dir(dir):
 		await $Move.move_to_pos(position + (dir * 32))
 		await $Move.move_to_pos(position - (dir * 32))
 
+	
 	game_control.start_enemy_turn()

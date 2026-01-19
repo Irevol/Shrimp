@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dkww1pexib2bu"]
+[gd_scene load_steps=12 format=4 uid="uid://dkww1pexib2bu"]
 
 [ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
@@ -7,12 +7,13 @@
 [ext_resource type="Script" uid="uid://2ma8ybyon1ax" path="res://Scripts/Healthbar.gd" id="6_21xkr"]
 [ext_resource type="Script" uid="uid://cmghuujvfuiry" path="res://Scripts/Rewards/test_reward.gd" id="6_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://dus5e46wayyaj" path="res://Scenes/heart.tscn" id="7_6bp64"]
+[ext_resource type="FontFile" uid="uid://duc1oq7qiqhj" path="res://Resources/Basic Comical Regular NC.ttf" id="7_hptm8"]
 [ext_resource type="Script" uid="uid://bc1xo1142smsb" path="res://Scenes/Rewardbar.gd" id="8_344ge"]
 [ext_resource type="TileSet" uid="uid://b05d1p6ulwqxp" path="res://Resources/tile_set.tres" id="9_ynf5e"]
 
 [sub_resource type="Environment" id="Environment_ynf5e"]
 background_mode = 3
-ambient_light_energy = 0.0
+ambient_light_source = 1
 glow_enabled = true
 glow_intensity = 0.2
 glow_bloom = 0.2
@@ -40,15 +41,6 @@ position = Vector2(-72, -1152)
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource("6_6bp64")]
-position = Vector2(216, -1728)
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource("6_6bp64")]
-position = Vector2(504, -864)
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource("6_6bp64")]
-position = Vector2(-648, -576)
-
 [node name="Enemy" parent="Enemies" instance=ExtResource("6_6bp64")]
 position = Vector2(-936, -1728)
 
@@ -74,6 +66,45 @@ color = Color(0.7392879, 0.73928833, 0.7392881, 1)
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 20
+
+[node name="Info" type="Node2D" parent="UI"]
+position = Vector2(144, 936)
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Info"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_right = 1725.0
+offset_bottom = 1008.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Info/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Info/PanelContainer/MarginContainer"]
+z_index = 101
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_hptm8")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "Look! TEXT!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Info/PanelContainer"]
+z_index = 100
+layout_mode = 2
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
 
 [node name="Healthbar" type="Node2D" parent="UI"]
 position = Vector2(216, 72)

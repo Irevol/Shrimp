@@ -10,6 +10,7 @@ var enemies_finised: int = 0
 var enemies_killed: int = 0 # used to update total_enemies, not running count
 var claimed_positions := []
 var current_rewards: Array[Reward]
+var summon_requested: bool = false
 const light_level = 0.2
 signal enemy_turn
 signal enemy_finished
@@ -19,24 +20,27 @@ func _ready():
 	enemy_finished.connect(start_player_turn)
 	set_lighting(light_level)
 	await get_tree().create_timer(1).timeout
-	summmon_rewards()
+	#summon_rewards()
 	
 	
 func start_enemy_turn():
+		
+	await get_tree().create_timer(0.2).timeout
+	
+	if summon_requested:
+		summmon_rewards_for_real()
 	if total_enemies == 0 or player.reward_walker:
 		start_player_turn() 
 		return
 		
-	await get_tree().create_timer(0.3).timeout
-		
+	start_player_turn()
 	claimed_positions.clear()
 	enemy_turn.emit()
 	
 	
 func start_player_turn():
-	if total_enemies > enemies_finised and not player.reward_walker: return
 	
-	await get_tree().create_timer(0.1).timeout
+	if total_enemies - enemies_killed > enemies_finised and not player.reward_walker: return
 	
 	if not player.reward_walker:
 		enemies_finised = 0
@@ -45,6 +49,7 @@ func start_player_turn():
 		if total_enemies == 0:
 			#win?
 			pass
+			
 	player.can_press_key = true
 	
 	
@@ -55,7 +60,12 @@ func set_lighting(ratio: float):
 	$Background/Darkness.color = color
 	
 	
-func summmon_rewards():
+func summon_rewards():
+	summon_requested = true
+	
+	
+func summmon_rewards_for_real():
+	summon_requested = false
 	reward_map.global_position = player.position
 	reward_map.generate_rewards()
 	reward_map.show()

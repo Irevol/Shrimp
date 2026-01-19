@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://d057dlqb4mj54"]
+
+[ext_resource type="Script" uid="uid://67crqjlxbi1b" path="res://Scenes/Tooltip.gd" id="1_617o6"]
+[ext_resource type="FontFile" uid="uid://duc1oq7qiqhj" path="res://Resources/Basic Comical Regular NC.ttf" id="1_ogi1g"]
+
+[node name="Tooltip" type="Node2D"]
+script = ExtResource("1_617o6")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_right = 1725.0
+offset_bottom = 1008.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer"]
+z_index = 101
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_ogi1g")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "examplettttttttttttttttttttttttttttt"
+fit_content = true
+autowrap_mode = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+z_index = 100
+layout_mode = 2
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
