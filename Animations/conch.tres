@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://bwwbwg2s4cc4d"]
+
+[ext_resource type="Texture2D" uid="uid://dlggw08wih76m" path="res://Images/conch1.png" id="1_aqmud"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_aqmud")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

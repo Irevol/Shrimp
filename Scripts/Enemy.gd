@@ -9,6 +9,7 @@ var requested_dir: Vector2
 var request_handled := false
 var max_turns = 1
 var turns
+var color: String
 
 
 func _ready():
@@ -33,6 +34,7 @@ func take_damage():
 	
 func die():
 	game_control.enemies_killed += 1
+	player.kill.emit(color)
 	await get_tree().create_timer(0.2).timeout
 	end_turn()
 	queue_free()

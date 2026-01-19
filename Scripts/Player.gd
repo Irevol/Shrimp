@@ -2,17 +2,29 @@ extends Node2D
 class_name Player
 
 @onready var game_control: GameControl = get_tree().current_scene #just gets root node
-@export var health: int
-@export var max_health: int
+@export var health: int = 5
+@export var max_health: int = 5
 var can_press_key = true
+var reward_walker = false
+var reward_pos: Vector2
 
 @export var shake_intensity: float = 25.0
 @export var shake_duration: float = 0.5
 var shake_timer: float = 0.0
 
+signal move(dir: Vector2)
+signal kill(color: String)
+
 
 func _ready():
+	await get_tree().process_frame
+	reset()
+	
+	
+func reset():
+	health = max_health
 	$AnimatedSprite2D.play("idle")
+	game_control.healthbar.display_hearts(health)
 
 
 # purely for shake effect atm
@@ -27,7 +39,7 @@ func _process(delta: float):
 		
 
 func _physics_process(_delta):
-	if can_press_key:
+	if can_press_key and health > 0:
 		var input_dir = Vector2.ZERO
 		if Input.is_action_pressed("ui_right"):
 			input_dir = Vector2.RIGHT
@@ -40,16 +52,15 @@ func _physics_process(_delta):
 		if input_dir != Vector2.ZERO:
 			can_press_key = false
 			move_in_dir(input_dir)
+			move.emit(input_dir)
 		
 		
 func take_damage():
-	print("damaged")
 	apply_shake()
-	if health == 1:
-		# die 
-		pass
-	else:
-		health -= 1
+	health -= 1
+	game_control.healthbar.display_hearts(health)
+	if health == 0:
+		game_control.on_die()
 		
 
 func apply_shake():
@@ -60,6 +71,10 @@ func play_animation(anim_name: String):
 	$AnimatedSprite2D.play(anim_name)
 	await $AnimatedSprite2D.animation_finished
 	$AnimatedSprite2D.play("idle")
+	
+	
+func change_light_mask(num):
+	$PointLight2D.range_item_cull_mask = num
 	
 
 func move_in_dir(dir):
@@ -73,15 +88,20 @@ func move_in_dir(dir):
 	elif dir.x == -1:
 		$AnimatedSprite2D.flip_h = false
 	
+	# TWO F**KING HOURS LOST TOO THIS IDIOTIC TECHNICALITY IT WASNT EVEN AN IMPORTANT PART OF THE GAME IM LOSING MY MIND
+		
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
-			print(node.name)
 			if node is Enemy:
 				node.take_damage()
 				prevent_move = true
-			if node.is_in_group("walkable"):
+			if not reward_walker and node.is_in_group("walkable"):
 				allow_move = true
-				
+			if reward_walker and node.is_in_group("reward_walkable"):
+				allow_move = true
+			if reward_walker and node is Reward:
+				node.on_pickup_init()
+				return #game control handles restarting flow here
 	if not prevent_move and allow_move:
 		await $Move.move_to_pos(target_pos)
 	else:

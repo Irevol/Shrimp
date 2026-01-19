@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dus5e46wayyaj"]
+
+[ext_resource type="SpriteFrames" uid="uid://w0x5u3jaaqvf" path="res://Animations/heart.tres" id="1_452e1"]
+[ext_resource type="Script" uid="uid://c5i25rnairlgr" path="res://Scripts/Heart.gd" id="2_v4aiu"]
+
+[node name="Heart" type="AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0.7882353)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("1_452e1")
+speed_scale = 1.8
+script = ExtResource("2_v4aiu")

@@ -31,6 +31,8 @@ shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0.84663665, 0.7900067, 1)
+light_mask = 3
+y_sort_enabled = true
 sprite_frames = ExtResource("3_x3wgy")
 animation = &"idle"
 frame_progress = 0.06550259
@@ -40,10 +42,15 @@ script = ExtResource("4_3smsa")
 metadata/_custom_type_script = "uid://bxw5tud1rq036"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(3.0517578e-05, -3.0517578e-05)
-scale = Vector2(17.999998, 17.999998)
-energy = 1.15
+light_mask = 3
+position = Vector2(0, -1.5258789e-05)
+scale = Vector2(25.874998, 24.749998)
+energy = 0.5
+range_layer_min = -10
+range_layer_max = 10
+range_item_cull_mask = 3
+shadow_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_fkybt")

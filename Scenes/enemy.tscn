@@ -20,7 +20,7 @@ animation = &"idle"
 frame = 2
 frame_progress = 0.007707566
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(3, -24.5)
