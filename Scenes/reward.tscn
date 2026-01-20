@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmff0hjysi1jc"]
+[gd_scene load_steps=6 format=3 uid="uid://bmff0hjysi1jc"]
 
 [ext_resource type="SpriteFrames" uid="uid://bwwbwg2s4cc4d" path="res://Animations/conch.tres" id="1_8gnab"]
 [ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="2_5bq4m"]
+[ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scenes/TooltipTrigger.gd" id="3_pjohr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gnab"]
 size = Vector2(200, 193)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bq4m"]
+size = Vector2(864, 864)
 
 [node name="Reward" type="Node2D"]
 
@@ -27,3 +31,11 @@ offset = Vector2(0, -216)
 [node name="Move" type="Node2D" parent="."]
 script = ExtResource("2_5bq4m")
 metadata/_custom_type_script = "uid://bxw5tud1rq036"
+
+[node name="Tooltip" type="Node2D" parent="." groups=["tooltip"]]
+script = ExtResource("3_pjohr")
+
+[node name="Area2D" type="Area2D" parent="Tooltip"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tooltip/Area2D"]
+shape = SubResource("RectangleShape2D_5bq4m")

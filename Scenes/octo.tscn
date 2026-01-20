@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgkmrmoev3ujp"]
+
+[ext_resource type="PackedScene" uid="uid://dhd2jib6vcsvt" path="res://Scenes/enemy.tscn" id="1_a18jx"]
+[ext_resource type="SpriteFrames" uid="uid://vtjtk7dq76xw" path="res://Animations/octo.tres" id="2_6j7fu"]
+[ext_resource type="Script" uid="uid://bfq4tyljpijm6" path="res://Scripts/Enemies/Octo.gd" id="3_f1vw5"]
+
+[node name="Enemy" instance=ExtResource("1_a18jx")]
+script = ExtResource("3_f1vw5")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+modulate = Color(0.40392157, 0.19215687, 1, 1)
+sprite_frames = ExtResource("2_6j7fu")
+frame = 1
+frame_progress = 0.5579598
+script = ExtResource("3_f1vw5")

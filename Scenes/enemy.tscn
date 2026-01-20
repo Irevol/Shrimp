@@ -17,9 +17,6 @@ script = ExtResource("2_0830c")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = -1
 sprite_frames = ExtResource("3_ghaa6")
-animation = &"idle"
-frame = 2
-frame_progress = 0.007707566
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 

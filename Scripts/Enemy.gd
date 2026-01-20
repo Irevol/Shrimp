@@ -13,10 +13,11 @@ var color: String
 
 
 func _ready():
-	game_control.enemy_turn.connect(on_enemy_turn)
 	game_control.total_enemies += 1
 	turns = max_turns
-	$AnimatedSprite2D.play("idle")
+	$AnimatedSprite2D.play("default")
+	await get_tree().process_frame
+	game_control.enemy_turn.connect(on_enemy_turn)
 
 
 @abstract 
@@ -37,15 +38,35 @@ func die():
 	# await get_tree().create_timer(0.5).timeout
 	game_control.enemies_killed += 1
 	player.kill.emit(color)
+	player.after_kill()
 	queue_free()
+
+
+func is_walkable(pos):
+	var detected_nodes = $DetectTile.detect_tile(pos)
+	if detected_nodes:
+		for node: Node2D in detected_nodes:
+			if node.is_in_group("walkable"):
+				return true
 
 
 ## given dict with .allow_move and .prevent_move and node collided with
 func handle_collision(movement_rules: Dictionary, node: Node2D) -> Dictionary:
 	if node is Player:
 		player.take_damage()
+		play_animation("attack")
+		game_control.init_slash(player.position)
 		movement_rules.prevent_move = true
 	return movement_rules
+	
+	
+func play_animation(anim_name: String):
+	if not $AnimatedSprite2D.sprite_frames.has_animation(anim_name): return
+	
+	$AnimatedSprite2D.play(anim_name)
+	await $AnimatedSprite2D.animation_finished
+	$AnimatedSprite2D.play("default")
+	
 	
 
 func end_turn():
@@ -80,13 +101,17 @@ func can_move_in_dir(dir):
 	return movement_rules
 
 
+func dir_to_pos(dir):
+	return position + (dir * game_control.tile_size)
+
+
 func move_in_dir(dir):
-	if dir.x == 1:
+	if dir.x == -1:
 		$AnimatedSprite2D.flip_h = true
-	elif dir.x == -1:
+	elif dir.x == 1:
 		$AnimatedSprite2D.flip_h = false
 	
-	var target_pos = position + (dir * game_control.tile_size)
+	var target_pos = dir_to_pos(dir)
 	var movement_rules = can_move_in_dir(dir)
 	
 	if movement_rules.defer:
@@ -97,7 +122,6 @@ func move_in_dir(dir):
 		game_control.claimed_positions.append(position)
 		
 	#if requests_to_move_here != null:
-		#print("I tried...")
 		#requests_to_move_here.request_handled = true
 		#requests_to_move_here.move_in_dir(requested_dir)
 		

@@ -8,6 +8,8 @@ var shake_timer: float = -1
 var id: String
 var game_control: GameControl
 var player: Player
+var unique: bool = false
+var description: String = "No description"
 const spacing = 128
 
 
@@ -16,7 +18,8 @@ func _ready():
 	player = game_control.player
 	player.move.connect(on_move)
 	player.kill.connect(on_kill)
-	
+	if unique:
+		game_control.reward_map.cur_rewards.erase(get_script())
 	
 func _process(delta: float):
 	if shake_timer == -1:

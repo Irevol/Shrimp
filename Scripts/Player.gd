@@ -7,11 +7,14 @@ class_name Player
 var can_press_key = true
 var reward_walker = false
 var reward_pos: Vector2
+var max_kills: int
+var kills: float
 
 @export var shake_intensity: float = 25.0
 @export var shake_duration: float = 0.5
 var shake_timer: float = 0.0
 var bug_patch: bool = false
+var tooltip_active: bool = false
 
 signal move(dir: Vector2)
 signal kill(color: String)
@@ -24,6 +27,8 @@ func _ready():
 	
 func reset():
 	health = max_health
+	max_kills = 5
+	after_kill() # to update bar
 	$AnimatedSprite2D.play("idle")
 	game_control.healthbar.display_hearts(health)
 
@@ -55,6 +60,16 @@ func _physics_process(_delta):
 			can_press_key = false
 			move_in_dir(input_dir)
 			move.emit(input_dir)
+			
+
+# called AFTER kill signal
+func after_kill():
+	kills += 1
+	if kills == max_kills:
+		game_control.summon_rewards()
+	#update killbar
+	var killbar = game_control.get_node("UI/Killbar")
+	killbar.update(100*kills/max_kills)
 		
 		
 func take_damage():
@@ -90,13 +105,14 @@ func move_in_dir(dir):
 		$AnimatedSprite2D.flip_h = true
 	elif dir.x == -1:
 		$AnimatedSprite2D.flip_h = false
-	
-	# TWO F**KING HOURS LOST TOO THIS IDIOTIC TECHNICALITY IT WASNT EVEN AN IMPORTANT PART OF THE GAME IM LOSING MY MIND
 		
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
+			#print(node.name)
 			if not reward_walker and node is Enemy:
 				node.take_damage()
+				play_animation("attack")
+				game_control.init_slash(node.position)
 				prevent_move = true
 			if not reward_walker and node.is_in_group("walkable"):
 				allow_move = true
@@ -105,6 +121,12 @@ func move_in_dir(dir):
 			if reward_walker and node is Reward:
 				node.on_pickup_init()
 				return #game control handles restarting flow here
+			if node is TooltipTrigger and not tooltip_active:
+				$"../UI/Tooltip".display(node.text)
+				tooltip_active = true
+			if node is not TooltipTrigger and tooltip_active:
+				tooltip_active = false
+				$"../UI/Tooltip".undisplay()
 	if not prevent_move and allow_move:
 		await $Move.move_to_pos(target_pos)
 	else:

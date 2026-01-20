@@ -3,8 +3,9 @@ class_name GameControl
 
 var tile_size = 288
 @onready var player: Player = $Player
-@onready var reward_map = $RewardMap
+@onready var reward_map: RewardMap = $RewardMap
 @onready var healthbar: Healthbar = $UI/Healthbar
+@export var slash: PackedScene
 var total_enemies: int = 0
 var enemies_finised: int = 0
 var enemies_killed: int = 0 # used to update total_enemies, not running count
@@ -27,6 +28,7 @@ func start_enemy_turn():
 		
 	await get_tree().create_timer(0.2).timeout
 	
+	print(total_enemies)
 	if summon_requested:
 		summmon_rewards_for_real()
 	if total_enemies == 0 or player.reward_walker:
@@ -35,6 +37,7 @@ func start_enemy_turn():
 		
 	start_player_turn()
 	claimed_positions.clear()
+	print("emited")
 	enemy_turn.emit()
 	
 	
@@ -79,6 +82,8 @@ func summmon_rewards_for_real():
 	
 func exit_rewards():
 	player.can_press_key = false
+	player.kills = 0
+	player.after_kill()
 	reward_map.hide()
 	player.change_light_mask(1)
 	var move: Move = player.get_node("Move")
@@ -89,6 +94,12 @@ func exit_rewards():
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
 	tween.tween_method(set_lighting, 0.9, light_level, 1)
+	
+	
+func init_slash(pos: Vector2):
+	var cur_slash = slash.instantiate()
+	cur_slash.position = pos
+	add_child(cur_slash)
 	
 	
 func on_die():

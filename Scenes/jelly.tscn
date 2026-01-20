@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkmbynowg4vq5"]
+
+[ext_resource type="PackedScene" uid="uid://dhd2jib6vcsvt" path="res://Scenes/enemy.tscn" id="1_h531r"]
+
+[node name="Jelly" instance=ExtResource("1_h531r")]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+animation = &"default"
+frame = 0
+frame_progress = 0.0

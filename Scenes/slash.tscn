@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpk5vgxtqauii"]
+
+[ext_resource type="SpriteFrames" uid="uid://b771g1pk0328k" path="res://Animations/slash.tres" id="1_b1hai"]
+[ext_resource type="Script" uid="uid://l7sndacni086" path="res://Scenes/Slash.gd" id="2_0nu70"]
+
+[node name="Slash" type="AnimatedSprite2D"]
+z_index = 20
+sprite_frames = ExtResource("1_b1hai")
+frame = 2
+frame_progress = 0.34475273
+script = ExtResource("2_0nu70")
