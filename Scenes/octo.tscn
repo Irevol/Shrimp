@@ -1,15 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgkmrmoev3ujp"]
+[gd_scene load_steps=6 format=3 uid="uid://dgkmrmoev3ujp"]
 
-[ext_resource type="PackedScene" uid="uid://dhd2jib6vcsvt" path="res://Scenes/enemy.tscn" id="1_a18jx"]
 [ext_resource type="SpriteFrames" uid="uid://vtjtk7dq76xw" path="res://Animations/octo.tres" id="2_6j7fu"]
+[ext_resource type="Script" uid="uid://bg41xuljf2e6d" path="res://Scripts/Utils/DetectTiles.gd" id="2_f1vw5"]
 [ext_resource type="Script" uid="uid://bfq4tyljpijm6" path="res://Scripts/Enemies/Octo.gd" id="3_f1vw5"]
+[ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="4_l5p7w"]
 
-[node name="Enemy" instance=ExtResource("1_a18jx")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(200, 193)
+
+[node name="Octo" type="Node2D" groups=["enemy"]]
 script = ExtResource("3_f1vw5")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
-modulate = Color(0.40392157, 0.19215687, 1, 1)
+[node name="DetectTile" type="Node2D" parent="."]
+script = ExtResource("2_f1vw5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
 sprite_frames = ExtResource("2_6j7fu")
-frame = 1
-frame_progress = 0.5579598
-script = ExtResource("3_f1vw5")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, -24.5)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="Move" type="Node2D" parent="."]
+script = ExtResource("4_l5p7w")
+metadata/_custom_type_script = "uid://bxw5tud1rq036"

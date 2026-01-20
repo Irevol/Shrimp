@@ -3,7 +3,8 @@ class_name Player
 
 @onready var game_control: GameControl = get_tree().current_scene #just gets root node
 @export var health: int = 5
-@export var max_health: int = 5
+@export var max_health: int = 3
+@export var starting_position := Vector2(0,0)
 var can_press_key = true
 var reward_walker = false
 var reward_pos: Vector2
@@ -18,19 +19,19 @@ var tooltip_active: bool = false
 
 signal move(dir: Vector2)
 signal kill(color: String)
-
-
-func _ready():
-	await get_tree().process_frame
-	reset()
 	
 	
 func reset():
+	position = starting_position
 	health = max_health
 	max_kills = 5
-	after_kill() # to update bar
-	$AnimatedSprite2D.play("idle")
+	update_killbar()
 	game_control.healthbar.display_hearts(health)
+	$AnimatedSprite2D.play("idle")
+	game_control.reset()
+	
+	var tween = create_tween()
+	tween.tween_property($PointLight2D, "energy", 0.6, 1)
 
 
 # purely for shake effect atm
@@ -44,22 +45,43 @@ func _process(delta: float):
 		$AnimatedSprite2D.offset = Vector2.ZERO
 		
 
-func _physics_process(_delta):
-	if can_press_key and health > 0:
-		var input_dir = Vector2.ZERO
-		if Input.is_action_pressed("ui_right"):
-			input_dir = Vector2.RIGHT
-		elif Input.is_action_pressed("ui_left"):
-			input_dir = Vector2.LEFT
-		elif Input.is_action_pressed("ui_up"):
-			input_dir = Vector2.UP
-		elif Input.is_action_pressed("ui_down"):
-			input_dir = Vector2.DOWN
-		if input_dir != Vector2.ZERO:
-			print("registered")
-			can_press_key = false
-			move_in_dir(input_dir)
-			move.emit(input_dir)
+#func _physics_process(_delta):
+	#if can_press_key and health > 0:
+		#var input_dir = Vector2.ZERO
+		#if Input.is_action_pressed("ui_right"):
+			#input_dir = Vector2.RIGHT
+		#elif Input.is_action_pressed("ui_left"):
+			#input_dir = Vector2.LEFT
+		#elif Input.is_action_pressed("ui_up"):
+			#input_dir = Vector2.UP
+		#elif Input.is_action_pressed("ui_down"):
+			#input_dir = Vector2.DOWN
+		#if input_dir != Vector2.ZERO:
+			#print("registered")
+			#can_press_key = false
+			#move_in_dir(input_dir)
+			#print("DONT DOUBLE TRIGGER")
+			#move.emit(input_dir)
+			
+
+#reworked input, LETS HOPE THERE'S NOT MORE JITTER, EVER (((:::
+func _input(event: InputEvent) -> void:
+	if not can_press_key: return
+	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") or event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down"):
+		
+		#kinda janky to put this here, put don't want to have to write naother input func
+		if game_control.game_over:
+			var tween := create_tween()
+			tween.tween_property($PointLight2D, "energy", 0, 1)
+			await tween.finished
+			await get_tree().create_timer(0.5).timeout
+			get_tree().reload_current_scene()
+			return
+			
+		var dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		move_in_dir(dir)
+		move.emit(dir)
+		can_press_key = false
 			
 
 # called AFTER kill signal
@@ -67,16 +89,21 @@ func after_kill():
 	kills += 1
 	if kills == max_kills:
 		game_control.summon_rewards()
-	#update killbar
+	update_killbar()
+
+
+func update_killbar():
 	var killbar = game_control.get_node("UI/Killbar")
 	killbar.update(100*kills/max_kills)
 		
 		
-func take_damage():
+func take_damage(amnt = 1):
+	if reward_walker or game_control.game_over: return
 	apply_shake()
-	health -= 1
+	health -= amnt
 	game_control.healthbar.display_hearts(health)
-	if health == 0:
+	if health <= 0:
+		can_press_key = false
 		game_control.on_die()
 		
 
@@ -130,8 +157,10 @@ func move_in_dir(dir):
 	if not prevent_move and allow_move:
 		await $Move.move_to_pos(target_pos)
 	else:
+		$Move.move_speed *= 2
 		await $Move.move_to_pos(position + (dir * 32))
 		await $Move.move_to_pos(position - (dir * 32))
+		$Move.move_speed /= 2
 
 	
 	game_control.start_enemy_turn()

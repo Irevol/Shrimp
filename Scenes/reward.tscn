@@ -2,7 +2,7 @@
 
 [ext_resource type="SpriteFrames" uid="uid://bwwbwg2s4cc4d" path="res://Animations/conch.tres" id="1_8gnab"]
 [ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="2_5bq4m"]
-[ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scenes/TooltipTrigger.gd" id="3_pjohr"]
+[ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scripts/TooltipTrigger.gd" id="3_pjohr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gnab"]
 size = Vector2(200, 193)
@@ -25,7 +25,9 @@ shape = SubResource("RectangleShape2D_8gnab")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0.4117647, 1, 1)
 light_mask = 3
+position = Vector2(2, 35)
 sprite_frames = ExtResource("1_8gnab")
+frame_progress = 0.73007774
 offset = Vector2(0, -216)
 
 [node name="Move" type="Node2D" parent="."]

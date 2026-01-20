@@ -13,6 +13,7 @@ config_version=5
 config/name="Shrimp"
 run/main_scene="uid://dkww1pexib2bu"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Images/icon.svg"
 
 [display]
@@ -33,8 +34,12 @@ enemy=""
 reward_walkable=""
 tooltip=""
 
+[physics]
+
+common/physics_interpolation=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.17042518, 0.27428266, 0.5858323, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

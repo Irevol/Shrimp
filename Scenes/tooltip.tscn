@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d057dlqb4mj54"]
 
-[ext_resource type="Script" uid="uid://67crqjlxbi1b" path="res://Scenes/Tooltip.gd" id="1_617o6"]
+[ext_resource type="Script" uid="uid://67crqjlxbi1b" path="res://Scripts/Tooltip.gd" id="1_617o6"]
 [ext_resource type="FontFile" uid="uid://duc1oq7qiqhj" path="res://Resources/Basic Comical Regular NC.ttf" id="1_ogi1g"]
 
 [node name="Tooltip" type="Node2D"]
@@ -30,9 +30,11 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_ogi1g")
 theme_override_font_sizes/normal_font_size = 96
 bbcode_enabled = true
-text = "examplettttttttttttttttttttttttttttt"
+text = "this is and example "
 fit_content = true
 autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
 z_index = 100

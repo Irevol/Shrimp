@@ -16,7 +16,7 @@ func _ready():
 	game_control.total_enemies += 1
 	turns = max_turns
 	$AnimatedSprite2D.play("default")
-	await get_tree().process_frame
+	set_owner(game_control)
 	game_control.enemy_turn.connect(on_enemy_turn)
 
 
@@ -62,7 +62,6 @@ func handle_collision(movement_rules: Dictionary, node: Node2D) -> Dictionary:
 	
 func play_animation(anim_name: String):
 	if not $AnimatedSprite2D.sprite_frames.has_animation(anim_name): return
-	
 	$AnimatedSprite2D.play(anim_name)
 	await $AnimatedSprite2D.animation_finished
 	$AnimatedSprite2D.play("default")
@@ -128,7 +127,9 @@ func move_in_dir(dir):
 	if movement_rules.allow_move and not movement_rules.prevent_move:
 		await $Move.move_to_pos(target_pos)
 	else:
+		$Move.move_speed *= 2
 		await $Move.move_to_pos(position + (dir * 32))
 		await $Move.move_to_pos(position - (dir * 32))
-		
-	end_turn()
+		$Move.move_speed /= 2
+	
+	return

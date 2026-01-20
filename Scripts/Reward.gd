@@ -9,7 +9,7 @@ var id: String
 var game_control: GameControl
 var player: Player
 var unique: bool = false
-var description: String = "No description"
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 const spacing = 128
 
 
@@ -20,6 +20,7 @@ func _ready():
 	player.kill.connect(on_kill)
 	if unique:
 		game_control.reward_map.cur_rewards.erase(get_script())
+	before_pickup()
 	
 func _process(delta: float):
 	if shake_timer == -1:
@@ -31,11 +32,14 @@ func _process(delta: float):
 	else:
 		shake_timer = 0
 		$AnimatedSprite2D.offset = Vector2.ZERO
+		
+
+func set_description(text):
+	$Tooltip.text = text
 	
 	
 func on_pickup_init():
 	var rewardbar = game_control.get_node("UI/Rewardbar")
-	var sprite: AnimatedSprite2D = $AnimatedSprite2D
 	reparent(rewardbar)
 	position = Vector2(spacing * game_control.current_rewards.size(), 0)
 	game_control.current_rewards.append(self)
@@ -45,6 +49,11 @@ func on_pickup_init():
 	shake_timer = shake_duration
 	game_control.exit_rewards()
 	on_pickup()
+	
+	
+## Set init properties here
+func before_pickup():
+	pass
 	
 	
 func on_pickup():

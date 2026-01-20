@@ -19,4 +19,5 @@ func on_enemy_turn():
 			break
 		dir = dir.rotated(PI/2)
 		
-	move_in_dir(dir)
+	await move_in_dir(dir)
+	end_turn()

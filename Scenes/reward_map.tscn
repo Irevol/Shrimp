@@ -36,6 +36,7 @@ position = Vector2(0, -1152)
 
 [node name="Stand" type="Sprite2D" parent="Reward Stand 0"]
 light_mask = 2
+z_index = -1
 texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
@@ -56,6 +57,7 @@ position = Vector2(1152, 0)
 
 [node name="Stand" type="Sprite2D" parent="Reward Stand 1"]
 light_mask = 2
+z_index = -1
 texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
@@ -76,6 +78,7 @@ position = Vector2(-1152, 0)
 
 [node name="Stand" type="Sprite2D" parent="Reward Stand 2"]
 light_mask = 2
+z_index = -1
 texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 

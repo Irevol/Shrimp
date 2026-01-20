@@ -6,12 +6,15 @@ var tile_size = 288
 @onready var reward_map: RewardMap = $RewardMap
 @onready var healthbar: Healthbar = $UI/Healthbar
 @export var slash: PackedScene
+@export var bullet: PackedScene
 var total_enemies: int = 0
 var enemies_finised: int = 0
 var enemies_killed: int = 0 # used to update total_enemies, not running count
 var claimed_positions := []
 var current_rewards: Array[Reward]
 var summon_requested: bool = false
+var game_over = false
+var darken_ui = false
 const light_level = 0.2
 signal enemy_turn
 signal enemy_finished
@@ -19,21 +22,39 @@ signal enemy_finished
 
 func _ready():
 	enemy_finished.connect(start_player_turn)
-	set_lighting(light_level)
+	set_lighting(1)
+	player.reset()
 	await get_tree().create_timer(1).timeout
 	#summon_rewards()
 	
 	
-func start_enemy_turn():
-		
-	await get_tree().create_timer(0.2).timeout
+func reset():
+	$UI/Tooltip.undisplay()
 	
-	print(total_enemies)
-	if summon_requested:
-		summmon_rewards_for_real()
+	for child in $UI/Rewardbar.get_children():
+		child.queue_free()
+	current_rewards.clear()
+	player.kills = 0
+	player.update_killbar()
+	
+	var tween: Tween = create_tween()
+	darken_ui = true
+	tween.tween_method(set_lighting, 1.0, light_level, 3)
+	await tween.finished
+	darken_ui = false
+	
+	
+	
+func start_enemy_turn():
+	
 	if total_enemies == 0 or player.reward_walker:
 		start_player_turn() 
 		return
+	
+	await get_tree().create_timer(0.3).timeout
+	
+	if summon_requested:
+		summmon_rewards_for_real()
 		
 	start_player_turn()
 	claimed_positions.clear()
@@ -61,6 +82,7 @@ func set_lighting(ratio: float):
 	var color = Color.WHITE.darkened(ratio)
 	darkness.color = color
 	$Background/Darkness.color = color
+	if darken_ui: $UI/Darkness.color = color
 	
 	
 func summon_rewards():
@@ -83,7 +105,7 @@ func summmon_rewards_for_real():
 func exit_rewards():
 	player.can_press_key = false
 	player.kills = 0
-	player.after_kill()
+	$UI/Tooltip.undisplay()
 	reward_map.hide()
 	player.change_light_mask(1)
 	var move: Move = player.get_node("Move")
@@ -94,6 +116,10 @@ func exit_rewards():
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
 	tween.tween_method(set_lighting, 0.9, light_level, 1)
+	await tween.finished
+	
+	healthbar.display_hearts(player.health)
+	player.update_killbar()
 	
 	
 func init_slash(pos: Vector2):
@@ -102,9 +128,26 @@ func init_slash(pos: Vector2):
 	add_child(cur_slash)
 	
 	
+# probably shouldnt be in game control? idk player and enmeies need access, too lazy
+func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false, dmg = 0):
+	var cur_bullet: Bullet = bullet.instantiate()
+	cur_bullet.position = pos
+	cur_bullet.dir = dir
+	cur_bullet.damage = dmg
+	cur_bullet.damage_enemies = dmg_enemy
+	add_child(cur_bullet)
+	return await cur_bullet.tree_exited
+	
+	
 func on_die():
-	$UI/Rewardbar.hide()
+	darken_ui = true
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
-	tween.tween_method(set_lighting, light_level, 0.9, 1)
+	tween.tween_method(set_lighting, light_level, 1, 1)
+	await tween.finished
+	darken_ui = false
+	
+	$UI/Tooltip.display("You died ):")
+	game_over = true
+	#flow handed to player
 	

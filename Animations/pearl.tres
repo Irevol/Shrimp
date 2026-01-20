@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://b56wjm36ri32b"]
+
+[ext_resource type="Texture2D" uid="uid://cuyiayfi6njja" path="res://Images/pearl (1).png" id="1_obeew"]
+[ext_resource type="Texture2D" uid="uid://dyopjgdchgibw" path="res://Images/pearl (2).png" id="2_gauby"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_obeew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gauby")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

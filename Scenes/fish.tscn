@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cfjddhbkv5vkj" path="res://Scripts/Enemies/Fish.gd" id="2_urn1o"]
 [ext_resource type="Material" uid="uid://q2dovklwtlyt" path="res://Shaders/custommod.tres" id="3_urn1o"]
 
-[node name="Enemy" instance=ExtResource("1_c4ibo")]
+[node name="Fish" instance=ExtResource("1_c4ibo")]
 script = ExtResource("2_urn1o")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
