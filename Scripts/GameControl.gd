@@ -87,7 +87,9 @@ func set_lighting(ratio: float):
 	
 func summon_rewards():
 	summon_requested = true
-	
+	$AudioStreamPlayer2D.play_reward_map_sound()
+	await get_tree().create_timer(3).timeout
+	$AudioStreamPlayer.play_reward_map_music()
 	
 func summmon_rewards_for_real():
 	summon_requested = false
@@ -100,7 +102,6 @@ func summmon_rewards_for_real():
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
 	tween.tween_method(set_lighting, light_level, 0.9, 1)
-	
 	
 func exit_rewards():
 	player.can_press_key = false
@@ -121,6 +122,8 @@ func exit_rewards():
 	healthbar.display_hearts(player.health)
 	player.update_killbar()
 	
+	$AudioStreamPlayer.play_normal_map_music()
+
 	
 func init_slash(pos: Vector2):
 	var cur_slash = slash.instantiate()

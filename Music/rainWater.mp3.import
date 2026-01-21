@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/rainWater.mp3-e4958486c1aa90a5194072a83fb8f37
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

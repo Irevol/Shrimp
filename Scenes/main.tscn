@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dkww1pexib2bu"]
+[gd_scene load_steps=25 format=4 uid="uid://dkww1pexib2bu"]
 
 [ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
@@ -19,6 +19,10 @@
 [ext_resource type="Script" path="res://Scripts/Killbar.gd" id="13_wsu2k"]
 [ext_resource type="PackedScene" path="res://Scenes/octo.tscn" id="17_h1bgf"]
 [ext_resource type="AudioStream" uid="uid://jl0n66byrhny" path="res://Music/rainWater.mp3" id="19_fevyy"]
+[ext_resource type="Script" uid="uid://5glcwumhn66r" path="res://Scenes/audio_stream_player.gd" id="20_gt3je"]
+[ext_resource type="Script" uid="uid://3rtip5nkn0cx" path="res://Scenes/audio_stream_player_2d.gd" id="20_hibaj"]
+[ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
+[ext_resource type="AudioStream" uid="uid://bgm7ws3jbakhi" path="res://Sound_Effects/win.mp3" id="21_pdsj5"]
 
 [sub_resource type="Environment" id="Environment_ynf5e"]
 background_mode = 3
@@ -122,4 +126,12 @@ environment = SubResource("Environment_ynf5e")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_fevyy")
+volume_db = -21.767
 autoplay = true
+script = ExtResource("20_gt3je")
+rainwater_music = ExtResource("19_fevyy")
+bells_music = ExtResource("21_3pmx8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("20_hibaj")
+sound_effect = ExtResource("21_pdsj5")
