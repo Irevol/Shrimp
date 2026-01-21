@@ -12,15 +12,18 @@
 layer = 20
 
 [node name="Healthbar" type="Node2D" parent="."]
+z_index = 10
 position = Vector2(340, 77)
 script = ExtResource("1_smcll")
 heart = ExtResource("2_ryf15")
 
 [node name="Rewardbar" type="Node2D" parent="."]
+z_index = 10
 position = Vector2(76, 980)
 script = ExtResource("3_mmixe")
 
 [node name="Killbar" type="TextureProgressBar" parent="."]
+z_index = 10
 offset_left = 7.0
 offset_right = 263.0
 offset_bottom = 256.0
@@ -32,6 +35,7 @@ tint_progress = Color(1.5990387, 1.5990387, 0.12345356, 1)
 script = ExtResource("6_4vbiv")
 
 [node name="Tooltip" parent="." instance=ExtResource("7_3r70p")]
+z_index = 10
 position = Vector2(97, 313)
 
 [node name="Darkness" type="CanvasModulate" parent="."]

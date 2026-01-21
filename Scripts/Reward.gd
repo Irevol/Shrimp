@@ -19,6 +19,7 @@ func _ready():
 	game_control = get_tree().current_scene
 	if unique:
 		game_control.reward_map.cur_rewards.erase(get_script())
+	$PointLight2D.hide()
 	before_pickup()
 	
 func _process(delta: float):

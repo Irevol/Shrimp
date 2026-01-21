@@ -145,7 +145,7 @@ func move_in_dir(dir):
 			if reward_walker:
 				if node.is_in_group("reward_walkable"):
 					allow_move = true
-				if node is Reward:
+				if node is Reward and not node.floating:
 					node.on_pickup_init()
 					return #game control handles restarting flow here
 			else:
@@ -162,11 +162,11 @@ func move_in_dir(dir):
 					node.on_pickup_init()
 				if node is Gate:
 					prevent_move = not node.attempt_open()
-				if node is TooltipTrigger and (not prevent_move and allow_move):
-					there_is_tooltip = true
-					if not tooltip_active:
-						tooltip_active = true
-						$"../UI/Tooltip".display(node.text)
+			if node is TooltipTrigger and (not prevent_move and allow_move):
+				there_is_tooltip = true
+				if not tooltip_active:
+					tooltip_active = true
+					$"../UI/Tooltip".display(node.text)
 					
 
 	if not there_is_tooltip and tooltip_active:

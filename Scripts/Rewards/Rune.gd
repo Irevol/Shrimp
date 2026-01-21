@@ -18,6 +18,7 @@ func _process(delta: float):
 
 func before_pickup():
 	set_description(names[rune_num], "An odd symbol...")
+	$PointLight2D.show()
 	sprite.sprite_frames = game_control.rune_anims[rune_num]
 	
 		

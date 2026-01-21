@@ -28,7 +28,7 @@ func _ready():
 	set_lighting(1)
 	player.reset()
 	await get_tree().create_timer(1).timeout
-	#summon_rewards()
+	summon_rewards()
 	
 	
 func reset():
@@ -99,14 +99,18 @@ func summmon_rewards_for_real():
 	reward_map.show()
 	player.change_light_mask(2)
 	player.reward_walker = true
+	player.z_index += 10
 	
-	var tween: Tween = create_tween()
-	tween.set_trans(tween.TRANS_CUBIC)
-	tween.tween_method(set_lighting, light_level, 0.9, 1)
+	$RewardMap/Distortion.show()
+	$RewardMap/Fade.show()
+	#var tween: Tween = create_tween()
+	#tween.set_trans(tween.TRANS_CUBIC)
+	#tween.tween_method(set_lighting, light_level, 0.9, 1)
 	
 func exit_rewards():
 	player.can_press_key = false
 	player.kills = 0
+	player.z_index -= 10
 	$UI/Tooltip.undisplay()
 	reward_map.hide()
 	player.change_light_mask(1)
@@ -116,15 +120,17 @@ func exit_rewards():
 	player.reward_walker = false
 	player.can_press_key = true
 	
-	var tween: Tween = create_tween()
-	tween.set_trans(tween.TRANS_CUBIC)
-	tween.tween_method(set_lighting, 0.9, light_level, 1)
-	await tween.finished
+	$RewardMap/Distortion.show()
+	$RewardMap/Fade.show()
+	#var tween: Tween = create_tween()
+	#tween.set_trans(tween.TRANS_CUBIC)
+	#tween.tween_method(set_lighting, 0.9, light_level, 1)
+	#await tween.finished
 	
 	healthbar.display_hearts(player.health)
 	player.update_killbar()
 	
-	$AudioStreamPlayer.play_normal_map_music()
+	$Music.play_normal_map_music()
 
 	
 func init_slash(pos: Vector2):
