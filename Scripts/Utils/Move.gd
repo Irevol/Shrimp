@@ -2,7 +2,7 @@ extends Node2D
 class_name Move
 ## Use "move_to_pos" to move parent
 
-@export var move_speed = 2
+@export var move_speed = 3
 var tween_trans = Tween.TRANS_QUAD
 var tween_ease = Tween.EASE_OUT
 var tween: Tween

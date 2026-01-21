@@ -11,6 +11,7 @@ var reward_pos: Vector2
 var max_kills: int
 var kills: float
 @export var invincible := false
+@export var brightness := 0.5
 
 @export var shake_intensity: float = 25.0
 @export var shake_duration: float = 0.5
@@ -32,7 +33,7 @@ func reset():
 	game_control.reset()
 	
 	var tween = create_tween()
-	tween.tween_property($PointLight2D, "energy", 0.6, 1)
+	tween.tween_property($PointLight2D, "energy", brightness, 1)
 
 
 # purely for shake effect atm
@@ -131,8 +132,6 @@ func move_in_dir(dir):
 	var there_is_tooltip = false
 	var detected_nodes = $DetectTile.detect_tile(target_pos)
 	
-	print("trigged")
-	
 	if dir.x == 1:
 		$AnimatedSprite2D.flip_h = true
 	elif dir.x == -1:
@@ -141,7 +140,7 @@ func move_in_dir(dir):
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
 			
-			print(node.name)
+			#print(node.name)
 			if reward_walker:
 				if node.is_in_group("reward_walkable"):
 					allow_move = true

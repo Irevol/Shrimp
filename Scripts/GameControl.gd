@@ -26,9 +26,10 @@ signal kill_lights
 func _ready():
 	enemy_finished.connect(start_player_turn)
 	set_lighting(1)
+	#$Map/Walkable.modulate.a = 100/255.0
 	player.reset()
 	await get_tree().create_timer(1).timeout
-	summon_rewards()
+	#summon_rewards()
 	
 	
 func reset():
@@ -54,19 +55,19 @@ func start_enemy_turn():
 		start_player_turn() 
 		return
 	
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	if summon_requested:
 		summmon_rewards_for_real()
 		
 	start_player_turn()
 	claimed_positions.clear()
-	print("emited")
+	print("enemy turn started")
 	enemy_turn.emit()
 	
 	
 func start_player_turn():
-	
+	print("called")
 	if total_enemies - enemies_killed > enemies_finised and not player.reward_walker: return
 	
 	if not player.reward_walker:
@@ -96,8 +97,8 @@ func summmon_rewards_for_real():
 	sound_effects.play_sound("win.mp3")
 	reward_map.global_position = player.position
 	reward_map.generate_rewards()
-	reward_map.show()
 	player.change_light_mask(2)
+	reward_map.show()
 	player.reward_walker = true
 	player.z_index += 10
 	

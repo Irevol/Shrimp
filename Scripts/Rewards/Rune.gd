@@ -19,6 +19,8 @@ func _process(delta: float):
 func before_pickup():
 	set_description(names[rune_num], "An odd symbol...")
 	light.show()
+	light.color = Color("edff79")
+	light.energy = 0.5
 	sprite.sprite_frames = game_control.rune_anims[rune_num]
 	
 		

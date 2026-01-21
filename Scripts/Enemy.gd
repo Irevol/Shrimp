@@ -7,7 +7,7 @@ class_name Enemy
 var requests_to_move_here: Enemy
 var requested_dir: Vector2
 var request_handled := false
-var max_turns = 1
+@export var max_turns = 1
 var turns
 var color: String
 
@@ -17,8 +17,15 @@ func _ready():
 	turns = max_turns
 	$AnimatedSprite2D.play("default")
 	set_owner(game_control)
-	game_control.enemy_turn.connect(on_enemy_turn)
+	game_control.enemy_turn.connect(take_turn_if_in_range)
+	
+	
 
+func take_turn_if_in_range():
+	if abs(player.position.x - position.x) < (288 * 5) and abs(player.position.y - position.y) < (288 * 4):
+		on_enemy_turn()
+	else:
+		end_turn()
 
 @abstract 
 func init_enemy()
@@ -69,6 +76,7 @@ func play_animation(anim_name: String):
 	
 
 func end_turn():
+	#print("turn ended")
 	request_handled = false
 	requests_to_move_here = null
 	turns -= 1
