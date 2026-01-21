@@ -5,6 +5,7 @@ var tile_size = 288
 @onready var player: Player = $Player
 @onready var reward_map: RewardMap = $RewardMap
 @onready var healthbar: Healthbar = $UI/Healthbar
+@onready var sound_effects: SoundEffect = $SoundEffects
 @export var slash: PackedScene
 @export var bullet: PackedScene
 @export var rune_anims: Array[SpriteFrames]
