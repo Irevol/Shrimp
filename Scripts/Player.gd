@@ -101,6 +101,7 @@ func update_killbar():
 func take_damage(amnt = 1):
 	if reward_walker or game_control.game_over or invincible: return
 	apply_shake()
+	game_control.sound_effects.play_sound("hurt.mp3")
 	health -= amnt
 	game_control.healthbar.display_hearts(health)
 	if health <= 0:
@@ -173,7 +174,6 @@ func move_in_dir(dir):
 		$"../UI/Tooltip".undisplay()
 	if not prevent_move and allow_move:
 		await $Move.move_to_pos(target_pos)
-		game_control.sound_effects.play_sound("win.mp3")
 	else:
 		$Move.move_speed *= 2
 		await $Move.move_to_pos(position + (dir * 32))
