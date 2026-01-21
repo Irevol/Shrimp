@@ -19,8 +19,9 @@ fill_to = Vector2(0, 1)
 script = ExtResource("1_4m48d")
 reward = ExtResource("5_oavb7")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["reward_walkable"]]
-modulate = Color(13.021544, 13.021544, 13.021544, 1)
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["reward_walkable", "walkable"]]
+modulate = Color(1.0803556, 1.0803556, 0.99106634, 0.62352943)
+self_modulate = Color(1.5431575, 1.5431575, 1.5431575, 1)
 light_mask = 3
 z_index = 1
 position = Vector2(144, -144)
