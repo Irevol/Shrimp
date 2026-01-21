@@ -100,6 +100,7 @@ func update_killbar():
 		
 func take_damage(amnt = 1):
 	if reward_walker or game_control.game_over or invincible: return
+	$PlayerAudioStreamPlayer2D.play_hurt()
 	apply_shake()
 	health -= amnt
 	game_control.healthbar.display_hearts(health)

@@ -14,9 +14,11 @@
 [ext_resource type="TileSet" uid="uid://b05d1p6ulwqxp" path="res://Resources/tile_set.tres" id="9_ynf5e"]
 [ext_resource type="Script" uid="uid://b8t4t7cmyhrjn" path="res://Scripts/Rewards/Pearl.gd" id="10_h1bgf"]
 [ext_resource type="Script" uid="uid://sdukrd3e0r0m" path="res://Scripts/Rewards/Conch.gd" id="11_b3802"]
-[ext_resource type="PackedScene" uid="uid://54hqsva7183s" path="res://Scenes/ui.tscn" id="12_h1bgf"]
-[ext_resource type="PackedScene" uid="uid://dgkmrmoev3ujp" path="res://Scenes/octo.tscn" id="17_h1bgf"]
+[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="12_h1bgf"]
+[ext_resource type="PackedScene" path="res://Scenes/octo.tscn" id="17_h1bgf"]
+[ext_resource type="AudioStream" uid="uid://jgqsxl8mmrmb" path="res://Sound_Effects/ded.mp3" id="18_b3802"]
 [ext_resource type="AudioStream" uid="uid://jl0n66byrhny" path="res://Music/rainWater.mp3" id="19_fevyy"]
+[ext_resource type="AudioStream" uid="uid://ddsgbwc86h34s" path="res://Sound_Effects/hurt.mp3" id="19_hibaj"]
 [ext_resource type="Script" uid="uid://5glcwumhn66r" path="res://Scenes/audio_stream_player.gd" id="20_gt3je"]
 [ext_resource type="Script" uid="uid://3rtip5nkn0cx" path="res://Scenes/audio_stream_player_2d.gd" id="20_hibaj"]
 [ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
@@ -83,6 +85,11 @@ position = Vector2(-72, -1152)
 starting_position = Vector2(-72, -1152)
 invincible = true
 
+[node name="PlayerAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+volume_db = -17.535
+script = ExtResource("9_fevyy")
+hurt = ExtResource("19_hibaj")
+
 [node name="RewardMap" parent="." instance=ExtResource("2_kry3j")]
 light_mask = 2
 position = Vector2(2520, 504)
@@ -117,6 +124,7 @@ rainwater_music = ExtResource("19_fevyy")
 bells_music = ExtResource("21_3pmx8")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -19.953
 script = ExtResource("20_hibaj")
 sound_effect = ExtResource("21_pdsj5")
 

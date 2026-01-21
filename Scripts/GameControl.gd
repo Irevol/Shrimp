@@ -89,6 +89,7 @@ func set_lighting(ratio: float):
 	
 func summon_rewards():
 	summon_requested = true
+	$AudioStreamPlayer.stop()
 	$AudioStreamPlayer2D.play_reward_map_sound()
 	await get_tree().create_timer(3).timeout
 	$AudioStreamPlayer.play_reward_map_music()
@@ -151,6 +152,9 @@ func position_rewards():
 	
 	
 func on_die():
+	$AudioStreamPlayer.stop()
+	$AudioStreamPlayer2D.play_death()
+	
 	darken_ui = true
 	kill_lights.emit()
 	var tween: Tween = create_tween()
