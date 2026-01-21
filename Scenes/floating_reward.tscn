@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://cn7nqwoc3xat4" path="res://Scenes/LightControl.gd" id="3_g7aiv"]
 [ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scripts/TooltipTrigger.gd" id="5_om23n"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gnab"]
+size = Vector2(200, 193)
+
 [sub_resource type="Gradient" id="Gradient_vgqql"]
 offsets = PackedFloat32Array(0, 0.7)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -15,9 +18,6 @@ gradient = SubResource("Gradient_vgqql")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gnab"]
-size = Vector2(200, 193)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bq4m"]
 size = Vector2(864, 864)
@@ -31,20 +31,6 @@ offset = Vector2(0, -32)
 
 [node name="Reward" type="Node2D" parent="." groups=["unwalkable"]]
 script = ExtResource("2_g7aiv")
-
-[node name="PointLight2D" type="PointLight2D" parent="Reward"]
-visible = false
-light_mask = 3
-position = Vector2(1.1444092e-05, -215.99992)
-scale = Vector2(6.75, 6.7500005)
-color = Color(2.5510268, 2.5510268, 0, 1)
-energy = 0.5
-range_layer_min = -10
-range_layer_max = 10
-range_item_cull_mask = 3
-shadow_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_ee4r6")
-script = ExtResource("3_g7aiv")
 
 [node name="Area2D" type="Area2D" parent="Reward"]
 z_index = 20
@@ -63,6 +49,19 @@ z_index = 5
 position = Vector2(0, -216)
 scale = Vector2(0.75, 0.75)
 sprite_frames = ExtResource("3_cqnkb")
+
+[node name="PointLight2D" type="PointLight2D" parent="Reward/AnimatedSprite2D"]
+visible = false
+light_mask = 3
+scale = Vector2(9, 9.000001)
+color = Color(2.5510268, 2.5510268, 0, 1)
+energy = 0.5
+range_layer_min = -10
+range_layer_max = 10
+range_item_cull_mask = 3
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_ee4r6")
+script = ExtResource("3_g7aiv")
 
 [node name="Tooltip" type="Node2D" parent="Reward" groups=["tooltip", "walkable"]]
 position = Vector2(-2, 0)

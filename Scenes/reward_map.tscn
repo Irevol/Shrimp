@@ -43,6 +43,7 @@ texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
 [node name="PointLight2D" type="PointLight2D" parent="Reward Stand 0"]
+visible = false
 light_mask = 2
 position = Vector2(0, -1.5258789e-05)
 scale = Vector2(25.874998, 24.749998)
@@ -66,6 +67,7 @@ texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
 [node name="PointLight2D" type="PointLight2D" parent="Reward Stand 1"]
+visible = false
 light_mask = 2
 position = Vector2(0, -1.5258789e-05)
 scale = Vector2(25.874998, 24.749998)
@@ -89,6 +91,7 @@ texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
 [node name="PointLight2D" type="PointLight2D" parent="Reward Stand 2"]
+visible = false
 light_mask = 2
 position = Vector2(0, -1.5258789e-05)
 scale = Vector2(25.874998, 24.749998)
@@ -115,4 +118,4 @@ offset_left = -2206.0
 offset_top = -1788.0
 offset_right = 2586.0
 offset_bottom = 1132.0
-color = Color(0, 0, 0, 0.27450982)
+color = Color(0, 0, 0, 0.3529412)

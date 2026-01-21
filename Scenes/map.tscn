@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=4 uid="uid://b3hq1jqq5dldw"]
+
+[ext_resource type="TileSet" uid="uid://b05d1p6ulwqxp" path="res://Resources/tile_set.tres" id="1_q0mm3"]
+[ext_resource type="PackedScene" uid="uid://bfgl74tb327dv" path="res://Scenes/gate.tscn" id="2_np2xp"]
+[ext_resource type="PackedScene" uid="uid://dhshlfk5tky02" path="res://Scenes/floating_reward.tscn" id="2_w7jjh"]
+[ext_resource type="Script" uid="uid://n3bfc164jgwb" path="res://Scenes/FloatingReward.gd" id="3_6q3n4"]
+[ext_resource type="Script" uid="uid://ymd8ampkwyaq" path="res://Scripts/Rewards/Rune.gd" id="4_4c2oa"]
+[ext_resource type="PackedScene" uid="uid://bkmbynowg4vq5" path="res://Scenes/jelly.tscn" id="4_6q3n4"]
+[ext_resource type="PackedScene" uid="uid://b25ier37yvifq" path="res://Scenes/fish.tscn" id="5_4c2oa"]
+
+[node name="Map" type="Node2D" groups=["walkable"]]
+
+[node name="Walkable" type="TileMapLayer" parent="." groups=["walkable"]]
+z_index = -10
+tile_map_data = PackedByteArray("AAD9////EAAAAAAAAAD+/wEAEAAAAAAAAAD9/wAAEAAAAAAAAAD9/wEAEAAAAAAAAAD9//7/EAAAAAAAAAD9//3/EAAAAAAAAAD///j/EAAAAAAAAAD+/wIAEAAAAAAAAAD9/wIAEAAAAAAAAAD8/wIAEAAAAAAAAAD8/wEAEAAAAAAAAAD8/wAAEAAAAAAAAAD+/wAAEAAAAAAAAAD9//j/EAAAAAAAAAD9//n/EAAAAAAAAAD9//r/EAAAAAAAAAD9//v/EAAAAAAAAAD9//z/EAAAAAAAAAD9//f/EAAAAAAAAAD8//f/EAAAAAAAAAD+//f/EAAAAAAAAAD+//j/EAAAAAAAAAD+//n/EAAAAAAAAAD8//n/EAAAAAAAAAD7//j/EAAAAAAAAAD7//f/EAAAAAAAAAD///f/EAAAAAAAAAD///b/EAAAAAAAAAD+//b/EAAAAAAAAAD9//b/EAAAAAAAAAD8//b/EAAAAAAAAAD7//b/EAAAAAAAAAD///X/EAAAAAAAAAD+//X/EAAAAAAAAAD9//X/EAAAAAAAAAD8//X/EAAAAAAAAAD7//X/EAAAAAAAAAD8//T/EAAAAAAAAAD9//T/EAAAAAAAAAD+//T/EAAAAAAAAAD6//b/EAAAAAAAAAD7//T/EAAAAAAAAAD///T/EAAAAAAAAAD///n/EAAAAAAAAAD7//n/EAAAAAAAAAD6//j/EAAAAAAAAAD6//f/EAAAAAAAAAD6//X/EAAAAAAAAAAAAPX/EAAAAAAAAAAAAPb/EAAAAAAAAAAAAPf/EAAAAAAAAAAAAPj/EAAAAAAAAAD5//f/EAAAAAAAAAD4//f/EAAAAAAAAAD3//f/EAAAAAAAAAD2//f/EAAAAAAAAAD1//f/EAAAAAAAAAABAPb/EAAAAAAAAAACAPb/EAAAAAAAAAADAPb/EAAAAAAAAAAEAPb/EAAAAAAAAAAFAPb/EAAAAAAAAAAGAPb/EAAAAAAAAAAFAPX/EAAAAAAAAAAGAPX/EAAAAAAAAAAFAPf/EAAAAAAAAAAGAPf/EAAAAAAAAAAHAPf/EAAAAAAAAAAHAPb/EAAAAAAAAAAHAPX/EAAAAAAAAAD1//j/EAAAAAAAAAD1//b/EAAAAAAAAAD0//b/EAAAAAAAAAD0//f/EAAAAAAAAAD0//j/EAAAAAAAAADz//b/EAAAAAAAAADz//f/EAAAAAAAAADz//j/EAAAAAAAAADy//f/EAAAAAAAAADx//f/EAAAAAAAAADw//f/EAAAAAAAAAAIAPb/EAAAAAAAAAAJAPb/EAAAAAAAAAAKAPb/EAAAAAAAAAALAPb/EAAAAAAAAAANAPP/EAAAAAAAAAD9//L/EAAAAAAAAAD9//P/EAAAAAAAAAD9//H/EAAAAAAAAAD9//D/EAAAAAAAAAD9/+//EAAAAAAAAAD9/+7/EAAAAAAAAAD8/+3/EAAAAAAAAAD9/+3/EAAAAAAAAAD+/+3/EAAAAAAAAAD7/+3/EAAAAAAAAAD//+3/EAAAAAAAAAD8/+7/EAAAAAAAAAD+/+7/EAAAAAAAAAAMAPX/EAAAAAAAAAAMAPb/EAAAAAAAAAAMAPf/EAAAAAAAAAANAPf/EAAAAAAAAAANAPb/EAAAAAAAAAANAPX/EAAAAAAAAAAOAPX/EAAAAAAAAAAOAPb/EAAAAAAAAAAOAPf/EAAAAAAAAAANAPT/EAAAAAAAAAANAPL/EAAAAAAAAAAMAPH/EAAAAAAAAAANAPH/EAAAAAAAAAAOAPH/EAAAAAAAAAAOAPD/EAAAAAAAAAANAPD/EAAAAAAAAAAMAPD/EAAAAAAAAAALAPD/EAAAAAAAAAALAPH/EAAAAAAAAAAPAPH/EAAAAAAAAAAPAPD/EAAAAAAAAAAPAO//EAAAAAAAAAAOAO//EAAAAAAAAAANAO//EAAAAAAAAAAMAO//EAAAAAAAAAALAO//EAAAAAAAAAALAO7/EAAAAAAAAAAMAO7/EAAAAAAAAAANAO7/EAAAAAAAAAAOAO7/EAAAAAAAAAAPAO7/EAAAAAAAAAAPAO3/EAAAAAAAAAAOAO3/EAAAAAAAAAANAO3/EAAAAAAAAAAMAO3/EAAAAAAAAAALAO3/EAAAAAAAAAAKAO3/EAAAAAAAAAAKAO7/EAAAAAAAAAAKAOz/EAAAAAAAAAALAOz/EAAAAAAAAAAMAOz/EAAAAAAAAAD8//j/EAAAAAAAAAA=")
+tile_set = ExtResource("1_q0mm3")
+occlusion_enabled = false
+navigation_enabled = false
+
+[node name="Unwalkable" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_q0mm3")
+
+[node name="Keys" type="Node" parent="."]
+
+[node name="FloatingReward" parent="Keys" instance=ExtResource("2_w7jjh")]
+position = Vector2(1872, -2736)
+script = ExtResource("3_6q3n4")
+reward_script = ExtResource("4_4c2oa")
+
+[node name="Gates" type="Node" parent="."]
+
+[node name="Gate" parent="Gates" instance=ExtResource("2_np2xp")]
+position = Vector2(-720, -3672)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Fish3" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(-1296, -2160)
+
+[node name="Jelly" parent="Enemies/Fish3" instance=ExtResource("4_6q3n4")]
+position = Vector2(2874.7546, -862.1094)
+
+[node name="Fish" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(-432, -2160)
+
+[node name="Fish2" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(-720, -2736)

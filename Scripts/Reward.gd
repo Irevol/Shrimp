@@ -11,6 +11,7 @@ var player: Player
 var unique := false
 var floating := true
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var light: PointLight2D = $AnimatedSprite2D/PointLight2D
 
 signal shake_done
 
@@ -19,7 +20,7 @@ func _ready():
 	game_control = get_tree().current_scene
 	if unique:
 		game_control.reward_map.cur_rewards.erase(get_script())
-	$PointLight2D.hide()
+	light.show()
 	before_pickup()
 	
 func _process(delta: float):
