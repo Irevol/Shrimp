@@ -108,8 +108,8 @@ color = Color(0.7392879, 0.73928833, 0.7392881, 1)
 environment = SubResource("Environment_ynf5e")
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
-max_polyphony = 5
 script = ExtResource("17_pdsj5")
+metadata/_custom_type_script = "uid://c76j1wku3nq33"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_fevyy")

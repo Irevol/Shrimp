@@ -173,6 +173,7 @@ func move_in_dir(dir):
 		$"../UI/Tooltip".undisplay()
 	if not prevent_move and allow_move:
 		await $Move.move_to_pos(target_pos)
+		game_control.sound_effects.play_sound("win.mp3")
 	else:
 		$Move.move_speed *= 2
 		await $Move.move_to_pos(position + (dir * 32))
