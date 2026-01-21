@@ -3,13 +3,14 @@ class_name Player
 
 @onready var game_control: GameControl = get_tree().current_scene #just gets root node
 @export var health: int = 5
-@export var max_health: int = 3
+@export var max_health: int = 6
 @export var starting_position := Vector2(0,0)
 var can_press_key = true
 var reward_walker = false
 var reward_pos: Vector2
 var max_kills: int
 var kills: float
+@export var invincible := false
 
 @export var shake_intensity: float = 25.0
 @export var shake_duration: float = 0.5
@@ -129,6 +130,8 @@ func move_in_dir(dir):
 	var there_is_tooltip = false
 	var detected_nodes = $DetectTile.detect_tile(target_pos)
 	
+	print("trigged")
+	
 	if dir.x == 1:
 		$AnimatedSprite2D.flip_h = true
 	elif dir.x == -1:
@@ -136,27 +139,35 @@ func move_in_dir(dir):
 		
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
-			#print(node.name)
-			if not reward_walker and node is Enemy:
-				node.take_damage()
-				play_animation("attack")
-				game_control.init_slash(node.position)
-				prevent_move = true
-			if not reward_walker and node.is_in_group("walkable"):
-				allow_move = true
-			if node.is_in_group("unwalkable"):
-				prevent_move = true
-			if reward_walker and node.is_in_group("reward_walkable"):
-				allow_move = true
-			if reward_walker and node is Reward:
-				node.on_pickup_init()
-				return #game control handles restarting flow here
-			if node is TooltipTrigger:
-				there_is_tooltip = true
-				if not tooltip_active:
-					tooltip_active = true
-					$"../UI/Tooltip".display(node.text)
+			
+			print(node.name)
+			if reward_walker:
+				if node.is_in_group("reward_walkable"):
+					allow_move = true
+				if node is Reward:
+					node.on_pickup_init()
+					return #game control handles restarting flow here
+			else:
+				if node.is_in_group("walkable"):
+					allow_move = true
+				if node.is_in_group("unwalkable"):
+					prevent_move = true
+				if node is Enemy:
+					node.take_damage()
+					play_animation("attack")
+					game_control.init_slash(node.position)
+					prevent_move = true
+				if node is Reward:
+					node.on_pickup_init()
+				if node is Gate:
+					prevent_move = not node.attempt_open()
+				if node is TooltipTrigger and (not prevent_move and allow_move):
+					there_is_tooltip = true
+					if not tooltip_active:
+						tooltip_active = true
+						$"../UI/Tooltip".display(node.text)
 					
+
 	if not there_is_tooltip and tooltip_active:
 		tooltip_active = false
 		$"../UI/Tooltip".undisplay()
@@ -168,5 +179,4 @@ func move_in_dir(dir):
 		await $Move.move_to_pos(position - (dir * 32))
 		$Move.move_speed /= 2
 
-	
 	game_control.start_enemy_turn()

@@ -7,6 +7,7 @@ var tile_size = 288
 @onready var healthbar: Healthbar = $UI/Healthbar
 @export var slash: PackedScene
 @export var bullet: PackedScene
+@export var rune_anims: Array[SpriteFrames]
 var total_enemies: int = 0
 var enemies_finised: int = 0
 var enemies_killed: int = 0 # used to update total_enemies, not running count
@@ -18,6 +19,7 @@ var darken_ui = false
 const light_level = 0.2
 signal enemy_turn
 signal enemy_finished
+signal kill_lights
 
 
 func _ready():
@@ -142,9 +144,15 @@ func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false, dmg = 0):
 	add_child(cur_bullet)
 	return await cur_bullet.tree_exited
 	
+
+func position_rewards():
+	for i in range(current_rewards.size()):
+		current_rewards[i].position = Vector2(96 * i, 0)
+	
 	
 func on_die():
 	darken_ui = true
+	kill_lights.emit()
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
 	tween.tween_method(set_lighting, light_level, 1, 1)

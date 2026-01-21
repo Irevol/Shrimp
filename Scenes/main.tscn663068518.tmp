@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dkww1pexib2bu"]
+[gd_scene load_steps=31 format=4 uid="uid://dkww1pexib2bu"]
 
 [ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
@@ -17,11 +17,14 @@
 [ext_resource type="PackedScene" uid="uid://54hqsva7183s" path="res://Scenes/ui.tscn" id="12_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://dgkmrmoev3ujp" path="res://Scenes/octo.tscn" id="17_h1bgf"]
 [ext_resource type="AudioStream" uid="uid://jl0n66byrhny" path="res://Music/rainWater.mp3" id="19_fevyy"]
+[ext_resource type="Texture2D" uid="uid://b0yv1hcojkcyr" path="res://Images/Altar.png" id="19_hibaj"]
 [ext_resource type="Script" uid="uid://5glcwumhn66r" path="res://Scenes/audio_stream_player.gd" id="20_gt3je"]
 [ext_resource type="Script" uid="uid://3rtip5nkn0cx" path="res://Scenes/audio_stream_player_2d.gd" id="20_hibaj"]
 [ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
+[ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="21_ee4r6"]
 [ext_resource type="AudioStream" uid="uid://bgm7ws3jbakhi" path="res://Sound_Effects/win.mp3" id="21_pdsj5"]
-[ext_resource type="PackedScene" uid="uid://dhshlfk5tky02" path="res://Scenes/floating_reward.tscn" id="22_ee4r6"]
+[ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scripts/TooltipTrigger.gd" id="22_gt3je"]
+[ext_resource type="Script" uid="uid://ymd8ampkwyaq" path="res://Scripts/Rewards/Rune.gd" id="23_u50mg"]
 
 [sub_resource type="Environment" id="Environment_ynf5e"]
 background_mode = 3
@@ -30,6 +33,22 @@ glow_enabled = true
 glow_intensity = 0.2
 glow_bloom = 0.2
 fog_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_vgqql"]
+offsets = PackedFloat32Array(0, 0.7)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ee4r6"]
+gradient = SubResource("Gradient_vgqql")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gnab"]
+size = Vector2(200, 193)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bq4m"]
+size = Vector2(864, 864)
 
 [node name="GameControl" type="Node2D"]
 script = ExtResource("1_sugp2")
@@ -50,11 +69,9 @@ position = Vector2(-72, -2088)
 position = Vector2(-648, -576)
 
 [node name="Jelly" parent="Enemies" instance=ExtResource("4_wsu2k")]
-y_sort_enabled = false
 position = Vector2(504, -576)
 
 [node name="Fish" parent="Enemies" instance=ExtResource("5_k12tt")]
-y_sort_enabled = false
 position = Vector2(-648, -1152)
 
 [node name="Octo2" parent="Enemies" instance=ExtResource("17_h1bgf")]
@@ -78,10 +95,12 @@ occlusion_enabled = false
 navigation_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_jjvhh")]
-y_sort_enabled = true
 position = Vector2(-72, -1152)
+health = null
+max_health = null
 starting_position = Vector2(-72, -1152)
-invincible = true
+shake_intensity = null
+shake_duration = null
 
 [node name="RewardMap" parent="." instance=ExtResource("2_kry3j")]
 light_mask = 2
@@ -120,5 +139,56 @@ bells_music = ExtResource("21_3pmx8")
 script = ExtResource("20_hibaj")
 sound_effect = ExtResource("21_pdsj5")
 
-[node name="FloatingReward" parent="." instance=ExtResource("22_ee4r6")]
+[node name="FloatingReward" type="Node2D" parent="."]
 position = Vector2(-648, -1440)
+
+[node name="Altar" type="Sprite2D" parent="FloatingReward"]
+texture = ExtResource("19_hibaj")
+offset = Vector2(0, -32)
+
+[node name="Reward" type="Node2D" parent="FloatingReward" groups=["unwalkable"]]
+script = ExtResource("23_u50mg")
+
+[node name="PointLight2D" type="PointLight2D" parent="FloatingReward/Reward"]
+light_mask = 3
+position = Vector2(1.1444092e-05, -215.99992)
+scale = Vector2(6.75, 6.7500005)
+color = Color(2.5510268, 2.5510268, 0, 1)
+energy = 0.5
+range_layer_min = -10
+range_layer_max = 10
+range_item_cull_mask = 3
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_ee4r6")
+
+[node name="Area2D" type="Area2D" parent="FloatingReward/Reward"]
+z_index = 20
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloatingReward/Reward/Area2D"]
+z_index = 10
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_8gnab")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FloatingReward/Reward"]
+modulate = Color(1, 0.4117647, 1, 1)
+light_mask = 3
+position = Vector2(0, -216)
+scale = Vector2(0.75, 0.75)
+sprite_frames = ExtResource("6_hibaj")
+
+[node name="Move" type="Node2D" parent="FloatingReward/Reward"]
+script = ExtResource("21_ee4r6")
+metadata/_custom_type_script = "uid://bxw5tud1rq036"
+
+[node name="Tooltip" type="Node2D" parent="FloatingReward/Reward" groups=["tooltip"]]
+script = ExtResource("22_gt3je")
+
+[node name="Area2D" type="Area2D" parent="FloatingReward/Reward/Tooltip"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloatingReward/Reward/Tooltip/Area2D"]
+shape = SubResource("RectangleShape2D_5bq4m")
+
+[connection signal="mouse_entered" from="FloatingReward/Reward/Area2D" to="FloatingReward/Reward/Tooltip" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="FloatingReward/Reward/Area2D" to="FloatingReward/Reward/Tooltip" method="_on_area_2d_mouse_exited"]
