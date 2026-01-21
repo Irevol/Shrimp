@@ -7,6 +7,7 @@ extends AudioStreamPlayer
 func _ready() -> void:
 	pass # Replace with function body.
 
+
 func play_reward_map_music():
 	stream = bells_music
 	play()

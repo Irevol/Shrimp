@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfgl74tb327dv"]
+
+[ext_resource type="Script" uid="uid://dr5bprnjhktcq" path="res://Scripts/Gate.gd" id="1_kfxhe"]
+[ext_resource type="SpriteFrames" uid="uid://dp2hwarp6yirb" path="res://Animations/gate.tres" id="2_4dmbs"]
+[ext_resource type="SpriteFrames" uid="uid://esvqf8p34k6o" path="res://Animations/runes/rune1.tres" id="3_dyksl"]
+[ext_resource type="Script" uid="uid://cn7nqwoc3xat4" path="res://Scenes/LightControl.gd" id="4_4dmbs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3802"]
+size = Vector2(200, 193)
+
+[sub_resource type="Gradient" id="Gradient_vgqql"]
+offsets = PackedFloat32Array(0, 0.7)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kfxhe"]
+gradient = SubResource("Gradient_vgqql")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+
+[node name="Gate" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_kfxhe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+sprite_frames = ExtResource("2_4dmbs")
+animation = &"close"
+frame = 4
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+position = Vector2(0, 216)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -144)
+shape = SubResource("RectangleShape2D_b3802")
+
+[node name="Rune" type="AnimatedSprite2D" parent="."]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+z_index = 5
+position = Vector2(0, -360)
+sprite_frames = ExtResource("3_dyksl")
+
+[node name="PointLight2D" type="PointLight2D" parent="Rune"]
+light_mask = 3
+position = Vector2(1.5258789e-05, 0)
+scale = Vector2(10.125, 10.124999)
+color = Color(2.5510268, 2.5510268, 0, 1)
+energy = 0.5
+range_layer_min = -10
+range_layer_max = 10
+range_item_cull_mask = 3
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_kfxhe")
+script = ExtResource("4_4dmbs")

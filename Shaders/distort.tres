@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnpud7lkxiw0a"]
+
+[ext_resource type="Shader" uid="uid://b03g11e7fobhd" path="res://Shaders/distort.gdshader" id="1_41usq"]
+
+[resource]
+shader = ExtResource("1_41usq")
+shader_parameter/max_ca_offset = 16.00000076
+shader_parameter/max_blur = 2.000000095
+shader_parameter/exponent = 2.0000000475

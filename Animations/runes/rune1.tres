@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://esvqf8p34k6o"]
+
+[ext_resource type="Texture2D" uid="uid://cp6mkwtcj0sik" path="res://Images/rune3 (1).png" id="1_5svqt"]
+[ext_resource type="Texture2D" uid="uid://dtv64uewkmnxp" path="res://Images/rune3 (2).png" id="2_dmgbu"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5svqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dmgbu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

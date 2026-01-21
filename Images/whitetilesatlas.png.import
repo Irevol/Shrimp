@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7krvev62yvho"
-path="res://.godot/imported/shrimp_fried_rice.png-1e47d8033c877cc54bc96262bd790871.ctex"
+uid="uid://dy8i70rjbi35m"
+path="res://.godot/imported/whitetilesatlas.png-ac082d02503557729818561a586add5c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/shrimp_fried_rice.png"
-dest_files=["res://.godot/imported/shrimp_fried_rice.png-1e47d8033c877cc54bc96262bd790871.ctex"]
+source_file="res://Images/whitetilesatlas.png"
+dest_files=["res://.godot/imported/whitetilesatlas.png-ac082d02503557729818561a586add5c.ctex"]
 
 [params]
 

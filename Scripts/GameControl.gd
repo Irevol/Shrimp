@@ -5,8 +5,10 @@ var tile_size = 288
 @onready var player: Player = $Player
 @onready var reward_map: RewardMap = $RewardMap
 @onready var healthbar: Healthbar = $UI/Healthbar
+@onready var sound_effects: SoundEffects = $SoundEffects
 @export var slash: PackedScene
 @export var bullet: PackedScene
+@export var rune_anims: Array[SpriteFrames]
 var total_enemies: int = 0
 var enemies_finised: int = 0
 var enemies_killed: int = 0 # used to update total_enemies, not running count
@@ -18,6 +20,7 @@ var darken_ui = false
 const light_level = 0.2
 signal enemy_turn
 signal enemy_finished
+signal kill_lights
 
 
 func _ready():
@@ -25,7 +28,7 @@ func _ready():
 	set_lighting(1)
 	player.reset()
 	await get_tree().create_timer(1).timeout
-	#summon_rewards()
+	summon_rewards()
 	
 	
 func reset():
@@ -87,26 +90,27 @@ func set_lighting(ratio: float):
 	
 func summon_rewards():
 	summon_requested = true
-	$AudioStreamPlayer.stop()
-	$AudioStreamPlayer2D.play_reward_map_sound()
-	await get_tree().create_timer(3).timeout
-	$AudioStreamPlayer.play_reward_map_music()
 	
 func summmon_rewards_for_real():
 	summon_requested = false
+	sound_effects.play_sound("win.mp3")
 	reward_map.global_position = player.position
 	reward_map.generate_rewards()
 	reward_map.show()
 	player.change_light_mask(2)
 	player.reward_walker = true
+	player.z_index += 10
 	
-	var tween: Tween = create_tween()
-	tween.set_trans(tween.TRANS_CUBIC)
-	tween.tween_method(set_lighting, light_level, 0.9, 1)
+	$RewardMap/Distortion.show()
+	$RewardMap/Fade.show()
+	#var tween: Tween = create_tween()
+	#tween.set_trans(tween.TRANS_CUBIC)
+	#tween.tween_method(set_lighting, light_level, 0.9, 1)
 	
 func exit_rewards():
 	player.can_press_key = false
 	player.kills = 0
+	player.z_index -= 10
 	$UI/Tooltip.undisplay()
 	reward_map.hide()
 	player.change_light_mask(1)
@@ -116,15 +120,17 @@ func exit_rewards():
 	player.reward_walker = false
 	player.can_press_key = true
 	
-	var tween: Tween = create_tween()
-	tween.set_trans(tween.TRANS_CUBIC)
-	tween.tween_method(set_lighting, 0.9, light_level, 1)
-	await tween.finished
+	$RewardMap/Distortion.show()
+	$RewardMap/Fade.show()
+	#var tween: Tween = create_tween()
+	#tween.set_trans(tween.TRANS_CUBIC)
+	#tween.tween_method(set_lighting, 0.9, light_level, 1)
+	#await tween.finished
 	
 	healthbar.display_hearts(player.health)
 	player.update_killbar()
 	
-	$AudioStreamPlayer.play_normal_map_music()
+	$Music.play_normal_map_music()
 
 	
 func init_slash(pos: Vector2):
@@ -143,12 +149,16 @@ func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false, dmg = 0):
 	add_child(cur_bullet)
 	return await cur_bullet.tree_exited
 	
+
+func position_rewards():
+	for i in range(current_rewards.size()):
+		current_rewards[i].position = Vector2(96 * i, 0)
+	
 	
 func on_die():
-	$AudioStreamPlayer.stop()
-	$AudioStreamPlayer2D.play_death()
-	
 	darken_ui = true
+	kill_lights.emit()
+	sound_effects.play_sound("ded.mp3")
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
 	tween.tween_method(set_lighting, light_level, 1, 1)
