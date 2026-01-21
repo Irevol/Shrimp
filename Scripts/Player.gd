@@ -126,6 +126,7 @@ func move_in_dir(dir):
 	var target_pos = position + (dir * game_control.tile_size)
 	var allow_move = false
 	var prevent_move = false
+	var there_is_tooltip = false
 	var detected_nodes = $DetectTile.detect_tile(target_pos)
 	
 	if dir.x == 1:
@@ -143,17 +144,22 @@ func move_in_dir(dir):
 				prevent_move = true
 			if not reward_walker and node.is_in_group("walkable"):
 				allow_move = true
+			if node.is_in_group("unwalkable"):
+				prevent_move = true
 			if reward_walker and node.is_in_group("reward_walkable"):
 				allow_move = true
 			if reward_walker and node is Reward:
 				node.on_pickup_init()
 				return #game control handles restarting flow here
-			if node is TooltipTrigger and not tooltip_active:
-				$"../UI/Tooltip".display(node.text)
-				tooltip_active = true
-			if node is not TooltipTrigger and tooltip_active:
-				tooltip_active = false
-				$"../UI/Tooltip".undisplay()
+			if node is TooltipTrigger:
+				there_is_tooltip = true
+				if not tooltip_active:
+					tooltip_active = true
+					$"../UI/Tooltip".display(node.text)
+					
+	if not there_is_tooltip and tooltip_active:
+		tooltip_active = false
+		$"../UI/Tooltip".undisplay()
 	if not prevent_move and allow_move:
 		await $Move.move_to_pos(target_pos)
 	else:

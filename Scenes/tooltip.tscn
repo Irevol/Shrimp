@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://duc1oq7qiqhj" path="res://Resources/Basic Comical Regular NC.ttf" id="1_ogi1g"]
 
 [node name="Tooltip" type="Node2D"]
+modulate = Color(5.912981, 5.912981, 5.912981, 1)
 script = ExtResource("1_617o6")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

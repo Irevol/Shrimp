@@ -20,7 +20,7 @@ script = ExtResource("1_4m48d")
 reward = ExtResource("5_oavb7")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." groups=["reward_walkable"]]
-modulate = Color(18.892157, 18.892157, 18.892157, 1)
+modulate = Color(13.021544, 13.021544, 13.021544, 1)
 light_mask = 3
 z_index = 1
 position = Vector2(144, -144)

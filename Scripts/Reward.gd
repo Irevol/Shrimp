@@ -10,7 +10,7 @@ var game_control: GameControl
 var player: Player
 var unique: bool = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-const spacing = 128
+const spacing = 96
 
 
 func _ready():
@@ -34,8 +34,8 @@ func _process(delta: float):
 		$AnimatedSprite2D.offset = Vector2.ZERO
 		
 
-func set_description(text):
-	$Tooltip.text = text
+func set_description(title, description):
+	$Tooltip.text = title+'\n'+"[font_size=64]"+description+"[/font_size]"
 	
 	
 func on_pickup_init():
