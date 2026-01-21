@@ -1,7 +1,6 @@
 extends AudioStreamPlayer2D
 
-@export var win: AudioStream
-@export var death: AudioStream
+@export var sound_effect: AudioStream
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,9 +8,6 @@ func _ready() -> void:
 	
 
 func play_reward_map_sound():
-	stream = win
+	stream = sound_effect
 	play()
 	
-func play_death():
-	stream = death
-	play()
