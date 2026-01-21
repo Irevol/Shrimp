@@ -87,6 +87,7 @@ func set_lighting(ratio: float):
 	
 func summon_rewards():
 	summon_requested = true
+	$AudioStreamPlayer.stop_sound()
 	$AudioStreamPlayer2D.play_reward_map_sound()
 	await get_tree().create_timer(3).timeout
 	$AudioStreamPlayer.play_reward_map_music()
