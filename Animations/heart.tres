@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://w0x5u3jaaqvf"]
 
 [ext_resource type="Texture2D" uid="uid://bve4q1ds2bruj" path="res://Images/Bubblenea.png" id="1_8pt7o"]
+[ext_resource type="Texture2D" uid="uid://gwtxkh3l3w3y" path="res://Images/health1 (3).png" id="2_2wps3"]
 [ext_resource type="Texture2D" uid="uid://66c4jg8ttvdj" path="res://Images/health1 (4).png" id="3_sbb23"]
-[ext_resource type="Texture2D" uid="uid://br8rqclrjrxpk" path="res://Images/heart (3).png" id="4_8n4yo"]
 [ext_resource type="Texture2D" uid="uid://ycud7qsx2lo1" path="res://Images/health1 (1).png" id="4_22mfs"]
 
 [resource]
@@ -17,7 +17,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_8n4yo")
+"texture": ExtResource("4_22mfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sbb23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_8pt7o")
+}],
+"loop": false,
+"name": &"depop",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2wps3")
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_sbb23")
@@ -27,5 +41,5 @@ animations = [{
 }],
 "loop": false,
 "name": &"pop",
-"speed": 6.0
+"speed": 3.0
 }]
