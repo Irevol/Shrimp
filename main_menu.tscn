@@ -28,12 +28,14 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_7vrkn")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 640.0
-offset_top = 496.0
-offset_right = 2740.0
-offset_bottom = 1996.0
+offset_left = 783.00006
+offset_top = 617.00006
+offset_right = 1725.8569
+offset_bottom = 1088.4282
 scale = Vector2(0.28000015, 0.28000015)
 texture_normal = ExtResource("3_fu7sn")
 texture_hover = ExtResource("4_jix8l")
+ignore_texture_size = true
+stretch_mode = 4
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_start_pressed"]
