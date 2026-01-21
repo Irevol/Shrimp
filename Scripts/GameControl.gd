@@ -25,7 +25,7 @@ func _ready():
 	set_lighting(1)
 	player.reset()
 	await get_tree().create_timer(1).timeout
-	#summon_rewards()
+	summon_rewards()
 	
 	
 func reset():
@@ -111,6 +111,7 @@ func exit_rewards():
 	player.change_light_mask(1)
 	var move: Move = player.get_node("Move")
 	await move.move_to_pos(reward_map.global_position)
+	reward_map.position = Vector2(0,10000)
 	player.reward_walker = false
 	player.can_press_key = true
 	
