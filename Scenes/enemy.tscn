@@ -9,14 +9,13 @@
 size = Vector2(200, 193)
 
 [node name="Enemy" type="Node2D" groups=["enemy"]]
-y_sort_enabled = true
 script = ExtResource("1_287tu")
 
 [node name="DetectTile" type="Node2D" parent="."]
 script = ExtResource("2_0830c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-y_sort_enabled = true
+z_index = -1
 sprite_frames = ExtResource("3_ghaa6")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]

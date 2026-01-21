@@ -1,16 +1,13 @@
-[gd_scene load_steps=24 format=4 uid="uid://dkww1pexib2bu"]
+[gd_scene load_steps=22 format=4 uid="uid://dkww1pexib2bu"]
 
 [ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cpk5vgxtqauii" path="res://Scenes/slash.tscn" id="2_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://y7i1s05oys7a" path="res://Scenes/reward_map.tscn" id="2_kry3j"]
 [ext_resource type="PackedScene" uid="uid://duw4nsqo4y87t" path="res://Scenes/bullet.tscn" id="3_wsu2k"]
-[ext_resource type="PackedScene" uid="uid://bfgl74tb327dv" path="res://Scenes/gate.tscn" id="4_b3802"]
-[ext_resource type="PackedScene" uid="uid://bkmbynowg4vq5" path="res://Scenes/jelly.tscn" id="4_wsu2k"]
-[ext_resource type="SpriteFrames" uid="uid://c1pk0hy608sqi" path="res://Animations/runes/rune2.tres" id="5_3pmx8"]
-[ext_resource type="PackedScene" uid="uid://b25ier37yvifq" path="res://Scenes/fish.tscn" id="5_k12tt"]
-[ext_resource type="SpriteFrames" uid="uid://esvqf8p34k6o" path="res://Animations/runes/rune1.tres" id="6_hibaj"]
-[ext_resource type="SpriteFrames" uid="uid://bhn6lrs2ajlph" path="res://Animations/runes/rune3.tres" id="6_u50mg"]
+[ext_resource type="PackedScene" path="res://Scenes/jelly.tscn" id="4_wsu2k"]
+[ext_resource type="PackedScene" path="res://Scenes/fish.tscn" id="5_k12tt"]
+[ext_resource type="Script" uid="uid://bps5c61spmrk7" path="res://Scenes/player_audio_stream_player_2d.gd" id="9_fevyy"]
 [ext_resource type="TileSet" uid="uid://b05d1p6ulwqxp" path="res://Resources/tile_set.tres" id="9_ynf5e"]
 [ext_resource type="Script" uid="uid://b8t4t7cmyhrjn" path="res://Scripts/Rewards/Pearl.gd" id="10_h1bgf"]
 [ext_resource type="Script" uid="uid://sdukrd3e0r0m" path="res://Scripts/Rewards/Conch.gd" id="11_b3802"]
@@ -23,7 +20,6 @@
 [ext_resource type="Script" uid="uid://3rtip5nkn0cx" path="res://Scenes/audio_stream_player_2d.gd" id="20_hibaj"]
 [ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
 [ext_resource type="AudioStream" uid="uid://bgm7ws3jbakhi" path="res://Sound_Effects/win.mp3" id="21_pdsj5"]
-[ext_resource type="PackedScene" uid="uid://dhshlfk5tky02" path="res://Scenes/floating_reward.tscn" id="22_ee4r6"]
 
 [sub_resource type="Environment" id="Environment_ynf5e"]
 background_mode = 3
@@ -37,14 +33,6 @@ fog_enabled = true
 script = ExtResource("1_sugp2")
 slash = ExtResource("2_jkdf5")
 bullet = ExtResource("3_wsu2k")
-rune_anims = Array[SpriteFrames]([ExtResource("6_hibaj"), ExtResource("5_3pmx8"), ExtResource("6_u50mg")])
-
-[node name="Keys" type="Node" parent="."]
-
-[node name="Gates" type="Node" parent="."]
-
-[node name="Gate" parent="Gates" instance=ExtResource("4_b3802")]
-position = Vector2(-72, -2088)
 
 [node name="Enemies" type="Node" parent="."]
 
@@ -52,11 +40,9 @@ position = Vector2(-72, -2088)
 position = Vector2(-648, -576)
 
 [node name="Jelly" parent="Enemies" instance=ExtResource("4_wsu2k")]
-y_sort_enabled = false
 position = Vector2(504, -576)
 
 [node name="Fish" parent="Enemies" instance=ExtResource("5_k12tt")]
-y_sort_enabled = false
 position = Vector2(-648, -1152)
 
 [node name="Octo2" parent="Enemies" instance=ExtResource("17_h1bgf")]
@@ -74,16 +60,14 @@ position = Vector2(-360, -864)
 [node name="TileMapLayer" type="TileMapLayer" parent="Map" groups=["walkable"]]
 z_index = -10
 position = Vector2(432, -144)
-tile_map_data = PackedByteArray("AAABAAEAEAAAAAAAAAAAAAAAEAAAAAAAAAD//wAAEAAAAAAAAAD/////EAAAAAAAAAD+////EAAAAAAAAAD9////EAAAAAAAAAD+//7/EAAAAAAAAAD///7/EAAAAAAAAAAAAP//EAAAAAAAAAD+/wAAEAAAAAAAAAD+/wEAEAAAAAAAAAD//wIAEAAAAAAAAAAAAAIAEAAAAAAAAAAAAAEAEAAAAAAAAAABAP//EAAAAAAAAAABAAAAEAAAAAAAAAD//wEAEAAAAAAAAAD9/wAAEAAAAAAAAAD9/wEAEAAAAAAAAAD9/wIAEAAAAAAAAAD+/wIAEAAAAAAAAAABAAIAEAAAAAAAAAAAAP7/EAAAAAAAAAD9//7/EAAAAAAAAAD8//7/EAAAAAAAAAD8////EAAAAAAAAAD8/wAAEAAAAAAAAAD8/wEAEAAAAAAAAAABAP7/EAAAAAAAAAABAP3/EAAAAAAAAAAAAP3/EAAAAAAAAAD///3/EAAAAAAAAAD+//3/EAAAAAAAAAD9//3/EAAAAAAAAAD8//3/EAAAAAAAAAD8/wIAEAAAAAAAAAACAAIAEAAAAAAAAAACAAEAEAAAAAAAAAACAAAAEAAAAAAAAAACAP//EAAAAAAAAAACAP7/EAAAAAAAAAACAP3/EAAAAAAAAAD///z/EAAAAAAAAAD///v/EAAAAAAAAAD///r/EAAAAAAAAAD///n/EAAAAAAAAAD///j/EAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAAEAEAAAAAAAAAAAAAAAEAAAAAAAAAD//wAAEAAAAAAAAAD/////EAAAAAAAAAD+////EAAAAAAAAAD9////EAAAAAAAAAD+//7/EAAAAAAAAAD///7/EAAAAAAAAAAAAP//EAAAAAAAAAD+/wAAEAAAAAAAAAD+/wEAEAAAAAAAAAD//wIAEAAAAAAAAAAAAAIAEAAAAAAAAAAAAAEAEAAAAAAAAAABAP//EAAAAAAAAAABAAAAEAAAAAAAAAD//wEAEAAAAAAAAAD9/wAAEAAAAAAAAAD9/wEAEAAAAAAAAAD9/wIAEAAAAAAAAAD+/wIAEAAAAAAAAAABAAIAEAAAAAAAAAAAAP7/EAAAAAAAAAD9//7/EAAAAAAAAAD8//7/EAAAAAAAAAD8////EAAAAAAAAAD8/wAAEAAAAAAAAAD8/wEAEAAAAAAAAAABAP7/EAAAAAAAAAABAP3/EAAAAAAAAAAAAP3/EAAAAAAAAAD///3/EAAAAAAAAAD+//3/EAAAAAAAAAD9//3/EAAAAAAAAAD8//3/EAAAAAAAAAD8/wIAEAAAAAAAAAACAAIAEAAAAAAAAAACAAEAEAAAAAAAAAACAAAAEAAAAAAAAAACAP//EAAAAAAAAAACAP7/EAAAAAAAAAACAP3/EAAAAAAAAAA=")
 tile_set = ExtResource("9_ynf5e")
 occlusion_enabled = false
 navigation_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_jjvhh")]
-y_sort_enabled = true
 position = Vector2(-72, -1152)
 starting_position = Vector2(-72, -1152)
-invincible = true
 
 [node name="PlayerAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 volume_db = -17.535
@@ -126,7 +110,5 @@ bells_music = ExtResource("21_3pmx8")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -19.953
 script = ExtResource("20_hibaj")
-sound_effect = ExtResource("21_pdsj5")
-
-[node name="FloatingReward" parent="." instance=ExtResource("22_ee4r6")]
-position = Vector2(-648, -1440)
+win = ExtResource("21_pdsj5")
+death = ExtResource("18_b3802")

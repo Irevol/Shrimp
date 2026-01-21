@@ -34,7 +34,6 @@ walkable="You can move onto this"
 enemy=""
 reward_walkable=""
 tooltip=""
-unwalkable=""
 
 [physics]
 

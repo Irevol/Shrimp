@@ -1,7 +1,6 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b05d1p6ulwqxp"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b05d1p6ulwqxp"]
 
 [ext_resource type="Texture2D" uid="uid://djuwb1led2g3p" path="res://Images/tileatlas.png" id="1_fk7st"]
-[ext_resource type="Texture2D" uid="uid://dy8i70rjbi35m" path="res://Images/whitetilesatlas.png" id="2_0bvd4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fk7st"]
 texture = ExtResource("1_fk7st")
@@ -13,19 +12,9 @@ texture_region_size = Vector2i(256, 256)
 0:0/0/modulate = Color(1, 1, 1, 0.58431375)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-144, -144, 144, -144, 144, 144, -144, 144)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rxn4f"]
-texture = ExtResource("2_0bvd4")
-texture_region_size = Vector2i(256, 256)
-0:0/animation_speed = 2.0
-0:0/animation_frame_0/duration = 1.0
-0:0/animation_frame_1/duration = 1.0
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-144, -144, 144, -144, 144, 144, -144, 144)
-
 [resource]
 tile_size = Vector2i(288, 288)
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 0
 sources/16 = SubResource("TileSetAtlasSource_fk7st")
-sources/2 = SubResource("TileSetAtlasSource_rxn4f")
-tile_proxies/coords_level = [[0, Vector2i(0, 0)], [2, Vector2i(0, 0)], [1, Vector2i(0, 0)], [2, Vector2i(1, 0)], [4, Vector2i(0, 0)], [6, Vector2i(0, 0)], [5, Vector2i(0, 0)], [6, Vector2i(1, 0)], [9, Vector2i(0, 0)], [12, Vector2i(0, 0)], [9, Vector2i(0, 1)], [12, Vector2i(0, 1)], [11, Vector2i(0, 0)], [12, Vector2i(1, 0)], [14, Vector2i(0, 0)], [16, Vector2i(0, 0)], [15, Vector2i(0, 0)], [16, Vector2i(1, 0)]]
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [2, Vector2i(0, 0)], [4, Vector2i(0, 0)], [6, Vector2i(0, 0)], [5, Vector2i(0, 0)], [6, Vector2i(1, 0)], [9, Vector2i(0, 0)], [12, Vector2i(0, 0)], [9, Vector2i(0, 1)], [12, Vector2i(0, 1)], [11, Vector2i(0, 0)], [12, Vector2i(1, 0)], [14, Vector2i(0, 0)], [16, Vector2i(0, 0)], [15, Vector2i(0, 0)], [16, Vector2i(1, 0)]]

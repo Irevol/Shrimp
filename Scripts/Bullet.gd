@@ -32,5 +32,5 @@ func _on_area_2d_area_entered(area: Area2D):
 				print("damaged!")
 		print(parent.name)
 		queue_free()
-	elif not parent.is_in_group("walkable") or parent.is_in_group("walkable"):
+	elif not parent.is_in_group("walkable"):
 		queue_free()
