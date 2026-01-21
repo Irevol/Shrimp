@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blebbc543en1x"
-path="res://.godot/imported/health1 (2).png-e89ec93a76b122284f88126c800ea4b5.ctex"
+uid="uid://cp6mkwtcj0sik"
+path="res://.godot/imported/rune3 (1).png-a3f8faab51d032e199859673e498588f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/health1 (2).png"
-dest_files=["res://.godot/imported/health1 (2).png-e89ec93a76b122284f88126c800ea4b5.ctex"]
+source_file="res://Images/rune3 (1).png"
+dest_files=["res://.godot/imported/rune3 (1).png-a3f8faab51d032e199859673e498588f.ctex"]
 
 [params]
 

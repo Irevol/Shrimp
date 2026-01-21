@@ -4,34 +4,34 @@ class_name Reward
 
 var shake_intensity: float = 25.0
 var shake_duration: float = 0.5
-var shake_timer: float = -1
+var shake_timer: float = -10
 var id: String
 var game_control: GameControl
 var player: Player
-var unique: bool = false
+var unique := false
+var floating := true
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-const spacing = 96
+
+signal shake_done
 
 
 func _ready():
 	game_control = get_tree().current_scene
-	player = game_control.player
-	player.move.connect(on_move)
-	player.kill.connect(on_kill)
 	if unique:
 		game_control.reward_map.cur_rewards.erase(get_script())
 	before_pickup()
 	
 func _process(delta: float):
-	if shake_timer == -1:
+	if shake_timer == -10:
 		return
 	if shake_timer > 0:
 		shake_timer -= delta
 		var current_strength = (shake_timer / shake_duration) * shake_intensity
-		$AnimatedSprite2D.offset = Vector2(randf_range(-current_strength, current_strength),randf_range(-current_strength, current_strength))
+		sprite.offset = Vector2(randf_range(-current_strength, current_strength),randf_range(-current_strength, current_strength))
 	else:
-		shake_timer = 0
-		$AnimatedSprite2D.offset = Vector2.ZERO
+		shake_timer = -10
+		shake_done.emit()
+		sprite.offset = Vector2.ZERO
 		
 
 func set_description(title, description):
@@ -40,15 +40,27 @@ func set_description(title, description):
 	
 func on_pickup_init():
 	var rewardbar = game_control.get_node("UI/Rewardbar")
+	player = game_control.player # here cause putting it in _ready() is too quick
 	reparent(rewardbar)
-	position = Vector2(spacing * game_control.current_rewards.size(), 0)
 	game_control.current_rewards.append(self)
+	game_control.position_rewards()
 	sprite.offset = Vector2.ZERO
+	sprite.position = Vector2(0,0)
 	sprite.scale = Vector2.ONE * 0.5
 	# $Area2D.queue_free(), needed for tooltip
 	shake_timer = shake_duration
-	game_control.exit_rewards()
+	if not floating: game_control.exit_rewards()
+	player.move.connect(on_move)
+	player.kill.connect(on_kill)
 	on_pickup()
+	
+	
+func remove_reward():
+	shake_timer = shake_duration
+	await shake_done
+	game_control.current_rewards.erase(self)
+	game_control.position_rewards()
+	queue_free()
 	
 	
 ## Set init properties here

@@ -16,5 +16,6 @@ func generate_rewards():
 		var reward_script = cur_rewards.pick_random()
 		var new_reward = reward.instantiate()
 		new_reward.set_script(reward_script)
+		new_reward.floating = false
 		get_node("Reward Stand "+str(i)).add_child(new_reward)
 	
