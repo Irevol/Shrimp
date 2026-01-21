@@ -1,0 +1,194 @@
+[gd_scene load_steps=31 format=4 uid="uid://dkww1pexib2bu"]
+
+[ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://cpk5vgxtqauii" path="res://Scenes/slash.tscn" id="2_jkdf5"]
+[ext_resource type="PackedScene" uid="uid://y7i1s05oys7a" path="res://Scenes/reward_map.tscn" id="2_kry3j"]
+[ext_resource type="PackedScene" uid="uid://duw4nsqo4y87t" path="res://Scenes/bullet.tscn" id="3_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://bfgl74tb327dv" path="res://Scenes/gate.tscn" id="4_b3802"]
+[ext_resource type="PackedScene" uid="uid://bkmbynowg4vq5" path="res://Scenes/jelly.tscn" id="4_wsu2k"]
+[ext_resource type="SpriteFrames" uid="uid://c1pk0hy608sqi" path="res://Animations/runes/rune2.tres" id="5_3pmx8"]
+[ext_resource type="PackedScene" uid="uid://b25ier37yvifq" path="res://Scenes/fish.tscn" id="5_k12tt"]
+[ext_resource type="SpriteFrames" uid="uid://esvqf8p34k6o" path="res://Animations/runes/rune1.tres" id="6_hibaj"]
+[ext_resource type="SpriteFrames" uid="uid://bhn6lrs2ajlph" path="res://Animations/runes/rune3.tres" id="6_u50mg"]
+[ext_resource type="TileSet" uid="uid://b05d1p6ulwqxp" path="res://Resources/tile_set.tres" id="9_ynf5e"]
+[ext_resource type="Script" uid="uid://b8t4t7cmyhrjn" path="res://Scripts/Rewards/Pearl.gd" id="10_h1bgf"]
+[ext_resource type="Script" uid="uid://sdukrd3e0r0m" path="res://Scripts/Rewards/Conch.gd" id="11_b3802"]
+[ext_resource type="PackedScene" uid="uid://54hqsva7183s" path="res://Scenes/ui.tscn" id="12_h1bgf"]
+[ext_resource type="PackedScene" uid="uid://dgkmrmoev3ujp" path="res://Scenes/octo.tscn" id="17_h1bgf"]
+[ext_resource type="AudioStream" uid="uid://jl0n66byrhny" path="res://Music/rainWater.mp3" id="19_fevyy"]
+[ext_resource type="Texture2D" uid="uid://b0yv1hcojkcyr" path="res://Images/Altar.png" id="19_hibaj"]
+[ext_resource type="Script" uid="uid://5glcwumhn66r" path="res://Scenes/audio_stream_player.gd" id="20_gt3je"]
+[ext_resource type="Script" uid="uid://3rtip5nkn0cx" path="res://Scenes/audio_stream_player_2d.gd" id="20_hibaj"]
+[ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
+[ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="21_ee4r6"]
+[ext_resource type="AudioStream" uid="uid://bgm7ws3jbakhi" path="res://Sound_Effects/win.mp3" id="21_pdsj5"]
+[ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scripts/TooltipTrigger.gd" id="22_gt3je"]
+[ext_resource type="Script" uid="uid://ymd8ampkwyaq" path="res://Scripts/Rewards/Rune.gd" id="23_u50mg"]
+
+[sub_resource type="Environment" id="Environment_ynf5e"]
+background_mode = 3
+ambient_light_source = 1
+glow_enabled = true
+glow_intensity = 0.2
+glow_bloom = 0.2
+fog_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_vgqql"]
+offsets = PackedFloat32Array(0, 0.7)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ee4r6"]
+gradient = SubResource("Gradient_vgqql")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gnab"]
+size = Vector2(200, 193)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bq4m"]
+size = Vector2(864, 864)
+
+[node name="GameControl" type="Node2D"]
+script = ExtResource("1_sugp2")
+slash = ExtResource("2_jkdf5")
+bullet = ExtResource("3_wsu2k")
+rune_anims = Array[SpriteFrames]([ExtResource("6_hibaj"), ExtResource("5_3pmx8"), ExtResource("6_u50mg")])
+
+[node name="Keys" type="Node" parent="."]
+
+[node name="Gates" type="Node" parent="."]
+
+[node name="Gate" parent="Gates" instance=ExtResource("4_b3802")]
+position = Vector2(-72, -2088)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Octo" parent="Enemies" instance=ExtResource("17_h1bgf")]
+position = Vector2(-648, -576)
+
+[node name="Jelly" parent="Enemies" instance=ExtResource("4_wsu2k")]
+position = Vector2(504, -576)
+
+[node name="Fish" parent="Enemies" instance=ExtResource("5_k12tt")]
+position = Vector2(-648, -1152)
+
+[node name="Octo2" parent="Enemies" instance=ExtResource("17_h1bgf")]
+position = Vector2(-72, -576)
+
+[node name="Octo3" parent="Enemies" instance=ExtResource("17_h1bgf")]
+position = Vector2(504, -1152)
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.7392879, 0.73928833, 0.7392881, 1)
+
+[node name="Map" type="Node2D" parent="." groups=["walkable"]]
+position = Vector2(-360, -864)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Map" groups=["walkable"]]
+z_index = -10
+position = Vector2(432, -144)
+tile_map_data = PackedByteArray("AAABAAEAEAAAAAAAAAAAAAAAEAAAAAAAAAD//wAAEAAAAAAAAAD/////EAAAAAAAAAD+////EAAAAAAAAAD9////EAAAAAAAAAD+//7/EAAAAAAAAAD///7/EAAAAAAAAAAAAP//EAAAAAAAAAD+/wAAEAAAAAAAAAD+/wEAEAAAAAAAAAD//wIAEAAAAAAAAAAAAAIAEAAAAAAAAAAAAAEAEAAAAAAAAAABAP//EAAAAAAAAAABAAAAEAAAAAAAAAD//wEAEAAAAAAAAAD9/wAAEAAAAAAAAAD9/wEAEAAAAAAAAAD9/wIAEAAAAAAAAAD+/wIAEAAAAAAAAAABAAIAEAAAAAAAAAAAAP7/EAAAAAAAAAD9//7/EAAAAAAAAAD8//7/EAAAAAAAAAD8////EAAAAAAAAAD8/wAAEAAAAAAAAAD8/wEAEAAAAAAAAAABAP7/EAAAAAAAAAABAP3/EAAAAAAAAAAAAP3/EAAAAAAAAAD///3/EAAAAAAAAAD+//3/EAAAAAAAAAD9//3/EAAAAAAAAAD8//3/EAAAAAAAAAD8/wIAEAAAAAAAAAACAAIAEAAAAAAAAAACAAEAEAAAAAAAAAACAAAAEAAAAAAAAAACAP//EAAAAAAAAAACAP7/EAAAAAAAAAACAP3/EAAAAAAAAAD///z/EAAAAAAAAAD///v/EAAAAAAAAAD///r/EAAAAAAAAAD///n/EAAAAAAAAAD///j/EAAAAAAAAAA=")
+tile_set = ExtResource("9_ynf5e")
+occlusion_enabled = false
+navigation_enabled = false
+
+[node name="Player" parent="." instance=ExtResource("2_jjvhh")]
+position = Vector2(-72, -1152)
+health = null
+max_health = null
+starting_position = Vector2(-72, -1152)
+shake_intensity = null
+shake_duration = null
+
+[node name="RewardMap" parent="." instance=ExtResource("2_kry3j")]
+light_mask = 2
+position = Vector2(2520, 504)
+rewards = Array[Script]([ExtResource("10_h1bgf"), ExtResource("11_b3802")])
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+light_mask = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.053990364, 0.48833972, 0.8205137, 1)
+
+[node name="Darkness" type="CanvasModulate" parent="Background"]
+color = Color(0.7392879, 0.73928833, 0.7392881, 1)
+
+[node name="UI" parent="." instance=ExtResource("12_h1bgf")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ynf5e")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_fevyy")
+volume_db = -21.767
+autoplay = true
+script = ExtResource("20_gt3je")
+rainwater_music = ExtResource("19_fevyy")
+bells_music = ExtResource("21_3pmx8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("20_hibaj")
+sound_effect = ExtResource("21_pdsj5")
+
+[node name="FloatingReward" type="Node2D" parent="."]
+position = Vector2(-648, -1440)
+
+[node name="Altar" type="Sprite2D" parent="FloatingReward"]
+texture = ExtResource("19_hibaj")
+offset = Vector2(0, -32)
+
+[node name="Reward" type="Node2D" parent="FloatingReward" groups=["unwalkable"]]
+script = ExtResource("23_u50mg")
+
+[node name="PointLight2D" type="PointLight2D" parent="FloatingReward/Reward"]
+light_mask = 3
+position = Vector2(1.1444092e-05, -215.99992)
+scale = Vector2(6.75, 6.7500005)
+color = Color(2.5510268, 2.5510268, 0, 1)
+energy = 0.5
+range_layer_min = -10
+range_layer_max = 10
+range_item_cull_mask = 3
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_ee4r6")
+
+[node name="Area2D" type="Area2D" parent="FloatingReward/Reward"]
+z_index = 20
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloatingReward/Reward/Area2D"]
+z_index = 10
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_8gnab")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FloatingReward/Reward"]
+modulate = Color(1, 0.4117647, 1, 1)
+light_mask = 3
+position = Vector2(0, -216)
+scale = Vector2(0.75, 0.75)
+sprite_frames = ExtResource("6_hibaj")
+
+[node name="Move" type="Node2D" parent="FloatingReward/Reward"]
+script = ExtResource("21_ee4r6")
+metadata/_custom_type_script = "uid://bxw5tud1rq036"
+
+[node name="Tooltip" type="Node2D" parent="FloatingReward/Reward" groups=["tooltip"]]
+script = ExtResource("22_gt3je")
+
+[node name="Area2D" type="Area2D" parent="FloatingReward/Reward/Tooltip"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloatingReward/Reward/Tooltip/Area2D"]
+shape = SubResource("RectangleShape2D_5bq4m")
+
+[connection signal="mouse_entered" from="FloatingReward/Reward/Area2D" to="FloatingReward/Reward/Tooltip" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="FloatingReward/Reward/Area2D" to="FloatingReward/Reward/Tooltip" method="_on_area_2d_mouse_exited"]

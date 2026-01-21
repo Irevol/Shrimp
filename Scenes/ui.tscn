@@ -28,11 +28,10 @@ step = 0.001
 fill_mode = 3
 texture_over = ExtResource("4_nt8jn")
 texture_progress = ExtResource("5_g0wmg")
-tint_progress = Color(1, 1, 0.05882353, 1)
+tint_progress = Color(1.5990387, 1.5990387, 0.12345356, 1)
 script = ExtResource("6_4vbiv")
 
 [node name="Tooltip" parent="." instance=ExtResource("7_3r70p")]
-position = Vector2(99, 240)
+position = Vector2(97, 313)
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)

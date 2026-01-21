@@ -9,6 +9,7 @@
 size = Vector2(200, 193)
 
 [node name="Octo" type="Node2D" groups=["enemy"]]
+modulate = Color(0.4751913, 0.32109174, 0.87168884, 1)
 script = ExtResource("3_f1vw5")
 
 [node name="DetectTile" type="Node2D" parent="."]
