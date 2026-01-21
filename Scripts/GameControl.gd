@@ -25,7 +25,7 @@ func _ready():
 	set_lighting(1)
 	player.reset()
 	await get_tree().create_timer(1).timeout
-	summon_rewards()
+	#summon_rewards()
 	
 	
 func reset():
@@ -87,7 +87,7 @@ func set_lighting(ratio: float):
 	
 func summon_rewards():
 	summon_requested = true
-	$AudioStreamPlayer.stop_sound()
+	$AudioStreamPlayer.stop()
 	$AudioStreamPlayer2D.play_reward_map_sound()
 	await get_tree().create_timer(3).timeout
 	$AudioStreamPlayer.play_reward_map_music()
@@ -145,6 +145,9 @@ func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false, dmg = 0):
 	
 	
 func on_die():
+	$AudioStreamPlayer.stop()
+	$AudioStreamPlayer2D.play_death()
+	
 	darken_ui = true
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
