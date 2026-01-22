@@ -29,11 +29,12 @@ func _ready():
 	#$Map/Walkable.modulate.a = 100/255.0
 	player.reset()
 	await get_tree().create_timer(1).timeout
-	#summon_rewards()
+	summon_rewards()
 	
 	
 func reset():
 	$UI/Tooltip.undisplay()
+	game_over = false
 	
 	for child in $UI/Rewardbar.get_children():
 		child.queue_free()
@@ -43,7 +44,7 @@ func reset():
 	
 	var tween: Tween = create_tween()
 	darken_ui = true
-	tween.tween_method(set_lighting, 1.0, light_level, 3)
+	tween.tween_method(set_lighting, 1.0, light_level, 1.5)
 	await tween.finished
 	darken_ui = false
 	
@@ -98,12 +99,10 @@ func summmon_rewards_for_real():
 	reward_map.global_position = player.position
 	reward_map.generate_rewards()
 	player.change_light_mask(2)
-	reward_map.show()
+	reward_map.transition_in()
 	player.reward_walker = true
 	player.z_index += 10
 	
-	$RewardMap/Distortion.show()
-	$RewardMap/Fade.show()
 	#var tween: Tween = create_tween()
 	#tween.set_trans(tween.TRANS_CUBIC)
 	#tween.tween_method(set_lighting, light_level, 0.9, 1)
@@ -113,16 +112,14 @@ func exit_rewards():
 	player.kills = 0
 	player.z_index -= 10
 	$UI/Tooltip.undisplay()
-	reward_map.hide()
 	player.change_light_mask(1)
 	var move: Move = player.get_node("Move")
+	reward_map.transition_out()
 	await move.move_to_pos(reward_map.global_position)
-	reward_map.position = Vector2(0,10000)
+	#reward_map.position = Vector2(0,10000)
 	player.reward_walker = false
 	player.can_press_key = true
 	
-	$RewardMap/Distortion.show()
-	$RewardMap/Fade.show()
 	#var tween: Tween = create_tween()
 	#tween.set_trans(tween.TRANS_CUBIC)
 	#tween.tween_method(set_lighting, 0.9, light_level, 1)

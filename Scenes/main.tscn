@@ -42,10 +42,8 @@ color = Color(0.7392879, 0.73928833, 0.7392881, 1)
 y_sort_enabled = true
 position = Vector2(-714, 432)
 starting_position = Vector2(-714, 432)
-invincible = true
 
 [node name="RewardMap" parent="." instance=ExtResource("2_kry3j")]
-visible = false
 light_mask = 2
 position = Vector2(-3010, 2417)
 rewards = Array[Script]([ExtResource("10_h1bgf"), ExtResource("11_b3802")])

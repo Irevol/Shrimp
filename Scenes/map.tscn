@@ -35,6 +35,12 @@ position = Vector2(-720, -3672)
 
 [node name="Enemies" type="Node" parent="."]
 
+[node name="Fish4" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(-432, -2448)
+
+[node name="Fish5" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(-1008, -2160)
+
 [node name="Jelly" parent="Enemies" instance=ExtResource("4_6q3n4")]
 position = Vector2(1578.7546, -3022.1094)
 

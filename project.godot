@@ -13,7 +13,6 @@ config_version=5
 config/name="Shrimp"
 run/main_scene="uid://beeshrfrq7r5q"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/bg_color=Color(0.36659476, 0.36659455, 0.36659455, 1)
 boot_splash/show_image=false
 config/icon="res://Images/icon.svg"
 

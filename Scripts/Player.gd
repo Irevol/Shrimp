@@ -96,7 +96,7 @@ func after_kill():
 
 func update_killbar():
 	var killbar = game_control.get_node("UI/Killbar")
-	killbar.update(100*kills/max_kills)
+	killbar.update(kills/max_kills)
 		
 		
 func take_damage(amnt = 1):

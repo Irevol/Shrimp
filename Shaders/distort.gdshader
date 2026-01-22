@@ -1,9 +1,9 @@
 shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
-uniform float max_ca_offset : hint_range(0.0, 128.0) = 4.0;
-uniform float max_blur : hint_range(0.0, 10.0) = 2.0;
-uniform float exponent : hint_range(1.0, 10.0) = 3.0;
+uniform float max_ca_offset = 4.0;
+uniform float max_blur = 2.0;
+uniform float exponent = 3.0;
 
 void fragment() {
     float dist = distance(SCREEN_UV, vec2(0.5));

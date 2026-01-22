@@ -20,7 +20,9 @@ fill_to = Vector2(0, 1)
 script = ExtResource("1_4m48d")
 reward = ExtResource("5_oavb7")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["reward_walkable", "walkable"]]
+[node name="Opacity" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Opacity" groups=["reward_walkable", "walkable"]]
 modulate = Color(1.1072266, 1.1072266, 1.1072266, 0.62352943)
 self_modulate = Color(1.1638972, 1.1638972, 1.1638972, 1)
 light_mask = 2
@@ -31,18 +33,18 @@ tile_set = ExtResource("2_6rwnv")
 occlusion_enabled = false
 navigation_enabled = false
 
-[node name="Reward Stand 0" type="Node2D" parent="."]
+[node name="Reward Stand 0" type="Node2D" parent="Opacity"]
 light_mask = 3
 z_index = 10
 position = Vector2(0, -1152)
 
-[node name="Stand" type="Sprite2D" parent="Reward Stand 0"]
+[node name="Stand" type="Sprite2D" parent="Opacity/Reward Stand 0"]
 light_mask = 2
 z_index = -1
 texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
-[node name="PointLight2D" type="PointLight2D" parent="Reward Stand 0"]
+[node name="PointLight2D" type="PointLight2D" parent="Opacity/Reward Stand 0"]
 visible = false
 light_mask = 2
 position = Vector2(0, -1.5258789e-05)
@@ -55,18 +57,18 @@ range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_6rwnv")
 texture_scale = 0.5
 
-[node name="Reward Stand 1" type="Node2D" parent="."]
+[node name="Reward Stand 1" type="Node2D" parent="Opacity"]
 light_mask = 3
 z_index = 10
 position = Vector2(1152, 0)
 
-[node name="Stand" type="Sprite2D" parent="Reward Stand 1"]
+[node name="Stand" type="Sprite2D" parent="Opacity/Reward Stand 1"]
 light_mask = 2
 z_index = -1
 texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
-[node name="PointLight2D" type="PointLight2D" parent="Reward Stand 1"]
+[node name="PointLight2D" type="PointLight2D" parent="Opacity/Reward Stand 1"]
 visible = false
 light_mask = 2
 position = Vector2(0, -1.5258789e-05)
@@ -79,18 +81,18 @@ range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_6rwnv")
 texture_scale = 0.5
 
-[node name="Reward Stand 2" type="Node2D" parent="."]
+[node name="Reward Stand 2" type="Node2D" parent="Opacity"]
 light_mask = 3
 z_index = 10
 position = Vector2(-1152, 0)
 
-[node name="Stand" type="Sprite2D" parent="Reward Stand 2"]
+[node name="Stand" type="Sprite2D" parent="Opacity/Reward Stand 2"]
 light_mask = 2
 z_index = -1
 texture = ExtResource("4_6rwnv")
 offset = Vector2(0, -32)
 
-[node name="PointLight2D" type="PointLight2D" parent="Reward Stand 2"]
+[node name="PointLight2D" type="PointLight2D" parent="Opacity/Reward Stand 2"]
 visible = false
 light_mask = 2
 position = Vector2(0, -1.5258789e-05)
@@ -103,7 +105,15 @@ range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_6rwnv")
 texture_scale = 0.5
 
-[node name="Distortion" type="ColorRect" parent="."]
+[node name="Fade" type="ColorRect" parent="Opacity"]
+z_index = 7
+offset_left = -2502.0
+offset_top = -1936.0
+offset_right = 2586.0
+offset_bottom = 1132.0
+color = Color(0, 0, 0, 0.3529412)
+
+[node name="Distort" type="ColorRect" parent="Opacity"]
 z_index = 7
 material = ExtResource("5_f73qb")
 offset_left = -2769.0
@@ -111,11 +121,3 @@ offset_top = -2017.0
 offset_right = 2813.0
 offset_bottom = 1249.0
 mouse_filter = 2
-
-[node name="Fade" type="ColorRect" parent="."]
-z_index = 7
-offset_left = -2206.0
-offset_top = -1788.0
-offset_right = 2586.0
-offset_bottom = 1132.0
-color = Color(0, 0, 0, 0.3529412)

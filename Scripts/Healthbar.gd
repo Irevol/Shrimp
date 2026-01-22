@@ -27,7 +27,6 @@ func display_hearts(amnt: int):
 		for i in range(cur_amnt-amnt):
 			hearts.pop_back().pop()
 	else:
-		print("works")
 		for i in range(amnt-cur_amnt):
 			var new_heart: Heart = heart.instantiate()
 			add_child(new_heart)
