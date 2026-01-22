@@ -17,7 +17,14 @@ var current_rewards: Array[Reward]
 var summon_requested: bool = false
 var game_over = false
 var darken_ui = false
+var frozen = []
 const light_level = 0.2
+var colors: Dictionary[String, Color] = {
+	"purple": Color("7952de"),
+	"green": Color("64c200"),
+	"orange": Color("fa7f26"),
+	"dark": Color("363a37"),
+}
 signal enemy_turn
 signal enemy_finished
 signal kill_lights
@@ -29,7 +36,7 @@ func _ready():
 	#$Map/Walkable.modulate.a = 100/255.0
 	player.reset()
 	await get_tree().create_timer(1).timeout
-	summon_rewards()
+	# summon_rewards()
 	
 	
 func reset():
@@ -47,6 +54,7 @@ func reset():
 	tween.tween_method(set_lighting, 1.0, light_level, 1.5)
 	await tween.finished
 	darken_ui = false
+	$UI/Darkness.modulate = Color.WHITE
 	
 	
 	
@@ -68,16 +76,15 @@ func start_enemy_turn():
 	
 	
 func start_player_turn():
-	print("called")
 	if total_enemies - enemies_killed > enemies_finised and not player.reward_walker: return
 	
-	if not player.reward_walker:
-		enemies_finised = 0
-		total_enemies -= enemies_killed
-		enemies_killed = 0
-		if total_enemies == 0:
-			#win?
-			pass
+	frozen.clear()
+	enemies_finised = 0
+	total_enemies -= enemies_killed
+	enemies_killed = 0
+	if total_enemies == 0:
+		#win?
+		pass
 			
 	player.can_press_key = true
 	
@@ -150,7 +157,7 @@ func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false, dmg = 0):
 
 func position_rewards():
 	for i in range(current_rewards.size()):
-		current_rewards[i].position = Vector2(96 * i, 0)
+		current_rewards[i].position = Vector2(128 * i, 0)
 	
 	
 func on_die():

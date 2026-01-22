@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://64mr8ncamok7"]
+
+[ext_resource type="Texture2D" uid="uid://3ydwei8kpe2b" path="res://Images/seaweed (2).png" id="1_3qgia"]
+[ext_resource type="Texture2D" uid="uid://gv0ibkl5dptn" path="res://Images/Untitled - January 18, 2026 13.29.51.png" id="2_f61yp"]
+[ext_resource type="Texture2D" uid="uid://c0ltk0tfcm47m" path="res://Images/seaweed (3).png" id="3_1s82c"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f61yp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1s82c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_3qgia")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

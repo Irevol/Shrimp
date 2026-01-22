@@ -2,30 +2,47 @@
 extends Node2D
 class_name Enemy
 
+@export var color: String
 @onready var game_control: GameControl = get_tree().current_scene #just gets root node
 @onready var player: Player = game_control.get_node("Player")
 var requests_to_move_here: Enemy
 var requested_dir: Vector2
 var request_handled := false
+var turn_ended #just here for debugging
 @export var max_turns = 1
 var turns
-var color: String
 
 
 func _ready():
 	game_control.total_enemies += 1
 	turns = max_turns
 	$AnimatedSprite2D.play("default")
+	#$Move.move_speed = 4.5
 	set_owner(game_control)
-	game_control.enemy_turn.connect(take_turn_if_in_range)
-	
+	game_control.enemy_turn.connect(take_turn_if_allowed)
+	modulate = game_control.colors[color]
+	if color == "dark":
+		max_turns = 2
+	if get_parent() is Enemy:
+		printerr("Enemy had child!")
 	
 
-func take_turn_if_in_range():
-	if abs(player.position.x - position.x) < (288 * 5) and abs(player.position.y - position.y) < (288 * 4):
+func take_turn_if_allowed():
+	var allowed = false
+	turn_ended = false
+	
+	if (abs(player.global_position.x - global_position.x) < (288 * 5)) and (abs(player.global_position.y - global_position.y) < (288 * 4)):
+		allowed = true
+	elif game_control.frozen.has(color):
+		print("frozen: ")
+		print(game_control.frozen)
+		allowed = false
+		
+	if allowed: 
 		on_enemy_turn()
 	else:
 		end_turn()
+
 
 @abstract 
 func init_enemy()
@@ -51,10 +68,14 @@ func die():
 
 func is_walkable(pos):
 	var detected_nodes = $DetectTile.detect_tile(pos)
+	var flag = false
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
 			if node.is_in_group("walkable"):
-				return true
+				flag = true
+			if node.is_in_group("unwalkable"):
+				return false
+	return flag
 
 
 ## given dict with .allow_move and .prevent_move and node collided with
@@ -77,8 +98,7 @@ func play_animation(anim_name: String):
 
 func end_turn():
 	#print("turn ended")
-	request_handled = false
-	requests_to_move_here = null
+	turn_ended = true
 	turns -= 1
 	if turns == 0:
 		turns = max_turns
@@ -91,19 +111,17 @@ func end_turn():
 func can_move_in_dir(dir):
 	var target_pos = position + (dir * game_control.tile_size)
 	var detected_nodes = $DetectTile.detect_tile(target_pos)
-	var movement_rules := {"allow_move": false, "prevent_move": false, "defer": false}
-	if target_pos in game_control.claimed_positions: return movement_rules
+	var movement_rules := {"allow_move": false, "prevent_move": false}
+	if target_pos in game_control.claimed_positions: 
+		return movement_rules
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
 			if node.is_in_group("walkable"):
 				movement_rules.allow_move = true
+			if node.is_in_group("unwalkable"):
+				movement_rules.prevent_move = true
 			if node is Enemy:
 				movement_rules.prevent_move = true
-				#print(request_handled)
-				#if not request_handled and node.requests_to_move_here == null:
-					#node.requests_to_move_here = self # if enemy moves out of way, it will move this enemy
-					#node.requested_dir = dir
-					#movement_rules.defer = true
 			movement_rules = handle_collision(movement_rules, node) #custom movement rules
 	return movement_rules
 
@@ -113,6 +131,7 @@ func dir_to_pos(dir):
 
 
 func move_in_dir(dir):
+	print("moved called")
 	if dir.x == -1:
 		$AnimatedSprite2D.flip_h = true
 	elif dir.x == 1:
@@ -121,8 +140,6 @@ func move_in_dir(dir):
 	var target_pos = dir_to_pos(dir)
 	var movement_rules = can_move_in_dir(dir)
 	
-	if movement_rules.defer:
-		return
 	if movement_rules.allow_move and not movement_rules.prevent_move:
 		game_control.claimed_positions.append(target_pos)
 	else:
@@ -139,5 +156,5 @@ func move_in_dir(dir):
 		await $Move.move_to_pos(position + (dir * 32))
 		await $Move.move_to_pos(position - (dir * 32))
 		$Move.move_speed /= 2
-	
+		
 	return

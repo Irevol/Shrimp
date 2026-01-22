@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cmfalfc73qrb4"]
 
-[ext_resource type="Texture2D" uid="uid://b7ytjs25ap7mx" path="res://Images/meter (1).png" id="1_4afkg"]
-[ext_resource type="Texture2D" uid="uid://cc0cnh6itxxa8" path="res://Images/meter (2).png" id="2_w4dob"]
-[ext_resource type="Texture2D" uid="uid://dm51wpdaripts" path="res://Images/meter (3).png" id="3_q6bvm"]
+[ext_resource type="Texture2D" uid="uid://c8lobkp6ogek5" path="res://Images/wavy (1).png" id="1_4afkg"]
+[ext_resource type="Texture2D" uid="uid://iq8thlv2ovux" path="res://Images/wavy (2).png" id="2_w4dob"]
+[ext_resource type="Texture2D" uid="uid://c4komrrxgkew1" path="res://Images/wavy (3).png" id="3_q6bvm"]
 
 [resource]
 animations = [{
@@ -18,5 +18,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 6.0
+"speed": 3.0
 }]

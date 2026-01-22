@@ -7,7 +7,6 @@ func init_enemy():
 
 # move towards player
 func on_enemy_turn():
-	print("HELP")
 	var diff = player.position - position
 	var dir = Vector2.DOWN
 	if abs(diff.x) > abs(diff.y):
@@ -20,5 +19,7 @@ func on_enemy_turn():
 			break
 		dir = dir.rotated(PI/2)
 		
+	print(position)
 	await move_in_dir(dir)
+	print(position)
 	end_turn()

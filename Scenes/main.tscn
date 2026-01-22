@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkww1pexib2bu"]
+[gd_scene load_steps=28 format=3 uid="uid://dkww1pexib2bu"]
 
 [ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
@@ -9,12 +9,22 @@
 [ext_resource type="SpriteFrames" uid="uid://esvqf8p34k6o" path="res://Animations/runes/rune1.tres" id="6_hibaj"]
 [ext_resource type="SpriteFrames" uid="uid://bhn6lrs2ajlph" path="res://Animations/runes/rune3.tres" id="6_u50mg"]
 [ext_resource type="PackedScene" uid="uid://b3hq1jqq5dldw" path="res://Scenes/map.tscn" id="7_h1bgf"]
-[ext_resource type="Script" uid="uid://b8t4t7cmyhrjn" path="res://Scripts/Rewards/Pearl.gd" id="10_h1bgf"]
-[ext_resource type="Script" uid="uid://sdukrd3e0r0m" path="res://Scripts/Rewards/Conch.gd" id="11_b3802"]
+[ext_resource type="Script" uid="uid://b8t4t7cmyhrjn" path="res://Scripts/Rewards/PearlGreen.gd" id="10_h1bgf"]
+[ext_resource type="Script" uid="uid://sdukrd3e0r0m" path="res://Scripts/Rewards/ConchGreen.gd" id="11_b3802"]
+[ext_resource type="Script" uid="uid://cmsdvcmuhmtq" path="res://Scripts/Rewards/SpikeGreen.gd" id="12_fevyy"]
 [ext_resource type="PackedScene" uid="uid://54hqsva7183s" path="res://Scenes/ui.tscn" id="12_h1bgf"]
+[ext_resource type="Script" uid="uid://0lc53uw4ww4x" path="res://Scripts/Rewards/SpikeOrange.gd" id="13_hibaj"]
+[ext_resource type="Script" uid="uid://lwmjlihr65hq" path="res://Scripts/Rewards/SpikePurple.gd" id="14_pdsj5"]
+[ext_resource type="Script" uid="uid://drl3td1cdtgii" path="res://Scripts/Rewards/ShellGreen.gd" id="15_ee4r6"]
+[ext_resource type="Script" uid="uid://dwkim0538ov81" path="res://Scripts/Rewards/ShellOrange.gd" id="16_gt3je"]
+[ext_resource type="Script" uid="uid://okwgyim5omf6" path="res://Scripts/Rewards/ShellPurple.gd" id="17_3pmx8"]
 [ext_resource type="Script" uid="uid://c76j1wku3nq33" path="res://Scenes/SoundEffects.gd" id="17_pdsj5"]
+[ext_resource type="Script" uid="uid://bb83gttsfoeni" path="res://Scripts/Rewards/ConchOrange.gd" id="18_3pmx8"]
 [ext_resource type="AudioStream" uid="uid://jl0n66byrhny" path="res://Music/rainWater.mp3" id="19_fevyy"]
+[ext_resource type="Script" uid="uid://dotr4axcdg2fy" path="res://Scripts/Rewards/ConchPurple.gd" id="19_u50mg"]
+[ext_resource type="Script" uid="uid://cb4ecp6wlcw5u" path="res://Scripts/Rewards/PearlOrange.gd" id="20_cbgmd"]
 [ext_resource type="Script" uid="uid://5glcwumhn66r" path="res://Scenes/audio_stream_player.gd" id="20_gt3je"]
+[ext_resource type="Script" uid="uid://ncdy2vb7elfj" path="res://Scripts/Rewards/PearlPurple.gd" id="21_1w6v2"]
 [ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
 
 [sub_resource type="Environment" id="Environment_ynf5e"]
@@ -46,7 +56,7 @@ starting_position = Vector2(-714, 432)
 [node name="RewardMap" parent="." instance=ExtResource("2_kry3j")]
 light_mask = 2
 position = Vector2(-3010, 2417)
-rewards = Array[Script]([ExtResource("10_h1bgf"), ExtResource("11_b3802")])
+rewards = Array[Script]([ExtResource("10_h1bgf"), ExtResource("11_b3802"), ExtResource("12_fevyy"), ExtResource("13_hibaj"), ExtResource("14_pdsj5"), ExtResource("15_ee4r6"), ExtResource("16_gt3je"), ExtResource("17_3pmx8"), ExtResource("11_b3802"), ExtResource("18_3pmx8"), ExtResource("19_u50mg"), ExtResource("10_h1bgf"), ExtResource("20_cbgmd"), ExtResource("21_1w6v2")])
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -10

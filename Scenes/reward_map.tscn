@@ -22,7 +22,18 @@ reward = ExtResource("5_oavb7")
 
 [node name="Opacity" type="Node2D" parent="."]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Opacity" groups=["reward_walkable", "walkable"]]
+[node name="TileMapLayer" type="TileMapLayer" parent="Opacity" groups=["reward_walkable"]]
+modulate = Color(1.1072266, 1.1072266, 1.1072266, 0.62352943)
+self_modulate = Color(1.1638972, 1.1638972, 1.1638972, 1)
+light_mask = 2
+z_index = 9
+position = Vector2(144, -144)
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAD//wAAAgAAAAAAAAD/////AgAAAAAAAAD+////AgAAAAAAAAAAAP//AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAAAAAEAAgAAAAAAAAD//wEAAgAAAAAAAAD9/wAAAgAAAAAAAAABAAAAAgAAAAAAAAD///7/AgAAAAAAAAD8/wAAAgAAAAAAAAD8/wEAAgAAAAAAAAD7/wEAAgAAAAAAAAD6/wEAAgAAAAAAAAD6/wAAAgAAAAAAAAD7////AgAAAAAAAAD8////AgAAAAAAAAD6////AgAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAADAAEAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAAAAgAAAAAAAAAEAP//AgAAAAAAAAADAP//AgAAAAAAAAADAAAAAgAAAAAAAAAAAP3/AgAAAAAAAAD///3/AgAAAAAAAAD+//3/AgAAAAAAAAD+//z/AgAAAAAAAAD+//v/AgAAAAAAAAD///v/AgAAAAAAAAAAAPv/AgAAAAAAAAAAAPz/AgAAAAAAAAD///z/AgAAAAAAAAD7/wAAAgAAAAAAAAA=")
+tile_set = ExtResource("2_6rwnv")
+occlusion_enabled = false
+navigation_enabled = false
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Opacity" groups=["reward_walkable"]]
 modulate = Color(1.1072266, 1.1072266, 1.1072266, 0.62352943)
 self_modulate = Color(1.1638972, 1.1638972, 1.1638972, 1)
 light_mask = 2
@@ -111,7 +122,7 @@ offset_left = -2502.0
 offset_top = -1936.0
 offset_right = 2586.0
 offset_bottom = 1132.0
-color = Color(0, 0, 0, 0.3529412)
+color = Color(0, 0, 0, 0.43137255)
 
 [node name="Distort" type="ColorRect" parent="Opacity"]
 z_index = 7

@@ -21,7 +21,7 @@ func tween_shader_method(node: CanvasItem, param: String, start: float, end: flo
 func transition_in():
 	$Opacity/Distort.show()
 	var tween = create_tween()
-	tween.tween_property($Opacity, "modulate:a", 1.0, 2)
+	tween.tween_property($Opacity, "modulate:a", 1.0, 1)
 	return await tween.finished
 	
 
@@ -30,10 +30,10 @@ func transition_out():
 	$Opacity/Distort.hide()
 	await get_tree().create_timer(0.5).timeout
 	for node in reward_nodes:
-		node.light.queue_free() # just looks better
+		if node.get_parent().get_parent().get_parent() == self: node.queue_free()
 	reward_nodes.clear()
 	var tween = create_tween()
-	tween.tween_property($Opacity, "modulate:a", 0.0, 2)
+	tween.tween_property($Opacity, "modulate:a", 0.0, 1)
 	await tween.finished
 	
 	

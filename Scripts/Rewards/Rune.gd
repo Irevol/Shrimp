@@ -18,6 +18,7 @@ func _process(delta: float):
 
 func before_pickup():
 	set_description(names[rune_num], "An odd symbol...")
+	print(rune_num)
 	light.show()
 	light.color = Color("edff79")
 	light.energy = 0.5

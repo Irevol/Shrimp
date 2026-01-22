@@ -12,6 +12,7 @@ var unique := false
 var floating := true
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var light: PointLight2D = $AnimatedSprite2D/PointLight2D
+@onready var label: RichTextLabel = $AnimatedSprite2D/RichTextLabel
 
 signal shake_done
 
@@ -37,7 +38,7 @@ func _process(delta: float):
 		
 
 func set_description(title, description):
-	$Tooltip.text = title+'\n'+"[font_size=64]"+description+"[/font_size]"
+	$Tooltip.text = title+'\n'+"[font_size=64]\n"+description+"[/font_size]"
 	
 	
 func on_pickup_init():
@@ -63,6 +64,10 @@ func remove_reward():
 	game_control.current_rewards.erase(self)
 	game_control.position_rewards()
 	queue_free()
+	
+	
+func shake():
+	shake_timer = shake_duration
 	
 	
 ## Set init properties here

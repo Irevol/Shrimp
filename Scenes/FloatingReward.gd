@@ -7,4 +7,6 @@ extends Node2D
 
 func _ready():
 	$Reward.set_script(reward_script)
-	if $Reward is Rune: $Reward.rune_num = rune_num
+	if $Reward is Rune:
+		$Reward.rune_num = rune_num
+		$Reward.before_pickup()

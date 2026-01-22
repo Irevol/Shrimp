@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://7tr6dgxw3xnp" path="res://Images/shrimpattack (3).png" id="2_xogkp"]
 [ext_resource type="Texture2D" uid="uid://ojinxxuqx5wg" path="res://Images/shrimpattack (1).png" id="3_3e12b"]
 [ext_resource type="Texture2D" uid="uid://dft8g87ic2ssh" path="res://Images/shrimp/PNG_0003.png" id="3_5sm03"]
+[ext_resource type="Texture2D" uid="uid://dsqi2kuvamxj" path="res://Images/Dead.png" id="4_2p2h1"]
 [ext_resource type="Texture2D" uid="uid://phlv671u5u1s" path="res://Images/movingshrimp (2).png" id="7_e2oiq"]
 [ext_resource type="Texture2D" uid="uid://daie45x57gm73" path="res://Images/movingshrimp (3).png" id="8_p0734"]
-[ext_resource type="Texture2D" uid="uid://c4piro1ulqm1n" path="res://Images/movingshrimp (1).png" id="9_k622n"]
 
 [resource]
 animations = [{
@@ -24,6 +24,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2p2h1")
+}],
+"loop": true,
+"name": &"dead",
 "speed": 6.0
 }, {
 "frames": [{
@@ -48,9 +56,9 @@ animations = [{
 "texture": ExtResource("8_p0734")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_k622n")
+"texture": ExtResource("7_e2oiq")
 }],
-"loop": true,
+"loop": false,
 "name": &"move",
-"speed": 5.0
+"speed": 6.0
 }]

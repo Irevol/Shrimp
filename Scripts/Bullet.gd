@@ -26,11 +26,12 @@ func _on_area_2d_area_entered(area: Area2D):
 		return
 	var parent: Node2D = area.get_parent()
 	if parent is Player or parent is Enemy:
-		if (damage_enemies) or (parent is Player):
+		if (damage_enemies) or (parent is Player and not damage_enemies):
 			for i in range(damage+1):
 				parent.take_damage()
 				print("damaged!")
 		print(parent.name)
 		queue_free()
-	elif not parent.is_in_group("walkable") or parent.is_in_group("walkable"):
+	elif parent.is_in_group("unwalkable"):
+		print("bullet despawn")
 		queue_free()

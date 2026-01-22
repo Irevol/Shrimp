@@ -8,6 +8,6 @@
 [node name="Fish" instance=ExtResource("1_c4ibo")]
 script = ExtResource("2_urn1o")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="AnimatedSprite2D" parent="." index="2"]
 material = ExtResource("3_urn1o")
 sprite_frames = ExtResource("2_4fqy1")

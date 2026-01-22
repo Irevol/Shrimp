@@ -8,6 +8,7 @@ class_name Player
 var can_press_key = true
 var reward_walker = false
 var reward_pos: Vector2
+@export var max_kills_on_reset = 8
 var max_kills: int
 var kills: float
 @export var invincible := false
@@ -26,7 +27,7 @@ signal kill(color: String)
 func reset():
 	position = starting_position
 	health = max_health
-	max_kills = 5
+	max_kills = max_kills_on_reset
 	update_killbar()
 	game_control.healthbar.display_hearts(health)
 	$AnimatedSprite2D.play("idle")
@@ -82,7 +83,6 @@ func _input(event: InputEvent) -> void:
 			
 		var dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		move_in_dir(dir)
-		move.emit(dir)
 		can_press_key = false
 			
 
@@ -107,6 +107,7 @@ func take_damage(amnt = 1):
 	game_control.healthbar.display_hearts(health)
 	if health <= 0:
 		can_press_key = false
+		$AnimatedSprite2D.play("dead")
 		game_control.on_die()
 		
 
@@ -136,12 +137,15 @@ func move_in_dir(dir):
 		$AnimatedSprite2D.flip_h = true
 	elif dir.x == -1:
 		$AnimatedSprite2D.flip_h = false
+	if not reward_walker:
+		move.emit(dir)
 		
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
 			
 			#print(node.name)
 			if reward_walker:
+				print("reward walking")
 				if node.is_in_group("reward_walkable"):
 					allow_move = true
 				if node is Reward and not node.floating:
@@ -157,6 +161,11 @@ func move_in_dir(dir):
 					play_animation("attack")
 					game_control.init_slash(node.position)
 					prevent_move = true
+				if node is Seaweed:
+					play_animation("attack")
+					game_control.init_slash(node.position)
+					prevent_move = true
+					node.queue_free()
 				if node is Reward:
 					node.on_pickup_init()
 				if node is Gate:
@@ -166,12 +175,12 @@ func move_in_dir(dir):
 				if not tooltip_active:
 					tooltip_active = true
 					$"../UI/Tooltip".display(node.text)
-					
-
+	
 	if not there_is_tooltip and tooltip_active:
 		tooltip_active = false
 		$"../UI/Tooltip".undisplay()
 	if not prevent_move and allow_move:
+		play_animation("move")
 		await $Move.move_to_pos(target_pos)
 	else:
 		$Move.move_speed *= 2

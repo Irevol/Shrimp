@@ -9,7 +9,7 @@
 size = Vector2(200, 193)
 
 [node name="Octo" type="Node2D" groups=["enemy"]]
-modulate = Color(0.4751913, 0.32109174, 0.87168884, 1)
+modulate = Color(0.21176112, 0.22574934, 0.2152187, 1)
 script = ExtResource("3_f1vw5")
 
 [node name="DetectTile" type="Node2D" parent="."]
@@ -22,7 +22,7 @@ sprite_frames = ExtResource("2_6j7fu")
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(3, -24.5)
+position = Vector2(219, -136)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="Move" type="Node2D" parent="."]
