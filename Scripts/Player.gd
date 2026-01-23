@@ -196,7 +196,7 @@ func move_in_dir(dir):
 		play_animation("move")
 		await $Move.move_to_pos(target_pos)
 	else:
-		game_control.sound_effects.play_sound("hurt.mp3")
+		game_control.sound_effects.play_sound("blip.mp3")
 		$Move.move_speed *= 2
 		await $Move.move_to_pos(position + (dir * 32))
 		await $Move.move_to_pos(position - (dir * 32))

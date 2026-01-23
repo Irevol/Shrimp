@@ -169,6 +169,7 @@ func fire_bullet(firer: Node2D, pos: Vector2, dir: Vector2, dmg_enemy = false, d
 	cur_bullet.damage = damage
 	cur_bullet.damage_enemies = dmg_enemy
 	add_child(cur_bullet)
+	sound_effects.play_sound("water-bubbles-257594.wav")
 	print("fired")
 	return await cur_bullet.tree_exited
 	

@@ -62,6 +62,7 @@ func set_description(title, description):
 	
 	
 func on_pickup_init():
+	game_control.sound_effects.play_sound("pickup.mp3")
 	var rewardbar = game_control.get_node("UI/Rewardbar")
 	player = game_control.player # here cause putting it in _ready() is too quick
 	reparent(rewardbar)
