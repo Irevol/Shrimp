@@ -20,13 +20,13 @@
 [ext_resource type="Script" uid="uid://okwgyim5omf6" path="res://Scripts/Rewards/ShellPurple.gd" id="17_3pmx8"]
 [ext_resource type="Script" uid="uid://c76j1wku3nq33" path="res://Scenes/SoundEffects.gd" id="17_pdsj5"]
 [ext_resource type="Script" uid="uid://bb83gttsfoeni" path="res://Scripts/Rewards/ConchOrange.gd" id="18_3pmx8"]
-[ext_resource type="AudioStream" uid="uid://jl0n66byrhny" path="res://Music/rainWater.mp3" id="19_fevyy"]
 [ext_resource type="Script" uid="uid://dotr4axcdg2fy" path="res://Scripts/Rewards/ConchPurple.gd" id="19_u50mg"]
 [ext_resource type="Script" uid="uid://cb4ecp6wlcw5u" path="res://Scripts/Rewards/PearlOrange.gd" id="20_cbgmd"]
 [ext_resource type="Script" uid="uid://5glcwumhn66r" path="res://Scenes/audio_stream_player.gd" id="20_gt3je"]
 [ext_resource type="Script" uid="uid://ncdy2vb7elfj" path="res://Scripts/Rewards/PearlPurple.gd" id="21_1w6v2"]
 [ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
 [ext_resource type="Shader" uid="uid://cqrlqwo84vg5r" path="res://Scenes/water_shader.gdshader" id="22_kltya"]
+[ext_resource type="AudioStream" uid="uid://b8s7mduuomw1k" path="res://Music/My Song 6.mp3" id="24_e08e2"]
 [ext_resource type="SpriteFrames" uid="uid://bwwbwg2s4cc4d" path="res://Animations/conch.tres" id="27_hpc6h"]
 [ext_resource type="Script" uid="uid://cn7nqwoc3xat4" path="res://Scenes/LightControl.gd" id="28_kltya"]
 [ext_resource type="FontFile" uid="uid://duc1oq7qiqhj" path="res://Resources/Basic Comical Regular NC.ttf" id="29_e08e2"]
@@ -114,11 +114,11 @@ volume_db = -15.0
 script = ExtResource("17_pdsj5")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_fevyy")
+stream = ExtResource("24_e08e2")
 volume_db = -30.0
 autoplay = true
 script = ExtResource("20_gt3je")
-rainwater_music = ExtResource("19_fevyy")
+rainwater_music = ExtResource("24_e08e2")
 bells_music = ExtResource("21_3pmx8")
 
 [node name="TestReward" type="Node2D" parent="."]

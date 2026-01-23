@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b8s7mduuomw1k"
+path="res://.godot/imported/My Song 6.mp3-ddd4f301916667e68667717e003bc1bb.mp3str"
+
+[deps]
+
+source_file="res://Music/My Song 6.mp3"
+dest_files=["res://.godot/imported/My Song 6.mp3-ddd4f301916667e68667717e003bc1bb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
