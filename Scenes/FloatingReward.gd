@@ -10,7 +10,7 @@ func _ready():
 	var cur = reward_scene.instantiate()
 	cur.set_script(reward_script)
 	add_child(cur)
-	cur.z_index = 20
+	cur.z_index = 10
 	if cur is Rune:
 		cur.rune_num = rune_num
 	cur.before_pickup()

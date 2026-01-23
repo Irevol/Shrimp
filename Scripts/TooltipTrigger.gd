@@ -3,6 +3,7 @@ class_name TooltipTrigger
 
 @export var text := "text"
 @onready var game_control = get_tree().current_scene
+@export var floating := true
 
 
 #func _on_area_2d_mouse_entered() -> void:

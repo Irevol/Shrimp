@@ -3,7 +3,6 @@ class_name Tooltip
 
 @onready var label: RichTextLabel = $"PanelContainer/MarginContainer/RichTextLabel"
 
-
 func _ready():
 	label.text = ""
 

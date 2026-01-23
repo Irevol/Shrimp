@@ -147,7 +147,7 @@ func exit_rewards():
 	healthbar.display_hearts(player.health)
 	player.update_killbar()
 	
-	$Music.play_normal_map_music()
+	#$Music.play_normal_map_music()
 
 	
 func init_slash(pos: Vector2):

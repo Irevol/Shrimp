@@ -43,6 +43,7 @@ func generate_rewards():
 		var new_reward = reward.instantiate()
 		new_reward.set_script(reward_script)
 		new_reward.floating = false
+		new_reward.get_node("Tooltip").floating = false
 		reward_nodes.append(new_reward)
 		get_node("Opacity/Reward Stand "+str(i)).add_child(new_reward)
 	

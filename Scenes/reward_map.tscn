@@ -17,6 +17,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 1)
 
 [node name="RewardMap" type="Node2D" groups=["reward_walkable"]]
+z_index = 5
 script = ExtResource("1_4m48d")
 reward = ExtResource("5_oavb7")
 

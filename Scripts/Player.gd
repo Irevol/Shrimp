@@ -183,10 +183,11 @@ func move_in_dir(dir):
 					game_control.init_slash(node.position)
 					prevent_move = true
 			if node is TooltipTrigger and (not prevent_move and allow_move):
-				there_is_tooltip = true
-				if not tooltip_active:
-					tooltip_active = true
-					$"../UI/Tooltip".display(node.text)
+				if node.floating != reward_walker:
+					there_is_tooltip = true
+					if not tooltip_active:
+						tooltip_active = true
+						$"../UI/Tooltip".display(node.text)
 	
 	if not there_is_tooltip and tooltip_active:
 		tooltip_active = false
