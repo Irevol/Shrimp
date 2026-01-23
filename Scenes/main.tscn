@@ -87,7 +87,7 @@ starting_position = Vector2(-714, -432)
 [node name="RewardMap" parent="." instance=ExtResource("2_kry3j")]
 light_mask = 2
 position = Vector2(-3010, 2417)
-rewards = Array[Script]([ExtResource("10_h1bgf"), ExtResource("11_b3802"), ExtResource("12_fevyy"), ExtResource("13_hibaj"), ExtResource("14_pdsj5"), ExtResource("15_ee4r6"), ExtResource("16_gt3je"), ExtResource("17_3pmx8"), ExtResource("11_b3802"), ExtResource("18_3pmx8"), ExtResource("19_u50mg"), ExtResource("10_h1bgf"), ExtResource("20_cbgmd"), ExtResource("21_1w6v2"), ExtResource("22_r33sp"), ExtResource("22_r33sp"), ExtResource("22_r33sp"), ExtResource("23_hdf80")])
+rewards = Array[Script]([ExtResource("10_h1bgf"), ExtResource("11_b3802"), ExtResource("12_fevyy"), ExtResource("13_hibaj"), ExtResource("14_pdsj5"), ExtResource("15_ee4r6"), ExtResource("16_gt3je"), ExtResource("17_3pmx8"), ExtResource("11_b3802"), ExtResource("18_3pmx8"), ExtResource("19_u50mg"), ExtResource("10_h1bgf"), ExtResource("20_cbgmd"), ExtResource("21_1w6v2"), ExtResource("22_r33sp"), ExtResource("22_r33sp"), ExtResource("23_hdf80")])
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -10

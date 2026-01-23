@@ -119,6 +119,8 @@ func summmon_rewards_for_real():
 	reward_map.transition_in()
 	player.reward_walker = true
 	player.z_index += 10
+	player.health += 1
+	healthbar.display_hearts(player.health)
 	
 	#var tween: Tween = create_tween()
 	#tween.set_trans(tween.TRANS_CUBIC)
