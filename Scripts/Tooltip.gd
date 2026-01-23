@@ -20,7 +20,8 @@ func display(text: String):
 	
 	
 func undisplay():
-	var tween: Tween = create_tween()
+	var tween: Tween = get_tree().create_tween()
+	print("undisplay called")
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(label, "visible_ratio", 0, label.text.length()*0.01)

@@ -31,14 +31,14 @@ func move():
 	
 
 func on_enemy_turn():
-	scared = position.distance_to(player.position) < 1.5 * 288
+	scared = dis_to_player() <= 2.5
 	if scared:
 		move()
 	else:
-		if position.x == player.position.x and not scared:
+		if position.x == player.position.x:
 			await game_control.fire_bullet(position, Vector2(0, sign(-position.y+player.position.y)))
 			end_turn()
-		elif position.y == player.position.y and not scared:
+		elif position.y == player.position.y:
 			await game_control.fire_bullet(position, Vector2(sign(-position.x+player.position.x), 0))
 			end_turn()
 		else:

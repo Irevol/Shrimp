@@ -6,5 +6,5 @@
 resource_local_to_scene = true
 shader = ExtResource("1_41usq")
 shader_parameter/max_ca_offset = 16.0
-shader_parameter/max_blur = 2.0
+shader_parameter/max_blur = 1.0
 shader_parameter/exponent = 0.0

@@ -12,4 +12,4 @@ func before_pickup():
 func on_move(dir):
 	if dir == Vector2.DOWN:
 		shake()
-		game_control.fire_bullet(player.position, Vector2.DOWN, true)
+		await game_control.fire_bullet(player.position, Vector2.DOWN, true)

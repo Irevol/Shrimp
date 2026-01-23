@@ -7,6 +7,6 @@ func _ready():
 	
 
 func update(new_value):
-	$Mask/Meter.offset.y = 245 + new_value*(-260)
+	$Mask/Meter.offset.y = 235 + new_value*(-255)
 	
 	

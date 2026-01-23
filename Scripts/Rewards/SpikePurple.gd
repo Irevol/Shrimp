@@ -19,7 +19,7 @@ func on_kill(color):
 	if color == "purple":
 		shake_timer = shake_duration
 		counter += 1
-		if counter == 6:
+		if counter == 2:
 			counter = 0
 			player.health += 1
 			game_control.healthbar.display_hearts(player.health)

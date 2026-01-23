@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://v7gm3moewlxb"]
+
+[ext_resource type="Script" uid="uid://dqivp7jahoqh3" path="res://Scenes/Seaweed.gd" id="1_yt8pn"]
+[ext_resource type="SpriteFrames" uid="uid://64mr8ncamok7" path="res://Animations/seaweed.tres" id="2_067sm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np2xp"]
+size = Vector2(200, 193)
+
+[node name="Seaweed" type="Node2D" groups=["unwalkable"]]
+script = ExtResource("1_yt8pn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["unwalkable"]]
+sprite_frames = ExtResource("2_067sm")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")

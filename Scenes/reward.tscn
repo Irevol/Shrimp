@@ -9,12 +9,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gnab"]
 size = Vector2(200, 193)
 
-[sub_resource type="Gradient" id="Gradient_vgqql"]
+[sub_resource type="Gradient" id="Gradient_y5ihe"]
 offsets = PackedFloat32Array(0, 0.7)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_y5ihe"]
-gradient = SubResource("Gradient_vgqql")
+gradient = SubResource("Gradient_y5ihe")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 1)
@@ -83,6 +83,3 @@ script = ExtResource("3_pjohr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tooltip/Area2D"]
 shape = SubResource("RectangleShape2D_5bq4m")
-
-[connection signal="mouse_entered" from="Area2D" to="Tooltip" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="Tooltip" method="_on_area_2d_mouse_exited"]

@@ -7,18 +7,18 @@ func before_pickup():
 	sprite.sprite_frames = load("res://Animations/shell.tres")
 	sprite.play("default")
 	sprite.modulate = game_control.colors["purple"]
-	set_description("Amethyst Shell","""Every 6th turn, purple enemies are frozen
+	set_description("Amethyst Shell","""Every 5th turn, purple enemies are frozen
 """)
 	
 
 func on_pickup():
 	pass
-
+	
 
 func on_move(_dir):
 	counter += 1
-	if counter == 6:
+	if counter == 5:
 		shake_timer = shake_duration
 		counter = 0
 		game_control.frozen.append("purple")
-		label.text = str(counter)
+	label.text = str(counter)

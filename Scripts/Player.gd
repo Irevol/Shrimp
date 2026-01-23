@@ -137,6 +137,7 @@ func move_in_dir(dir):
 		$AnimatedSprite2D.flip_h = true
 	elif dir.x == -1:
 		$AnimatedSprite2D.flip_h = false
+		
 	if not reward_walker:
 		move.emit(dir)
 		

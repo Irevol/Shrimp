@@ -1,0 +1,187 @@
+[gd_scene load_steps=11 format=4 uid="uid://b3hq1jqq5dldw"]
+
+[ext_resource type="TileSet" uid="uid://b05d1p6ulwqxp" path="res://Resources/tile_set.tres" id="1_q0mm3"]
+[ext_resource type="PackedScene" uid="uid://bfgl74tb327dv" path="res://Scenes/gate.tscn" id="2_np2xp"]
+[ext_resource type="PackedScene" uid="uid://dhshlfk5tky02" path="res://Scenes/floating_reward.tscn" id="2_w7jjh"]
+[ext_resource type="Script" uid="uid://n3bfc164jgwb" path="res://Scenes/FloatingReward.gd" id="3_6q3n4"]
+[ext_resource type="Script" uid="uid://ymd8ampkwyaq" path="res://Scripts/Rewards/Rune.gd" id="4_4c2oa"]
+[ext_resource type="PackedScene" uid="uid://b25ier37yvifq" path="res://Scenes/fish.tscn" id="5_4c2oa"]
+[ext_resource type="PackedScene" uid="uid://bkmbynowg4vq5" path="res://Scenes/jelly.tscn" id="7_4c2oa"]
+[ext_resource type="Script" uid="uid://dqivp7jahoqh3" path="res://Scenes/Seaweed.gd" id="7_6q3n4"]
+[ext_resource type="SpriteFrames" uid="uid://64mr8ncamok7" path="res://Animations/seaweed.tres" id="8_4c2oa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np2xp"]
+size = Vector2(200, 193)
+
+[node name="Map" type="Node2D" groups=["walkable"]]
+
+[node name="Walkable" type="TileMapLayer" parent="." groups=["walkable"]]
+modulate = Color(0.22352941, 0.4862745, 0.6901961, 0.70980394)
+z_index = -10
+tile_map_data = PackedByteArray("AAD9////EAAAAAAAAAD+/wEAEAAAAAAAAAD9/wAAEAAAAAAAAAD9/wEAEAAAAAAAAAD9//7/EAAAAAAAAAD9//3/EAAAAAAAAAD///j/EAAAAAAAAAD+/wIAEAAAAAAAAAD9/wIAEAAAAAAAAAD8/wIAEAAAAAAAAAD8/wEAEAAAAAAAAAD8/wAAEAAAAAAAAAD+/wAAEAAAAAAAAAD9//j/EAAAAAAAAAD9//n/EAAAAAAAAAD9//r/EAAAAAAAAAD9//v/EAAAAAAAAAD9//z/EAAAAAAAAAD9//f/EAAAAAAAAAD8//f/EAAAAAAAAAD+//f/EAAAAAAAAAD+//j/EAAAAAAAAAD+//n/EAAAAAAAAAD8//n/EAAAAAAAAAD7//j/EAAAAAAAAAD7//f/EAAAAAAAAAD///f/EAAAAAAAAAD///b/EAAAAAAAAAD+//b/EAAAAAAAAAD9//b/EAAAAAAAAAD8//b/EAAAAAAAAAD7//b/EAAAAAAAAAD///X/EAAAAAAAAAD+//X/EAAAAAAAAAD9//X/EAAAAAAAAAD8//X/EAAAAAAAAAD7//X/EAAAAAAAAAD8//T/EAAAAAAAAAD9//T/EAAAAAAAAAD+//T/EAAAAAAAAAD6//b/EAAAAAAAAAD7//T/EAAAAAAAAAD///T/EAAAAAAAAAD///n/EAAAAAAAAAD7//n/EAAAAAAAAAD6//j/EAAAAAAAAAD6//f/EAAAAAAAAAD6//X/EAAAAAAAAAAAAPX/EAAAAAAAAAAAAPb/EAAAAAAAAAAAAPf/EAAAAAAAAAAAAPj/EAAAAAAAAAD5//f/EAAAAAAAAAD4//f/EAAAAAAAAAD3//f/EAAAAAAAAAD2//f/EAAAAAAAAAD1//f/EAAAAAAAAAABAPb/EAAAAAAAAAACAPb/EAAAAAAAAAADAPb/EAAAAAAAAAAEAPb/EAAAAAAAAAAFAPb/EAAAAAAAAAAGAPb/EAAAAAAAAAAFAPX/EAAAAAAAAAAGAPX/EAAAAAAAAAAFAPf/EAAAAAAAAAAGAPf/EAAAAAAAAAAHAPf/EAAAAAAAAAAHAPb/EAAAAAAAAAAHAPX/EAAAAAAAAAD1//b/EAAAAAAAAAD0//f/EAAAAAAAAADz//j/EAAAAAAAAADx//f/EAAAAAAAAADw//f/EAAAAAAAAAAIAPb/EAAAAAAAAAAJAPb/EAAAAAAAAAAKAPb/EAAAAAAAAAALAPb/EAAAAAAAAAANAPP/EAAAAAAAAAD9//L/EAAAAAAAAAD9//P/EAAAAAAAAAD9//H/EAAAAAAAAAD9//D/EAAAAAAAAAD9/+//EAAAAAAAAAD9/+7/EAAAAAAAAAD8/+3/EAAAAAAAAAD9/+3/EAAAAAAAAAD+/+3/EAAAAAAAAAD7/+3/EAAAAAAAAAD//+3/EAAAAAAAAAD8/+7/EAAAAAAAAAD+/+7/EAAAAAAAAAAMAPX/EAAAAAAAAAAMAPb/EAAAAAAAAAAMAPf/EAAAAAAAAAANAPf/EAAAAAAAAAANAPb/EAAAAAAAAAANAPX/EAAAAAAAAAAOAPX/EAAAAAAAAAAOAPb/EAAAAAAAAAAOAPf/EAAAAAAAAAANAPT/EAAAAAAAAAANAPL/EAAAAAAAAAAMAPH/EAAAAAAAAAANAPH/EAAAAAAAAAAOAPH/EAAAAAAAAAAOAPD/EAAAAAAAAAANAPD/EAAAAAAAAAAMAPD/EAAAAAAAAAALAPD/EAAAAAAAAAALAPH/EAAAAAAAAAAPAPH/EAAAAAAAAAAPAPD/EAAAAAAAAAAPAO//EAAAAAAAAAAOAO//EAAAAAAAAAANAO//EAAAAAAAAAAMAO//EAAAAAAAAAALAO//EAAAAAAAAAALAO7/EAAAAAAAAAAMAO7/EAAAAAAAAAANAO7/EAAAAAAAAAAOAO7/EAAAAAAAAAAPAO7/EAAAAAAAAAAPAO3/EAAAAAAAAAAOAO3/EAAAAAAAAAANAO3/EAAAAAAAAAAMAO3/EAAAAAAAAAALAO3/EAAAAAAAAAAKAO3/EAAAAAAAAAAKAO7/EAAAAAAAAAAKAOz/EAAAAAAAAAALAOz/EAAAAAAAAAAMAOz/EAAAAAAAAAD8//j/EAAAAAAAAAD3//b/EAAAAAAAAAD4//b/EAAAAAAAAAD4//j/EAAAAAAAAADw//j/EAAAAAAAAADx//j/EAAAAAAAAAD7/+z/EAAAAAAAAAD8/+z/EAAAAAAAAAD9/+z/EAAAAAAAAAD+/+z/EAAAAAAAAAD//+z/EAAAAAAAAAD8/+//EAAAAAAAAAD+/+//EAAAAAAAAAD7/+7/EAAAAAAAAAD//+7/EAAAAAAAAAD7/+v/EAAAAAAAAAD8/+v/EAAAAAAAAAD9/+v/EAAAAAAAAAD+/+v/EAAAAAAAAAD//+v/EAAAAAAAAAD8/+r/EAAAAAAAAAD9/+r/EAAAAAAAAAD+/+r/EAAAAAAAAAD7/+r/EAAAAAAAAAD//+r/EAAAAAAAAAAAAOz/EAAAAAAAAAABAOz/EAAAAAAAAAACAOz/EAAAAAAAAAACAOv/EAAAAAAAAAACAO3/EAAAAAAAAAADAO3/EAAAAAAAAAAEAO3/EAAAAAAAAAAEAOz/EAAAAAAAAAAEAOv/EAAAAAAAAAADAOv/EAAAAAAAAAADAOz/EAAAAAAAAAD7/+n/EAAAAAAAAAD6/+n/EAAAAAAAAAD6/+r/EAAAAAAAAAD5/+n/EAAAAAAAAAD5/+j/EAAAAAAAAAD6/+j/EAAAAAAAAAD5/+f/EAAAAAAAAAD4/+f/EAAAAAAAAAD4/+j/EAAAAAAAAAD3/+f/EAAAAAAAAAD4/+b/EAAAAAAAAAD4/+X/EAAAAAAAAAD3/+X/EAAAAAAAAAD3/+T/EAAAAAAAAAD2/+T/EAAAAAAAAAD1/+X/EAAAAAAAAAD2/+X/EAAAAAAAAAD2/+b/EAAAAAAAAAD3/+b/EAAAAAAAAAD2/+f/EAAAAAAAAAD1/+b/EAAAAAAAAAD1/+T/EAAAAAAAAAD4/+T/EAAAAAAAAAD1/+f/EAAAAAAAAAD0/+X/EAAAAAAAAADz/+X/EAAAAAAAAADy/+X/EAAAAAAAAADx/+b/EAAAAAAAAADy/+b/EAAAAAAAAADz/+b/EAAAAAAAAAD0/+b/EAAAAAAAAADw/+f/EAAAAAAAAADw/+j/EAAAAAAAAADw/+n/EAAAAAAAAADw/+r/EAAAAAAAAADw/+v/EAAAAAAAAADx/+v/EAAAAAAAAADx/+r/EAAAAAAAAADx/+n/EAAAAAAAAADx/+j/EAAAAAAAAADx/+f/EAAAAAAAAADv/+v/EAAAAAAAAADy/+r/EAAAAAAAAADy/+v/EAAAAAAAAADy/+z/EAAAAAAAAADx/+z/EAAAAAAAAADw/+z/EAAAAAAAAADv/+z/EAAAAAAAAAD5//b/EAAAAAAAAAD5//j/EAAAAAAAAAD2//b/EAAAAAAAAADy//j/EAAAAAAAAAD5/+X/EAAAAAAAAAD5/+b/EAAAAAAAAAD6/+b/EAAAAAAAAAD7/+b/EAAAAAAAAAD8/+b/EAAAAAAAAAD9/+b/EAAAAAAAAAD9/+X/EAAAAAAAAAD+/+X/EAAAAAAAAAD8/+X/EAAAAAAAAAD7/+X/EAAAAAAAAAD6/+X/EAAAAAAAAAD8/+T/EAAAAAAAAAD9/+T/EAAAAAAAAAD+/+T/EAAAAAAAAAD//+T/EAAAAAAAAAAAAOT/EAAAAAAAAAAAAOX/EAAAAAAAAAD//+X/EAAAAAAAAAAAAOb/EAAAAAAAAAABAOb/EAAAAAAAAAABAOX/EAAAAAAAAAACAOb/EAAAAAAAAAACAOf/EAAAAAAAAAABAOf/EAAAAAAAAAADAOf/EAAAAAAAAAADAOb/EAAAAAAAAAAEAOb/EAAAAAAAAAAEAOf/EAAAAAAAAAACAOj/EAAAAAAAAAADAOj/EAAAAAAAAAAEAOj/EAAAAAAAAAD2/+P/EAAAAAAAAAD2/+L/EAAAAAAAAAD3/+L/EAAAAAAAAAD3/+P/EAAAAAAAAAD4/+H/EAAAAAAAAAD3/+H/EAAAAAAAAAD2/+H/EAAAAAAAAAD1/+H/EAAAAAAAAAD0/+H/EAAAAAAAAAD0/+D/EAAAAAAAAAD0/9//EAAAAAAAAAD1/9//EAAAAAAAAAD2/9//EAAAAAAAAAD3/9//EAAAAAAAAAD4/9//EAAAAAAAAAD5/9//EAAAAAAAAAD5/+D/EAAAAAAAAAD4/+D/EAAAAAAAAAD3/+D/EAAAAAAAAAD2/+D/EAAAAAAAAAD1/+D/EAAAAAAAAAD5/+H/EAAAAAAAAAD0/97/EAAAAAAAAAD1/97/EAAAAAAAAAD2/97/EAAAAAAAAAD3/97/EAAAAAAAAAD4/97/EAAAAAAAAAD5/97/EAAAAAAAAAD//+b/EAAAAAAAAAAEAOX/EAAAAAAAAAAEAOT/EAAAAAAAAAAEAOP/EAAAAAAAAAAEAOL/EAAAAAAAAAD1/93/EAAAAAAAAAD1/9z/EAAAAAAAAAD1/9v/EAAAAAAAAAD1/9r/EAAAAAAAAAD1/9n/EAAAAAAAAAD4/93/EAAAAAAAAAD4/9z/EAAAAAAAAAD3/9r/EAAAAAAAAAD3/9v/EAAAAAAAAAD3/9z/EAAAAAAAAAD5/9z/EAAAAAAAAAD5/9v/EAAAAAAAAAD5/9r/EAAAAAAAAAD4/9r/EAAAAAAAAAD4/9v/EAAAAAAAAADv//f/EAAAAAAAAADv//j/EAAAAAAAAADu//f/EAAAAAAAAAD1//j/EAAAAAAAAAD0//j/EAAAAAAAAAD2//j/EAAAAAAAAAD1//n/EAAAAAAAAAD0//n/EAAAAAAAAAD0//r/EAAAAAAAAADz//r/EAAAAAAAAADz//n/EAAAAAAAAADy//n/EAAAAAAAAADx//n/EAAAAAAAAADv//b/EAAAAAAAAADw//b/EAAAAAAAAADw//n/EAAAAAAAAADx//r/EAAAAAAAAADy//r/EAAAAAAAAADu//b/EAAAAAAAAADv//X/EAAAAAAAAADu//X/EAAAAAAAAADw//X/EAAAAAAAAADv//T/EAAAAAAAAADv//P/EAAAAAAAAADv//L/EAAAAAAAAADv//H/EAAAAAAAAADu/+//EAAAAAAAAADu//D/EAAAAAAAAADu//H/EAAAAAAAAADw//H/EAAAAAAAAADw//D/EAAAAAAAAADw/+//EAAAAAAAAADv/+//EAAAAAAAAADv//D/EAAAAAAAAADu/+7/EAAAAAAAAADu/+3/EAAAAAAAAADv/+3/EAAAAAAAAADv/+7/EAAAAAAAAADw/+3/EAAAAAAAAADw/+7/EAAAAAAAAADx/+3/EAAAAAAAAADx/+7/EAAAAAAAAADx/+//EAAAAAAAAADx//D/EAAAAAAAAADy/+3/EAAAAAAAAADy/+7/EAAAAAAAAADy/+f/EAAAAAAAAAD1/+//EAAAAAAAAAD1//D/EAAAAAAAAAD1//H/EAAAAAAAAAD1//L/EAAAAAAAAAD2//L/EAAAAAAAAAD3//L/EAAAAAAAAAD3//H/EAAAAAAAAAD4//H/EAAAAAAAAAD4//D/EAAAAAAAAAD3//D/EAAAAAAAAAD3/+//EAAAAAAAAAD2/+//EAAAAAAAAAD2//D/EAAAAAAAAAD2//H/EAAAAAAAAAD4//L/EAAAAAAAAAD0//D/EAAAAAAAAAD0//H/EAAAAAAAAAD0//L/EAAAAAAAAAD1//P/EAAAAAAAAAD2//P/EAAAAAAAAAD3//P/EAAAAAAAAAABAPH/EAAAAAAAAAABAPL/EAAAAAAAAAACAPL/EAAAAAAAAAADAPH/EAAAAAAAAAADAPD/EAAAAAAAAAACAPD/EAAAAAAAAAACAPH/EAAAAAAAAAADAPL/EAAAAAAAAAACAPP/EAAAAAAAAAADAPP/EAAAAAAAAAAEAPL/EAAAAAAAAAAEAPH/EAAAAAAAAAACAPr/EAAAAAAAACACAPv/EAAAAAAAACACAPz/EAAAAAAAACADAPv/EAAAAAAAACADAPz/EAAAAAAAACABAPz/EAAAAAAAACABAPv/EAAAAAAAACABAPr/EAAAAAAAACAAAPv/EAAAAAAAACAAAPz/EAAAAAAAACABAP3/EAAAAAAAACACAP3/EAAAAAAAACD2//z/EAAAAAAAACD3//z/EAAAAAAAACD3//3/EAAAAAAAACD4//3/EAAAAAAAACD5//3/EAAAAAAAACD5//z/EAAAAAAAACD4//v/EAAAAAAAACD3//v/EAAAAAAAACD4//z/EAAAAAAAACD3//7/EAAAAAAAACD2//3/EAAAAAAAACD4//7/EAAAAAAAACA=")
+tile_set = ExtResource("1_q0mm3")
+occlusion_enabled = false
+navigation_enabled = false
+
+[node name="Unwalkable" type="TileMapLayer" parent="." groups=["unwalkable"]]
+tile_map_data = PackedByteArray("AAD9//3/AAAAAAAAAAD8//f/AQAAAAAAAAD+//X/AQAAAAAAAAD+//j/AQAAAAAAAAA=")
+tile_set = ExtResource("1_q0mm3")
+
+[node name="Keys" type="Node" parent="."]
+
+[node name="FloatingReward" parent="Keys" instance=ExtResource("2_w7jjh")]
+position = Vector2(1872, -2736)
+script = ExtResource("3_6q3n4")
+reward_script = ExtResource("4_4c2oa")
+
+[node name="FloatingReward2" parent="Keys" instance=ExtResource("2_w7jjh")]
+position = Vector2(3312, -5328)
+script = ExtResource("3_6q3n4")
+reward_script = ExtResource("4_4c2oa")
+rune_num = 1
+
+[node name="Gates" type="Node" parent="."]
+
+[node name="Gate" parent="Gates" instance=ExtResource("2_np2xp")]
+position = Vector2(-720, -3672)
+
+[node name="Gate2" parent="Gates" instance=ExtResource("2_np2xp")]
+position = Vector2(-3024, -10008)
+
+[node name="Gate3" parent="Gates" instance=ExtResource("2_np2xp")]
+position = Vector2(1296, -7704)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Fish4" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(-1008, 144)
+color = "purple"
+max_turns = 1
+
+[node name="Jelly" parent="Enemies" instance=ExtResource("7_4c2oa")]
+position = Vector2(1584, -3024)
+color = "purple"
+
+[node name="Jelly2" parent="Enemies" instance=ExtResource("7_4c2oa")]
+position = Vector2(2160, -2448)
+color = "orange"
+
+[node name="Fish5" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(-1296, -2736)
+color = "purple"
+max_turns = 1
+
+[node name="Jelly3" parent="Enemies" instance=ExtResource("7_4c2oa")]
+position = Vector2(3600, -2448)
+color = "orange"
+
+[node name="Fish" parent="Enemies" instance=ExtResource("5_4c2oa")]
+position = Vector2(3888, -4176)
+color = "purple"
+max_turns = 1
+
+[node name="Other" type="Node" parent="."]
+
+[node name="Seaweed" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(1008, -2736)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")
+
+[node name="Seaweed2" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(-720, -1584)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed2" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed2/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")
+
+[node name="Seaweed3" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(-1008, -1872)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed3" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed3/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")
+
+[node name="Seaweed4" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(-1296, -1872)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed4" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed4/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")
+
+[node name="Seaweed5" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(-1296, -3312)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed5" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed5/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")
+
+[node name="Seaweed6" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(-720, -2736)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed6" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed6/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")
+
+[node name="Seaweed7" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(2448, -2736)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed7" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed7/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")
+
+[node name="Seaweed8" type="Node2D" parent="Other" groups=["unwalkable"]]
+position = Vector2(3312, -2736)
+script = ExtResource("7_6q3n4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Other/Seaweed8" groups=["unwalkable"]]
+sprite_frames = ExtResource("8_4c2oa")
+frame_progress = 0.9604354
+
+[node name="Area2D" type="Area2D" parent="Other/Seaweed8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/Seaweed8/Area2D"]
+shape = SubResource("RectangleShape2D_np2xp")

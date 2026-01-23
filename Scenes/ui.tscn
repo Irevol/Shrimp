@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://54hqsva7183s"]
+[gd_scene load_steps=11 format=3 uid="uid://54hqsva7183s"]
 
 [ext_resource type="Script" uid="uid://2ma8ybyon1ax" path="res://Scripts/Healthbar.gd" id="1_smcll"]
 [ext_resource type="PackedScene" uid="uid://dus5e46wayyaj" path="res://Scenes/heart.tscn" id="2_ryf15"]
@@ -9,13 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://cnw8vx0a7gpoo" path="res://Images/filler (1).png" id="5_g0wmg"]
 [ext_resource type="Script" uid="uid://b76c53hu5wi4v" path="res://Scripts/Killbar.gd" id="6_4vbiv"]
 [ext_resource type="PackedScene" uid="uid://d057dlqb4mj54" path="res://Scenes/tooltip.tscn" id="7_3r70p"]
+[ext_resource type="Texture2D" uid="uid://dxirabb8k6eut" path="res://Images/Border.png" id="10_nt8jn"]
 
 [node name="UI" type="CanvasLayer"]
 layer = 20
 
 [node name="Killbar" type="Sprite2D" parent="."]
 z_index = 5
-position = Vector2(144, 144)
+position = Vector2(158, 158)
 texture = ExtResource("4_nt8jn")
 script = ExtResource("6_4vbiv")
 
@@ -39,7 +40,7 @@ offset = Vector2(0, 235)
 
 [node name="Healthbar" type="Node2D" parent="."]
 z_index = 10
-position = Vector2(340, 77)
+position = Vector2(357, 69)
 script = ExtResource("1_smcll")
 heart = ExtResource("2_ryf15")
 
@@ -51,5 +52,12 @@ script = ExtResource("3_mmixe")
 [node name="Tooltip" parent="." instance=ExtResource("7_3r70p")]
 z_index = 10
 position = Vector2(97, 313)
+
+[node name="Border" type="Sprite2D" parent="."]
+modulate = Color(0, 0.9372549, 0.9411765, 0.15686275)
+z_index = -2
+position = Vector2(514, 633)
+scale = Vector2(2.0507813, 2.5)
+texture = ExtResource("10_nt8jn")
 
 [node name="Darkness" type="CanvasModulate" parent="."]

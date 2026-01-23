@@ -6,7 +6,7 @@ extends Reward
 func before_pickup():
 	sprite.sprite_frames = load("res://Animations/shell.tres")
 	sprite.play("default")
-	sprite.modulate = game_control.colors["purple"]
+	sprite.modulate = game_control.colors["orange"]
 	set_description("Topaz Shell","""Every 5th turn, purple enemies are frozen 
 """)
 	

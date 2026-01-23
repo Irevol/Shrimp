@@ -16,6 +16,8 @@ func _ready():
 
 func _process(delta):
 	global_position += dir * 288 * 6 * delta
+	if ignore_count > 0: 
+		return
 	if not notifier.is_on_screen():
 		queue_free()
 
@@ -30,8 +32,9 @@ func _on_area_2d_area_entered(area: Area2D):
 			for i in range(damage+1):
 				parent.take_damage()
 				print("damaged!")
-		print(parent.name)
+		queue_free()
+	elif parent is Seaweed:
+		parent.queu_free()
 		queue_free()
 	elif parent.is_in_group("unwalkable"):
-		print("bullet despawn")
 		queue_free()

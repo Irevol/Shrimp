@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_bc61b")
-shader_parameter/target_color = Color(0.5326106, 0.87369114, 0.3575226, 1)
+shader_parameter/target_color = Color(1, 1, 1, 1)

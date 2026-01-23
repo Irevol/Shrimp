@@ -6,10 +6,13 @@ var shake_intensity: float = 25.0
 var shake_duration: float = 0.5
 var shake_timer: float = -10
 var id: String
-var game_control: GameControl
+@onready var game_control: GameControl = get_tree().current_scene
 var player: Player
 var unique := false
 var floating := true
+@onready var text_display: Tooltip = game_control.get_node("UI/Tooltip")
+@onready var area2d: Area2D = $Area2D
+@export var debug = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var light: PointLight2D = $AnimatedSprite2D/PointLight2D
 @onready var label: RichTextLabel = $AnimatedSprite2D/RichTextLabel
@@ -18,11 +21,16 @@ signal shake_done
 
 
 func _ready():
-	game_control = get_tree().current_scene
 	if unique:
 		game_control.reward_map.cur_rewards.erase(get_script())
 	light.show()
+	area2d.mouse_entered.connect(mouse_entered)
+	area2d.mouse_exited.connect(mouse_exited)
 	before_pickup()
+	if debug:
+		await get_tree().process_frame
+		await get_tree().process_frame
+		on_pickup_init()
 	
 func _process(delta: float):
 	if shake_timer == -10:
@@ -35,6 +43,15 @@ func _process(delta: float):
 		shake_timer = -10
 		shake_done.emit()
 		sprite.offset = Vector2.ZERO
+		
+		
+func mouse_entered():
+	text_display.display($Tooltip.text)
+	
+	
+func mouse_exited():
+	print("exit!!")
+	text_display.undisplay()
 		
 
 func set_description(title, description):
@@ -50,6 +67,7 @@ func on_pickup_init():
 	sprite.offset = Vector2.ZERO
 	sprite.position = Vector2(0,0)
 	sprite.scale = Vector2.ONE * 0.5
+	$Tooltip/Area2D.queue_free()
 	# $Area2D.queue_free(), needed for tooltip
 	shake_timer = shake_duration
 	if not floating: game_control.exit_rewards()
@@ -79,9 +97,9 @@ func on_pickup():
 	pass
 	
 	
-func on_move(dir: Vector2):
+func on_move(_dir: Vector2):
 	pass
 
 
-func on_kill(color: String):
+func on_kill(_color: String):
 	pass

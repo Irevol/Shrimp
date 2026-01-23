@@ -11,6 +11,7 @@ var tile_size = 288
 @export var rune_anims: Array[SpriteFrames]
 var total_enemies: int = 0
 var enemies_finised: int = 0
+var color_balance = {"green":0,"orange":0,"purple":0}
 var enemies_killed: int = 0 # used to update total_enemies, not running count
 var claimed_positions := []
 var current_rewards: Array[Reward]
@@ -145,13 +146,13 @@ func init_slash(pos: Vector2):
 	
 	
 # probably shouldnt be in game control? idk player and enmeies need access, too lazy
-func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false, dmg = 0):
+func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false):
 	var cur_bullet: Bullet = bullet.instantiate()
 	cur_bullet.position = pos
 	cur_bullet.dir = dir
-	cur_bullet.damage = dmg
 	cur_bullet.damage_enemies = dmg_enemy
 	add_child(cur_bullet)
+	print("fired")
 	return await cur_bullet.tree_exited
 	
 

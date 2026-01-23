@@ -7,6 +7,7 @@
 size = Vector2(200, 193)
 
 [node name="Bullet" type="Node2D"]
+z_index = 12
 script = ExtResource("1_oduel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -21,6 +22,7 @@ frame_progress = 0.613586
 shape = SubResource("RectangleShape2D_k12tt")
 
 [node name="Notifier" type="VisibleOnScreenNotifier2D" parent="."]
+z_index = 100
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="screen_exited" from="Notifier" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

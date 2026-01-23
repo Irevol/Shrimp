@@ -14,7 +14,7 @@ func _process(delta: float):
 	if time > two_pi:
 		time -= two_pi
 	for i in range(hearts.size()):
-		hearts[i].offset.y = sin(time+i*0.75) * 20
+		hearts[i].offset.y = sin(time+i*0.5) * 20
 		
 
 func display_hearts(amnt: int):

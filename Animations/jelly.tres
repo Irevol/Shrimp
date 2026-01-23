@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bg0mhniykn07o" path="res://Images/jelly/PNG_0001.png" id="1_25i8i"]
 [ext_resource type="Texture2D" uid="uid://cru35cjv7bhn3" path="res://Images/jelly/PNG_0002.png" id="2_e3obj"]
-[ext_resource type="Texture2D" uid="uid://cd7u5lvj5wmgm" path="res://Images/jelly/PNG_0003.png" id="3_rdy0k"]
+[ext_resource type="Texture2D" uid="uid://c4rrm17kjc2jw" path="res://Images/jelly/jelly3.png" id="3_hixkc"]
 
 [resource]
 animations = [{
@@ -14,7 +14,7 @@ animations = [{
 "texture": ExtResource("2_e3obj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_rdy0k")
+"texture": ExtResource("3_hixkc")
 }],
 "loop": true,
 "name": &"default",

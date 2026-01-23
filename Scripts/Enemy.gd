@@ -14,17 +14,19 @@ var turns
 
 
 func _ready():
+	color = "purple" #["green","orange","purple"].pick_random()
 	game_control.total_enemies += 1
 	turns = max_turns
 	$AnimatedSprite2D.play("default")
 	#$Move.move_speed = 4.5
 	set_owner(game_control)
 	game_control.enemy_turn.connect(take_turn_if_allowed)
-	modulate = game_control.colors[color]
+	$AnimatedSprite2D.modulate = game_control.colors[color]
 	if color == "dark":
 		max_turns = 2
 	if get_parent() is Enemy:
 		printerr("Enemy had child!")
+	init_enemy()
 	
 
 func take_turn_if_allowed():
@@ -33,9 +35,7 @@ func take_turn_if_allowed():
 	
 	if (abs(player.global_position.x - global_position.x) < (288 * 5)) and (abs(player.global_position.y - global_position.y) < (288 * 4)):
 		allowed = true
-	elif game_control.frozen.has(color):
-		print("frozen: ")
-		print(game_control.frozen)
+	if game_control.frozen.has(color):
 		allowed = false
 		
 	if allowed: 
@@ -64,6 +64,10 @@ func die():
 	player.kill.emit(color)
 	player.after_kill()
 	queue_free()
+
+
+func dis_to_player():
+	return snappedf(position.distance_to(player.position)/288, 0.1)
 
 
 func is_walkable(pos):
@@ -120,7 +124,7 @@ func can_move_in_dir(dir):
 				movement_rules.allow_move = true
 			if node.is_in_group("unwalkable"):
 				movement_rules.prevent_move = true
-			if node is Enemy:
+			if node is Enemy or node is Gate:
 				movement_rules.prevent_move = true
 			movement_rules = handle_collision(movement_rules, node) #custom movement rules
 	return movement_rules
@@ -131,7 +135,7 @@ func dir_to_pos(dir):
 
 
 func move_in_dir(dir):
-	print("moved called")
+	#print("moved called")
 	if dir.x == -1:
 		$AnimatedSprite2D.flip_h = true
 	elif dir.x == 1:
