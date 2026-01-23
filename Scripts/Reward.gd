@@ -21,11 +21,13 @@ signal shake_done
 
 
 func _ready():
+	await get_tree().process_frame
 	if unique:
 		game_control.reward_map.cur_rewards.erase(get_script())
+	print(light)
 	light.show()
-	area2d.mouse_entered.connect(mouse_entered)
-	area2d.mouse_exited.connect(mouse_exited)
+	#area2d.mouse_entered.connect(mouse_entered)
+	#area2d.mouse_exited.connect(mouse_exited)
 	before_pickup()
 	if debug:
 		await get_tree().process_frame

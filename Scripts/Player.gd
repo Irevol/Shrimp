@@ -151,7 +151,7 @@ func move_in_dir(dir):
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
 			
-			#print(node.name)
+			print(node.name)
 			if reward_walker:
 				print("reward walking")
 				if node.is_in_group("reward_walkable"):

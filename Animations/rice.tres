@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://keg4iin8hris"]
+
+[ext_resource type="Texture2D" uid="uid://bbg51v77y6n1y" path="res://Images/shrimpFriedRice.png" id="1_c8q5w"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_c8q5w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]

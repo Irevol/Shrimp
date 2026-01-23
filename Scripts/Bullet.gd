@@ -31,7 +31,8 @@ func _on_area_2d_area_entered(area: Area2D):
 		return
 	if (parent is Player and not damage_enemies) or (parent is Enemy and damage_enemies):
 		for i in range(damage):
-			if firer.is_player():
+			if firer is Player:
+				firer.play_animation("attack")
 				firer.kills -= 0.5
 			parent.take_damage()
 			get_tree().current_scene.init_slash(position) #game control
