@@ -1,14 +1,15 @@
 extends Node2D
 class_name GameControl
 
-var tile_size = 288
 @onready var player: Player = $Player
 @onready var reward_map: RewardMap = $RewardMap
 @onready var healthbar: Healthbar = $UI/Healthbar
 @onready var sound_effects: SoundEffects = $SoundEffects
+@onready var music: AudioStreamPlayer = $Music
 @export var slash: PackedScene
 @export var bullet: PackedScene
 @export var rune_anims: Array[SpriteFrames]
+var tile_size = 288
 var total_enemies: int = 0
 var enemies_finised: int = 0
 var color_balance = {"green":0,"orange":0,"purple":0}
@@ -55,7 +56,7 @@ func reset():
 	tween.tween_method(set_lighting, 1.0, light_level, 1.5)
 	await tween.finished
 	darken_ui = false
-	$UI/Darkness.modulate = Color.WHITE
+	$UI/Darkness.color = Color.WHITE
 	
 	
 	
@@ -146,10 +147,12 @@ func init_slash(pos: Vector2):
 	
 	
 # probably shouldnt be in game control? idk player and enmeies need access, too lazy
-func fire_bullet(pos: Vector2, dir: Vector2, dmg_enemy = false):
+func fire_bullet(firer: Node2D, pos: Vector2, dir: Vector2, dmg_enemy = false, damage = 1):
 	var cur_bullet: Bullet = bullet.instantiate()
 	cur_bullet.position = pos
 	cur_bullet.dir = dir
+	cur_bullet.firer = firer
+	cur_bullet.damage = damage
 	cur_bullet.damage_enemies = dmg_enemy
 	add_child(cur_bullet)
 	print("fired")
@@ -165,13 +168,16 @@ func on_die():
 	darken_ui = true
 	kill_lights.emit()
 	sound_effects.play_sound("ded.mp3")
+	music.stop()
 	var tween: Tween = create_tween()
 	tween.set_trans(tween.TRANS_CUBIC)
 	tween.tween_method(set_lighting, light_level, 1, 1)
 	await tween.finished
 	darken_ui = false
 	
-	$UI/Tooltip.display("You died ):")
+	await get_tree().create_timer(1).timeout
+	$UI/Tooltip.reparent($DeathScreen)
+	$DeathScreen/Tooltip.display("You died ):\n\n[font_size=32]Press any key to continue...[/font_size]")
 	game_over = true
 	#flow handed to player
 	

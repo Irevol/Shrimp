@@ -106,6 +106,7 @@ texture = SubResource("GradientTexture2D_6rwnv")
 texture_scale = 0.5
 
 [node name="Fade" type="ColorRect" parent="Opacity"]
+visible = false
 z_index = 7
 offset_left = -2502.0
 offset_top = -1936.0

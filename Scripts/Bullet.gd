@@ -4,37 +4,44 @@ class_name Bullet
 var dir := Vector2.UP
 var damage := 1
 var damage_enemies := false
-var ignore_count = 1
+var firer: Node2D
+var not_on_screen = 0
 @onready var notifier: VisibleOnScreenNotifier2D = $Notifier
 
 
 func _ready():
 	$AnimatedSprite2D.play("default")
+	print("huh?")
 	if dir == Vector2.ZERO:
 		queue_free()
 
 
-func _process(delta):
-	global_position += dir * 288 * 6 * delta
-	if ignore_count > 0: 
-		return
+func _physics_process(delta: float):
+	global_position += dir * 288 * 5 * delta
 	if not notifier.is_on_screen():
-		queue_free()
+		if not_on_screen < 10:
+			not_on_screen += 1
+		else:
+			queue_free()
 
 
 func _on_area_2d_area_entered(area: Area2D):
-	if ignore_count > 0: #to stop it from hitting whatever spawned it
-		ignore_count -= 1
-		return
 	var parent: Node2D = area.get_parent()
-	if parent is Player or parent is Enemy:
-		if (damage_enemies) or (parent is Player and not damage_enemies):
-			for i in range(damage+1):
-				parent.take_damage()
-				print("damaged!")
+	if parent == firer: 
+		return
+	if (parent is Player and not damage_enemies) or (parent is Enemy and damage_enemies):
+		for i in range(damage):
+			parent.take_damage()
+			get_tree().current_scene.init_slash(position) #game control
+			print("damaged!")                   
 		queue_free()
 	elif parent is Seaweed:
-		parent.queu_free()
+		parent.queue_free()
 		queue_free()
 	elif parent.is_in_group("unwalkable"):
+		queue_free()
+
+
+func _on_area_2d_body_entered(body: Node2D):
+	if body.is_in_group("unwalkable"):
 		queue_free()

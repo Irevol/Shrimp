@@ -40,11 +40,12 @@ offset = Vector2(0, 235)
 
 [node name="Healthbar" type="Node2D" parent="."]
 z_index = 10
-position = Vector2(357, 69)
+position = Vector2(400, 60)
 script = ExtResource("1_smcll")
 heart = ExtResource("2_ryf15")
 
 [node name="Rewardbar" type="Node2D" parent="."]
+modulate = Color(0.583047, 0.583047, 0.5830469, 1)
 z_index = 10
 position = Vector2(76, 980)
 script = ExtResource("3_mmixe")
@@ -54,10 +55,10 @@ z_index = 10
 position = Vector2(97, 313)
 
 [node name="Border" type="Sprite2D" parent="."]
-modulate = Color(0, 0.9372549, 0.9411765, 0.15686275)
+modulate = Color(0.18431373, 0.49411765, 0.6745098, 0.50980395)
 z_index = -2
-position = Vector2(514, 633)
-scale = Vector2(2.0507813, 2.5)
+position = Vector2(504, 648)
+scale = Vector2(2.0507813, 2.546875)
 texture = ExtResource("10_nt8jn")
 
 [node name="Darkness" type="CanvasModulate" parent="."]

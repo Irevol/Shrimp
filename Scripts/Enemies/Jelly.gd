@@ -1,7 +1,8 @@
 extends Enemy
 class_name Jelly
 
-var cur_dir := Vector2.DOWN
+var dir := Vector2.DOWN
+var cycle = 1
 const signs := [-1,1]
 
 
@@ -10,13 +11,28 @@ func init_enemy():
 
 # move towards player
 func on_enemy_turn():
-	if dis_to_player() <= 1:
-		await move_in_dir(sign(player.position - position))
+	var diff = player.position - position
+	var dis = dis_to_player()
+	var player_dir: Vector2
+	cycle *= -1
+	
+	if abs(diff.x) > abs(diff.y):
+		player_dir = Vector2(sign(diff.x), 0)
 	else:
-		var rand_sign = signs.pick_random()
-		for i in range(3):
-			if is_walkable(dir_to_pos(cur_dir)):
-				break
-			cur_dir = cur_dir.rotated(rand_sign*PI/2)
-		await move_in_dir(cur_dir)
+		player_dir = Vector2(0, sign(diff.y))
+		
+	# attack if you can
+	if dis <= 1:
+		dir = player_dir
+	
+	for i in range(4):
+		if i == 3:
+			dir = player_dir #if you've cornered them, only fair
+			break
+		if blocked.has(purge(dir)):
+			dir = dir.rotated(PI/2*cycle)
+		else:
+			break
+			
+	await move_in_dir(dir)
 	end_turn()

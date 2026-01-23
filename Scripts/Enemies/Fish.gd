@@ -1,7 +1,7 @@
 extends Enemy
 class_name Fish
 
-var cycle = false
+var cycle = 1
 
 func init_enemy():
 	var shader: ShaderMaterial = $AnimatedSprite2D.material
@@ -12,30 +12,22 @@ func init_enemy():
 func on_enemy_turn():
 	var diff = player.position - position
 	var dir = Vector2.DOWN
-	var dis = dis_to_player()
-	print(dis)
-	if dis <= 2 and dis > 1:
-		print("avoiding")
-		if diff.x == 0:
-			if cycle:
-				dir = Vector2.UP
-			else:
-				dir = Vector2.DOWN
-		else:
-			if cycle:
-				dir = Vector2.RIGHT
-			else:
-				dir = Vector2.LEFT
-		cycle = not cycle
+	var player_dir = Vector2.DOWN
+	cycle *= -1
+	
+	if abs(diff.x) > abs(diff.y):
+		player_dir = Vector2(sign(diff.x), 0)
 	else:
-		if abs(diff.x) > abs(diff.y):
-			dir = Vector2(sign(diff.x), 0)
+		player_dir = Vector2(0, sign(diff.y))
+		
+	dir = player_dir
+	for i in range(4):
+		if i == 3:
+			dir = player_dir
+		if blocked.has(purge(dir)):
+			dir = dir.rotated(PI/2*cycle)
 		else:
-			dir = Vector2(0, sign(diff.y))
+			break
 			
-		for i in range(3):
-			if is_walkable(dir_to_pos(dir)):
-				break
-			dir = dir.rotated(PI/2)
 	await move_in_dir(dir)
 	end_turn()

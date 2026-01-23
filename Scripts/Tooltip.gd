@@ -10,7 +10,7 @@ func _ready():
 
 func display(text: String):
 	print("display called")
-	label.text = "[wave amp=50.0 freq=5.0 connected=0]"+text+"[/wave]"
+	label.text = "[wave amp=30.0 freq=5.0 connected=0]"+text+"[/wave]"
 	label.visible_ratio = 0
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)

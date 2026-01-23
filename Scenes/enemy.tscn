@@ -8,10 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(144, 144)
 
-[node name="Node2D" type="Node2D" groups=["enemy"]]
+[node name="Enemy" type="Node2D" groups=["enemy"]]
 y_sort_enabled = true
 script = ExtResource("1_287tu")
-color = "unassigned"
 
 [node name="Move" type="Node2D" parent="."]
 script = ExtResource("4_1dp5w")

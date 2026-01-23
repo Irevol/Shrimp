@@ -46,12 +46,13 @@ func _process(delta: float):
 		
 		
 func mouse_entered():
-	text_display.display($Tooltip.text)
+	pass
+	#text_display.display($Tooltip.text)
 	
-	
+	 
 func mouse_exited():
-	print("exit!!")
-	text_display.undisplay()
+	pass
+	#text_display.undisplay()
 		
 
 func set_description(title, description):

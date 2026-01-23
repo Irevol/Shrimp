@@ -17,10 +17,10 @@ func on_pickup():
 
 func on_kill(color):
 	if color == "purple":
-		shake_timer = shake_duration
 		counter += 1
-		if counter == 2:
+		if counter == 6:
 			counter = 0
 			player.health += 1
+			shake_timer = shake_duration
 			game_control.healthbar.display_hearts(player.health)
 		label.text = str(counter)

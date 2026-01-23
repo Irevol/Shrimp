@@ -22,6 +22,10 @@ var tooltip_active: bool = false
 
 signal move(dir: Vector2)
 signal kill(color: String)
+
+
+func _ready():
+	starting_position = position
 	
 	
 func reset():
@@ -76,8 +80,9 @@ func _input(event: InputEvent) -> void:
 		if game_control.game_over:
 			var tween := create_tween()
 			tween.tween_property($PointLight2D, "energy", 0, 1)
+			game_control.get_node("DeathScreen/Tooltip").undisplay()
 			await tween.finished
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.7).timeout
 			get_tree().reload_current_scene()
 			return
 			
@@ -130,6 +135,7 @@ func move_in_dir(dir):
 	var target_pos = position + (dir * game_control.tile_size)
 	var allow_move = false
 	var prevent_move = false
+	var redo_turn = false
 	var there_is_tooltip = false
 	var detected_nodes = $DetectTile.detect_tile(target_pos)
 	
@@ -157,20 +163,23 @@ func move_in_dir(dir):
 					allow_move = true
 				if node.is_in_group("unwalkable"):
 					prevent_move = true
+					redo_turn = true
+				if node is Seaweed:
+					play_animation("attack")
+					game_control.init_slash(node.position)
+					prevent_move = true
+					redo_turn = false #you can stall on this!
+					node.queue_free()
+				if node is Reward:
+					node.on_pickup_init()
+					prevent_move = false
+				if node is Gate:
+					prevent_move = not node.attempt_open()
 				if node is Enemy:
 					node.take_damage()
 					play_animation("attack")
 					game_control.init_slash(node.position)
 					prevent_move = true
-				if node is Seaweed:
-					play_animation("attack")
-					game_control.init_slash(node.position)
-					prevent_move = true
-					node.queue_free()
-				if node is Reward:
-					node.on_pickup_init()
-				if node is Gate:
-					prevent_move = not node.attempt_open()
 			if node is TooltipTrigger and (not prevent_move and allow_move):
 				there_is_tooltip = true
 				if not tooltip_active:
@@ -184,9 +193,16 @@ func move_in_dir(dir):
 		play_animation("move")
 		await $Move.move_to_pos(target_pos)
 	else:
+		game_control.sound_effects.play_sound("hurt.mp3")
 		$Move.move_speed *= 2
 		await $Move.move_to_pos(position + (dir * 32))
 		await $Move.move_to_pos(position - (dir * 32))
 		$Move.move_speed /= 2
+		
+	if not allow_move or redo_turn:
+		can_press_key = true
+	else:
+		game_control.start_enemy_turn()
 
-	game_control.start_enemy_turn()
+
+	
