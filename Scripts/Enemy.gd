@@ -10,6 +10,7 @@ var requested_dir: Vector2
 var request_handled := false
 var turn_ended #just here for debugging
 @export var blocked: Array[Vector2] = []
+var suicide: Array[Vector2] = []
 var max_turns = 1
 var turns = 1
 
@@ -44,9 +45,13 @@ func take_turn_if_allowed():
 		
 	#update blocked tiles
 	blocked.clear()
+	suicide.clear()
 	for dir in [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]:
-		if not is_walkable(dir_to_pos(dir)):
+		var pos = dir_to_pos(dir)
+		if not is_walkable(pos):
 			blocked.append(dir)
+		if is_suicide(pos):
+			suicide.append(dir)
 		
 	if allowed: 
 		$AnimatedSprite2D.play("default")
@@ -89,12 +94,6 @@ func dis_to_player():
 func is_walkable(pos: Vector2):
 	var detected_nodes = $DetectTile.detect_tile(pos)
 	var flag = false
-	#no suicide (:
-	if color != "dark":
-		var dis = snapped(pos.distance_to(player.position), 0.01)
-		if dis <= 288 and dis > 100:
-			return false
-	#normal stuff
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
 			if node.is_in_group("walkable"):
@@ -102,7 +101,13 @@ func is_walkable(pos: Vector2):
 			if node.is_in_group("unwalkable") or node is Enemy or node is Gate:
 				return false
 	return flag
-
+	
+	
+func is_suicide(pos: Vector2):
+	var dis = snapped(pos.distance_to(player.position), 0.01)
+	if dis <= 288 and dis > 100:
+		return true
+			
 
 ## given dict with .allow_move and .prevent_move and node collided with
 func handle_collision(movement_rules: Dictionary, node: Node2D) -> Dictionary:

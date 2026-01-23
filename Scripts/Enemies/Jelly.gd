@@ -25,14 +25,17 @@ func on_enemy_turn():
 	if dis <= 1:
 		dir = player_dir
 	
-	for i in range(4):
-		if i == 3:
-			dir = player_dir #if you've cornered them, only fair
-			break
-		if blocked.has(purge(dir)):
-			dir = dir.rotated(PI/2*cycle)
+	for i in range(7):
+		if i >= 4:
+			if blocked.has(purge(dir)):
+				dir = dir.rotated(PI/2*cycle)
+			else:
+				break
 		else:
-			break
+			if blocked.has(purge(dir)) or suicide.has(purge(dir)):
+				dir = dir.rotated(PI/2*cycle)
+			else:
+				break
 			
 	await move_in_dir(dir)
 	end_turn()

@@ -71,7 +71,7 @@ color = Color(0.7392879, 0.73928833, 0.7392881, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_jjvhh")]
 y_sort_enabled = true
-position = Vector2(-1008, -2736)
+position = Vector2(-720, -412)
 max_health = 4
 starting_position = Vector2(-714, -432)
 max_kills_on_reset = 5

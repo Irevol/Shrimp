@@ -20,14 +20,24 @@ func on_enemy_turn():
 	else:
 		player_dir = Vector2(0, sign(diff.y))
 		
-	dir = player_dir
-	for i in range(4):
-		if i == 3:
-			dir = player_dir
-		if blocked.has(purge(dir)):
-			dir = dir.rotated(PI/2*cycle)
+	dir = purge(player_dir)
+	
+	var flag := false
+	for i in range(7):
+		if i >= 4:
+			if blocked.has(dir): 
+				dir = purge(dir.rotated(PI/2.0*cycle))
+			else:
+				flag = true
 		else:
+			if blocked.has(dir) or suicide.has(dir):
+				print(i)
+				dir = purge(dir.rotated(PI/2.0*cycle))
+			else:
+				flag = true
+		if flag:
 			break
 			
+	print(dir)
 	await move_in_dir(dir)
 	end_turn()

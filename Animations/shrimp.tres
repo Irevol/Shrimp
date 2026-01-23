@@ -13,7 +13,7 @@
 [resource]
 animations = [{
 "frames": [{
-"duration": 0.25,
+"duration": 1.0,
 "texture": ExtResource("1_2p2h1")
 }, {
 "duration": 1.0,
@@ -49,7 +49,7 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 0.5,
+"duration": 0.25,
 "texture": ExtResource("7_e2oiq")
 }, {
 "duration": 1.0,
