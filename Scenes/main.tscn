@@ -82,8 +82,9 @@ color = Color(0.7392879, 0.73928833, 0.7392881, 1)
 [node name="Player" parent="." instance=ExtResource("2_jjvhh")]
 y_sort_enabled = true
 position = Vector2(-720, -432)
+max_health = 5
 starting_position = Vector2(-714, -432)
-max_kills_on_reset = 1
+max_kills_on_reset = 6
 invincible = true
 
 [node name="RewardMap" parent="." instance=ExtResource("2_kry3j")]

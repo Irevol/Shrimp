@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://blr2qi7m140f1"]
+
+[ext_resource type="Script" uid="uid://bfq4tyljpijm6" path="res://Scripts/Enemies/Octo.gd" id="1_qmnqr"]
+[ext_resource type="Script" uid="uid://bg41xuljf2e6d" path="res://Scripts/Utils/DetectTiles.gd" id="2_k2nk1"]
+[ext_resource type="SpriteFrames" uid="uid://vtjtk7dq76xw" path="res://Animations/octo.tres" id="3_5h78c"]
+[ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="4_8tfuf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(200, 193)
+
+[node name="Octo" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_qmnqr")
+
+[node name="DetectTile" type="Node2D" parent="."]
+script = ExtResource("2_k2nk1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = ExtResource("3_5h78c")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="Move" type="Node2D" parent="."]
+script = ExtResource("4_8tfuf")
+metadata/_custom_type_script = "uid://bxw5tud1rq036"
