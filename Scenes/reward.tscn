@@ -35,7 +35,6 @@ position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_8gnab")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 0.4117647, 1, 1)
 light_mask = 3
 position = Vector2(2, -196)
 sprite_frames = ExtResource("1_8gnab")

@@ -174,6 +174,7 @@ func move_in_dir(dir):
 				if node is Reward:
 					node.on_pickup_init()
 					prevent_move = true
+					redo_turn = false #you can stall on this!
 				if node is Gate:
 					prevent_move = not node.attempt_open()
 				if node is Enemy:

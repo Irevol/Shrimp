@@ -13,4 +13,4 @@ func _ready():
 	cur.z_index = 20
 	if cur is Rune:
 		cur.rune_num = rune_num
-		cur.before_pickup()
+	cur.before_pickup()

@@ -95,7 +95,7 @@ func start_player_turn():
 	
 func mod_background():
 	print(snapped(-player.position.y/20000, 0.01))
-	var color = Color("3996cd").darkened(snapped(-player.position.y/20000, 0.01))
+	var color = Color("3996cd").darkened(snapped(-player.position.y/30000, 0.01))
 	$Background/ColorRect.color = color
 	
 	
@@ -188,4 +188,25 @@ func on_die():
 	$DeathScreen/Tooltip.display("You died ):\n\n[font_size=32]Press any key to continue...[/font_size]")
 	game_over = true
 	#flow handed to player
+	
+
+func on_win():
+	darken_ui = true
+	kill_lights.emit()
+	sound_effects.play_sound("win.mp3")
+	music.stop()
+	var tween: Tween = create_tween()
+	tween.set_trans(tween.TRANS_CUBIC)
+	tween.tween_method(set_lighting, light_level, 1, 1)
+	await tween.finished
+	darken_ui = false
+	
+	await get_tree().create_timer(1).timeout
+	$UI/Tooltip.reparent($DeathScreen)
+	$DeathScreen/Tooltip.display("""Thanks for playing!
+Created by Oliver Kotter and Haiyi Yan
+Music by Josh Rainwater
+[font_size=32]Press any key to continue...[/font_size]""")
+	game_over = true
+	
 	
