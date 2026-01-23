@@ -149,7 +149,7 @@ func can_move_in_dir(dir):
 		return movement_rules
 	if detected_nodes:
 		for node: Node2D in detected_nodes:
-			print(node.name)
+			#print(node.name)
 			if node.is_in_group("walkable"):
 				movement_rules.allow_move = true
 			if node.is_in_group("unwalkable"):

@@ -97,7 +97,6 @@ func mod_background():
 	print(snapped(-player.position.y/20000, 0.01))
 	var color = Color("3996cd").darkened(snapped(-player.position.y/20000, 0.01))
 	$Background/ColorRect.color = color
-	$Map/Secret.modulate = color
 	
 	
 func set_lighting(ratio: float):

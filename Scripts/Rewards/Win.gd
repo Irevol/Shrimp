@@ -1,4 +1,5 @@
 extends Reward
+class_name Win
 
 
 func before_pickup():
