@@ -71,7 +71,7 @@ color = Color(0.7392879, 0.73928833, 0.7392881, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_jjvhh")]
 y_sort_enabled = true
-position = Vector2(-720, -412)
+position = Vector2(-720, -432)
 max_health = 4
 starting_position = Vector2(-714, -432)
 max_kills_on_reset = 5
@@ -91,7 +91,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.2219443, 0.5862816, 0.80328625, 1)
+color = Color(0.45048487, 0.7498094, 0.9456585, 1)
 
 [node name="Darkness" type="CanvasModulate" parent="Background"]
 color = Color(0.7392879, 0.73928833, 0.7392881, 1)

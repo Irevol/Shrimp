@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://c36kfvdqaypyi"]
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://c36kfvdqaypyi"]
 
 [ext_resource type="Texture2D" uid="uid://c0443cr10rat0" path="res://Images/shrimpattack (2).png" id="1_2p2h1"]
 [ext_resource type="Texture2D" uid="uid://ch72w13a1cqs1" path="res://Images/shrimp/PNG_0001.png" id="1_nkgof"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dsqi2kuvamxj" path="res://Images/Dead.png" id="4_2p2h1"]
 [ext_resource type="Texture2D" uid="uid://phlv671u5u1s" path="res://Images/movingshrimp (2).png" id="7_e2oiq"]
 [ext_resource type="Texture2D" uid="uid://daie45x57gm73" path="res://Images/movingshrimp (3).png" id="8_p0734"]
+[ext_resource type="Texture2D" uid="uid://c4piro1ulqm1n" path="res://Images/movingshrimp (1).png" id="10_xogkp"]
 
 [resource]
 animations = [{
@@ -49,14 +50,14 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 0.25,
-"texture": ExtResource("7_e2oiq")
-}, {
 "duration": 1.0,
 "texture": ExtResource("8_p0734")
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_e2oiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xogkp")
 }],
 "loop": false,
 "name": &"move",

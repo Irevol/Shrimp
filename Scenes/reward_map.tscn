@@ -115,6 +115,7 @@ offset_bottom = 1132.0
 color = Color(0, 0, 0, 0.27058825)
 
 [node name="Distort" type="ColorRect" parent="Opacity"]
+modulate = Color(7.9112988, 7.9112988, 7.9112988, 1)
 z_index = 7
 material = ExtResource("5_f73qb")
 offset_left = -2769.0

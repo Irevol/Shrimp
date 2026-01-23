@@ -29,15 +29,15 @@ func on_enemy_turn():
 				dir = purge(dir.rotated(PI/2.0*cycle))
 			else:
 				flag = true
+			print("suicide")
 		else:
 			if blocked.has(dir) or suicide.has(dir):
-				print(i)
 				dir = purge(dir.rotated(PI/2.0*cycle))
 			else:
 				flag = true
 		if flag:
 			break
 			
-	print(dir)
+	print(dis_to_player())
 	await move_in_dir(dir)
 	end_turn()

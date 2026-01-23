@@ -21,4 +21,4 @@ func on_move(_dir):
 		shake_timer = shake_duration
 		counter = 0
 		game_control.frozen.append("orange")
-		label.text = str(counter)
+	label.text = str(counter)

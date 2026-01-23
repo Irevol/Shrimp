@@ -103,9 +103,10 @@ func is_walkable(pos: Vector2):
 	return flag
 	
 	
-func is_suicide(pos: Vector2):
+func is_suicide(pos: Vector2): # IF PROBLEM HERE, MAKE SURE PLAYER ALIGNED TO GRID
 	var dis = snapped(pos.distance_to(player.position), 0.01)
-	if dis <= 288 and dis > 100:
+	#print(dis)
+	if dis <= 289 and dis > 100:
 		return true
 			
 

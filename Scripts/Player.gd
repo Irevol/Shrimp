@@ -93,6 +93,7 @@ func _input(event: InputEvent) -> void:
 
 # called AFTER kill signal
 func after_kill():
+	print("after_kill")
 	kills += 1
 	if kills == max_kills:
 		game_control.summon_rewards()
@@ -172,7 +173,7 @@ func move_in_dir(dir):
 					node.queue_free()
 				if node is Reward:
 					node.on_pickup_init()
-					prevent_move = false
+					prevent_move = true
 				if node is Gate:
 					prevent_move = not node.attempt_open()
 				if node is Enemy:

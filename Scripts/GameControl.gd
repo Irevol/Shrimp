@@ -43,6 +43,7 @@ func _ready():
 	
 func reset():
 	$UI/Tooltip.undisplay()
+	mod_background()
 	game_over = false
 	
 	for child in $UI/Rewardbar.get_children():
@@ -62,6 +63,7 @@ func reset():
 	
 func start_enemy_turn():
 	
+	mod_background()
 	if total_enemies == 0 or player.reward_walker:
 		start_player_turn() 
 		return
@@ -89,6 +91,13 @@ func start_player_turn():
 		pass
 			
 	player.can_press_key = true
+	
+	
+func mod_background():
+	print(snapped(-player.position.y/20000, 0.01))
+	var color = Color("3996cd").darkened(snapped(-player.position.y/20000, 0.01))
+	$Background/ColorRect.color = color
+	$Map/Secret.modulate = color
 	
 	
 func set_lighting(ratio: float):
