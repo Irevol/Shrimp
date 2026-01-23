@@ -53,11 +53,15 @@ func reset():
 	player.update_killbar()
 	
 	var tween: Tween = create_tween()
-	darken_ui = true
 	tween.tween_method(set_lighting, 1.0, light_level, 1.5)
 	await tween.finished
-	darken_ui = false
-	$UI/Darkness.color = Color.WHITE
+	#$UI/Darkness.color = Color.WHITE
+	
+	await get_tree().create_timer(2.5).timeout
+	tween = create_tween()
+	tween.tween_property($Map/Title, "modulate:a", 0, 1)
+	tween.tween_property($UI/Darkness, "color:a", 1, 1)
+	await tween.finished
 	
 	
 	

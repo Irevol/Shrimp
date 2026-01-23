@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dkww1pexib2bu"]
+[gd_scene load_steps=31 format=3 uid="uid://dkww1pexib2bu"]
 
 [ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
@@ -28,11 +28,6 @@
 [ext_resource type="Script" uid="uid://wxlq7a15tkcx" path="res://Scripts/Rewards/WhitePearl.gd" id="22_r33sp"]
 [ext_resource type="Script" uid="uid://bgq5hffjeyl41" path="res://Scripts/Rewards/WhitePearl2.gd" id="23_hdf80"]
 [ext_resource type="AudioStream" uid="uid://b8s7mduuomw1k" path="res://Music/My Song 6.mp3" id="24_e08e2"]
-[ext_resource type="SpriteFrames" uid="uid://bwwbwg2s4cc4d" path="res://Animations/conch.tres" id="27_hpc6h"]
-[ext_resource type="Script" uid="uid://cn7nqwoc3xat4" path="res://Scenes/LightControl.gd" id="28_kltya"]
-[ext_resource type="FontFile" uid="uid://duc1oq7qiqhj" path="res://Resources/Basic Comical Regular NC.ttf" id="29_e08e2"]
-[ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="30_neg2b"]
-[ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scripts/TooltipTrigger.gd" id="31_r33sp"]
 [ext_resource type="PackedScene" uid="uid://c61xwpoycrpdo" path="res://Scenes/canvas_layer.tscn" id="33_e08e2"]
 
 [sub_resource type="Environment" id="Environment_ynf5e"]
@@ -44,22 +39,6 @@ glow_enabled = true
 glow_intensity = 0.3
 glow_bloom = 0.2
 fog_enabled = true
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdf80"]
-size = Vector2(200, 193)
-
-[sub_resource type="Gradient" id="Gradient_vgqql"]
-offsets = PackedFloat32Array(0, 0.7)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jwpg7"]
-gradient = SubResource("Gradient_vgqql")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2e45"]
-size = Vector2(864, 864)
 
 [node name="GameControl" type="Node2D"]
 script = ExtResource("1_sugp2")
@@ -117,74 +96,7 @@ script = ExtResource("20_gt3je")
 rainwater_music = ExtResource("24_e08e2")
 bells_music = ExtResource("21_3pmx8")
 
-[node name="TestReward" type="Node2D" parent="."]
-script = ExtResource("21_1w6v2")
-debug = true
-
-[node name="Area2D" type="Area2D" parent="TestReward"]
-z_index = 20
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestReward/Area2D"]
-z_index = 10
-position = Vector2(3, 0)
-shape = SubResource("RectangleShape2D_hdf80")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TestReward"]
-modulate = Color(1, 0.4117647, 1, 1)
-light_mask = 3
-position = Vector2(2, -196)
-sprite_frames = ExtResource("27_hpc6h")
-frame_progress = 0.73007774
-
-[node name="PointLight2D" type="PointLight2D" parent="TestReward/AnimatedSprite2D"]
-visible = false
-light_mask = 3
-scale = Vector2(6.75, 6.7500005)
-energy = 0.3
-range_layer_min = -10
-range_layer_max = 10
-range_item_cull_mask = 3
-shadow_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_jwpg7")
-script = ExtResource("28_kltya")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TestReward/AnimatedSprite2D"]
-modulate = Color(18.892157, 18.892157, 18.892157, 1)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -218.0
-offset_top = -196.0
-offset_right = -30.0
-offset_bottom = -61.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("29_e08e2")
-theme_override_font_sizes/normal_font_size = 128
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Move" type="Node2D" parent="TestReward"]
-script = ExtResource("30_neg2b")
-metadata/_custom_type_script = "uid://bxw5tud1rq036"
-
-[node name="Tooltip" type="Node2D" parent="TestReward" groups=["tooltip"]]
-script = ExtResource("31_r33sp")
-
-[node name="Area2D" type="Area2D" parent="TestReward/Tooltip"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestReward/Tooltip/Area2D"]
-shape = SubResource("RectangleShape2D_k2e45")
-
 [node name="DeathScreen" type="CanvasLayer" parent="."]
 layer = 100
 
 [node name="CanvasLayer" parent="." instance=ExtResource("33_e08e2")]
-
-[connection signal="mouse_entered" from="TestReward/Area2D" to="TestReward/Tooltip" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="TestReward/Area2D" to="TestReward/Tooltip" method="_on_area_2d_mouse_exited"]
