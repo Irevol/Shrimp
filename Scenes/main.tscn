@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dkww1pexib2bu"]
+[gd_scene load_steps=40 format=3 uid="uid://dkww1pexib2bu"]
 
 [ext_resource type="Script" uid="uid://b51cp3ls0c4xq" path="res://Scripts/GameControl.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bpn4j5n7qq6yk" path="res://Scenes/player.tscn" id="2_jjvhh"]
@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://drl3td1cdtgii" path="res://Scripts/Rewards/ShellGreen.gd" id="15_ee4r6"]
 [ext_resource type="Script" uid="uid://dwkim0538ov81" path="res://Scripts/Rewards/ShellOrange.gd" id="16_gt3je"]
 [ext_resource type="Script" uid="uid://okwgyim5omf6" path="res://Scripts/Rewards/ShellPurple.gd" id="17_3pmx8"]
-[ext_resource type="Script" uid="uid://c76j1wku3nq33" path="res://Scenes/SoundEffects.gd" id="17_pdsj5"]
+[ext_resource type="Script" path="res://Scenes/SoundEffects.gd" id="17_pdsj5"]
 [ext_resource type="Script" uid="uid://bb83gttsfoeni" path="res://Scripts/Rewards/ConchOrange.gd" id="18_3pmx8"]
 [ext_resource type="AudioStream" uid="uid://jl0n66byrhny" path="res://Music/rainWater.mp3" id="19_fevyy"]
 [ext_resource type="Script" uid="uid://dotr4axcdg2fy" path="res://Scripts/Rewards/ConchPurple.gd" id="19_u50mg"]
@@ -26,11 +26,13 @@
 [ext_resource type="Script" uid="uid://5glcwumhn66r" path="res://Scenes/audio_stream_player.gd" id="20_gt3je"]
 [ext_resource type="Script" uid="uid://ncdy2vb7elfj" path="res://Scripts/Rewards/PearlPurple.gd" id="21_1w6v2"]
 [ext_resource type="AudioStream" uid="uid://on6usov0it30" path="res://Music/wavyBells.mp3" id="21_3pmx8"]
+[ext_resource type="Shader" uid="uid://cqrlqwo84vg5r" path="res://Scenes/water_shader.gdshader" id="22_kltya"]
 [ext_resource type="SpriteFrames" uid="uid://bwwbwg2s4cc4d" path="res://Animations/conch.tres" id="27_hpc6h"]
-[ext_resource type="Script" uid="uid://cn7nqwoc3xat4" path="res://Scenes/LightControl.gd" id="28_kltya"]
+[ext_resource type="Script" path="res://Scenes/LightControl.gd" id="28_kltya"]
 [ext_resource type="FontFile" uid="uid://duc1oq7qiqhj" path="res://Resources/Basic Comical Regular NC.ttf" id="29_e08e2"]
 [ext_resource type="Script" uid="uid://bxw5tud1rq036" path="res://Scripts/Utils/Move.gd" id="30_neg2b"]
 [ext_resource type="Script" uid="uid://bs7ee1lwxn7w8" path="res://Scripts/TooltipTrigger.gd" id="31_r33sp"]
+[ext_resource type="PackedScene" uid="uid://c61xwpoycrpdo" path="res://Scenes/canvas_layer.tscn" id="33_e08e2"]
 
 [sub_resource type="Environment" id="Environment_ynf5e"]
 background_mode = 3
@@ -57,6 +59,12 @@ fill_to = Vector2(0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2e45"]
 size = Vector2(864, 864)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kltya"]
+shader = ExtResource("22_kltya")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/speed = Vector2(0.03, 0.07)
+shader_parameter/wave_strength = 2.0
 
 [node name="GameControl" type="Node2D"]
 script = ExtResource("1_sugp2")
@@ -104,7 +112,6 @@ environment = SubResource("Environment_ynf5e")
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
 script = ExtResource("17_pdsj5")
-metadata/_custom_type_script = "uid://c76j1wku3nq33"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_fevyy")
@@ -180,6 +187,17 @@ shape = SubResource("RectangleShape2D_k2e45")
 
 [node name="DeathScreen" type="CanvasLayer" parent="."]
 layer = 100
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_kltya")
+offset_left = -23213.0
+offset_top = -11936.999
+offset_right = -23173.0
+offset_bottom = -11896.999
+scale = Vector2(321.82468, 618.8637)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("33_e08e2")]
 
 [connection signal="mouse_entered" from="TestReward/Area2D" to="TestReward/Tooltip" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="TestReward/Area2D" to="TestReward/Tooltip" method="_on_area_2d_mouse_exited"]
