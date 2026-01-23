@@ -6,7 +6,7 @@ func before_pickup():
 	sprite.play("default")
 	sprite.modulate = game_control.colors["orange"]
 	unique = true
-	set_description("Topaz Pearl","Release a ranged attack when\nmoving left")
+	set_description("Topaz Pearl","Release a ranged attack when\nmoving to the left")
 	
 
 func on_move(dir):
