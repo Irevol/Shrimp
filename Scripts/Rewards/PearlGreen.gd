@@ -6,7 +6,7 @@ func before_pickup():
 	sprite.play("default")
 	sprite.modulate = game_control.colors["green"]
 	unique = true
-	set_description("Emerald Pearl","Release a ranged attack when\nmoving right")
+	set_description("Emerald Pearl","Release a ranged attack when\nmoving to the right")
 	
 
 func on_move(dir):
